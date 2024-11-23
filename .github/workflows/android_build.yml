@@ -20,8 +20,14 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
+      - name: View whats on
+        run : ls
+
       - name: Change directory
         run : cd Android/
+
+      - name: View whats on again
+        run : ls
 
       - name: Build with Gradle
         run : ./gradlew build
