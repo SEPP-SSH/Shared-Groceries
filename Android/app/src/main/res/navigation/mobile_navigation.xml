@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="uk.co.xeiverse.ssh.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_shopping"
+        android:name="uk.co.xeiverse.ssh.ui.shop.ShopFragment"
+        android:label="@string/title_shopping"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="uk.co.xeiverse.ssh.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_settings"
+        android:name="uk.co.xeiverse.ssh.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
