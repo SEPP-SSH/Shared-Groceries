@@ -20,8 +20,11 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
+      - name: Change directory
+        run : cd Android/
+
       - name: Build with Gradle
-        run : ../Android/gradlew build
+        run : ./gradlew build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
