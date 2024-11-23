@@ -20,6 +20,9 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
+      - name: Change directory
+        run : cd Android/
+
       - name: Build with Gradle
         run : ./gradlew build
 
