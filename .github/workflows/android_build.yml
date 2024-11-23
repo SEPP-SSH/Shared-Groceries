@@ -3,6 +3,7 @@ name: AndroidBuild
 on:
   pull_request :
     branches : [ main ]
+    paths : ['Android/**']
 
 jobs:
   build:
