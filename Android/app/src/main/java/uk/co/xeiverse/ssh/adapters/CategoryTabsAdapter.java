@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.xeiverse.ssh.ui.shop.CategoryFragment;
-import uk.co.xeiverse.ssh.ui.shop.GroceryItem;
+import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class CategoryTabsAdapter extends FragmentStateAdapter {
 

@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
-import uk.co.xeiverse.ssh.ui.shop.GroceryItem;
+import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
 
@@ -47,8 +47,10 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
 
         // Set the text of the text views
         titleView.setText(currentGroceryItem.getName());
-        priceView.setText("£" + currentGroceryItem.getPrice().toString());
-        quantityView.setText(currentGroceryItem.getQuantity().toString());
+        priceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+
+        // TODO: Set the quantity based on what's in the shopping basket
+        quantityView.setText("0");
 
         // Load the image URL into the imageview
         Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);

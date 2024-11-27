@@ -21,6 +21,8 @@ import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.databinding.FragmentShopBinding;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.adapters.CategoryTabsAdapter;
+import uk.co.xeiverse.ssh.objects.GroceryItem;
+import uk.co.xeiverse.ssh.objects.GroceryStore;
 
 public class ShopFragment extends Fragment {
     private ServerHelper serverHelper;
@@ -34,6 +36,7 @@ public class ShopFragment extends Fragment {
     private CategoryTabsAdapter categoryTabsAdapter;
     private List<String> itemCategories;
     private List<GroceryItem> itemsList;
+    private List<GroceryStore> storesList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class ShopFragment extends Fragment {
         // Initialise UI elements
         tabLayout = binding.tabLayout;
         viewTrolleyBtn = binding.viewTrolleyIcon;
+
+        // Fetch stores from the server
+        storesList = serverHelper.getStores();
 
         // Fetch categories from database
         itemCategories = serverHelper.getCategories();

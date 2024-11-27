@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.GroceryItemsAdapter;
+import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class CategoryFragment extends Fragment {
 

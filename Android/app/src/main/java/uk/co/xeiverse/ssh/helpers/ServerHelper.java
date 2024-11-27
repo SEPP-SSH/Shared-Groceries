@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import uk.co.xeiverse.ssh.ui.shop.GroceryItem;
+import uk.co.xeiverse.ssh.objects.GroceryItem;
+import uk.co.xeiverse.ssh.objects.GroceryStore;
 
 public class ServerHelper {
 
@@ -56,13 +57,14 @@ public class ServerHelper {
         // TODO: Update item quantity in database
     }
 
-    public List<String> getStores() {
+    public List<GroceryStore> getStores() {
         // TODO: Fetch stores from database
-        List<String> storesList = new ArrayList<>();
+        List<GroceryStore> storesList = new ArrayList<>();
 
         // TEMPORARY SOLUTION
-        String[] supermarkets = {"Tesco", "Sainsbury's", "Asda"};
-        storesList = new ArrayList<>(Arrays.asList(supermarkets));
+        storesList.add(new GroceryStore("Tesco", "https://picsum.photos/200/300"));
+        storesList.add(new GroceryStore("Sainsbury's", "https://picsum.photos/200/300"));
+        storesList.add(new GroceryStore("Aldi", "https://picsum.photos/200/300"));
 
         return storesList;
     }
@@ -85,7 +87,7 @@ public class ServerHelper {
             double price = 1 + (10 - 1) * random.nextDouble(); // Price between 1 and 10
             int quantity = 1 + random.nextInt(5); // Quantity between 1 and 5
 
-            groceryItems.add(new GroceryItem(name, price, category, quantity));
+            groceryItems.add(new GroceryItem(name, "https://picsum.photos/200/300", price, price, 1, 1));
         }
 
         return groceryItems;
