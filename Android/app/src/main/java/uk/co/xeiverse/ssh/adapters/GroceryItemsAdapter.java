@@ -45,15 +45,35 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         TextView priceView = currentItemView.findViewById(R.id.itemPriceView);
         TextView quantityView = currentItemView.findViewById(R.id.itemQuantityView);
 
+        ImageView increaseQuantityBtn = currentItemView.findViewById(R.id.increaseQuantityBtn);
+        ImageView reduceQuantityBtn = currentItemView.findViewById(R.id.reduceQuantityBtn);
+
         // Set the text of the text views
         titleView.setText(currentGroceryItem.getName());
         priceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+
+        // TODO: Implement the offer price
 
         // TODO: Set the quantity based on what's in the shopping basket
         quantityView.setText("0");
 
         // Load the image URL into the imageview
         Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);
+
+        // Set the onclick listeners for the change quantity buttons
+        increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        reduceQuantityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         // then return the recyclable view
         return currentItemView;

@@ -7,6 +7,7 @@ import java.util.Random;
 
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 import uk.co.xeiverse.ssh.objects.GroceryStore;
+import uk.co.xeiverse.ssh.objects.Housemate;
 
 public class ServerHelper {
 
@@ -62,17 +63,18 @@ public class ServerHelper {
         List<GroceryStore> storesList = new ArrayList<>();
 
         // TEMPORARY SOLUTION
-        storesList.add(new GroceryStore("Tesco", "https://picsum.photos/200/300"));
-        storesList.add(new GroceryStore("Sainsbury's", "https://picsum.photos/200/300"));
-        storesList.add(new GroceryStore("Aldi", "https://picsum.photos/200/300"));
+        storesList.add(new GroceryStore(0, "Tesco", "https://picsum.photos/200/300"));
+        storesList.add(new GroceryStore(1, "Sainsbury's", "https://picsum.photos/200/300"));
+        storesList.add(new GroceryStore(2, "Aldi", "https://picsum.photos/200/300"));
 
         return storesList;
     }
 
-    public List<String> getHousemates(Integer houseID) {
+    public List<Housemate> getHousemates(Integer houseID) {
         // TODO: Fetch housemates from database
+        List<Housemate> housematesList = new ArrayList<>();
 
-        return null;
+        return housematesList;
     }
 
     public List<GroceryItem> createRandomGroceryItems(int numItems) {
@@ -87,7 +89,7 @@ public class ServerHelper {
             double price = 1 + (10 - 1) * random.nextDouble(); // Price between 1 and 10
             int quantity = 1 + random.nextInt(5); // Quantity between 1 and 5
 
-            groceryItems.add(new GroceryItem(name, "https://picsum.photos/200/300", price, price, 1, 1));
+            groceryItems.add(new GroceryItem(0, name, "https://picsum.photos/200/300", price, price, 1, 1));
         }
 
         return groceryItems;

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 public class GroceryItem implements Parcelable {
 
+    private Integer id;
     private String name;
     private String imgUrl;
     private Double basePrice;
@@ -15,7 +16,8 @@ public class GroceryItem implements Parcelable {
     private Integer inStock;
     private Integer category;
 
-    public GroceryItem(String name, String imgUrl, Double basePrice, Double offerPrice, Integer inStock, Integer category) {
+    public GroceryItem(Integer id, String name, String imgUrl, Double basePrice, Double offerPrice, Integer inStock, Integer category) {
+        this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
         this.basePrice = basePrice;
@@ -26,6 +28,7 @@ public class GroceryItem implements Parcelable {
 
     @SuppressLint("NewApi")
     public GroceryItem(Parcel in) {
+        this.id = in.readInt();
         this.name = in.readString();
         this.imgUrl = in.readString();
         this.basePrice = in.readDouble();
@@ -40,6 +43,13 @@ public class GroceryItem implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+
         parcel.writeString(name);
         parcel.writeString(imgUrl);
 
@@ -83,6 +93,10 @@ public class GroceryItem implements Parcelable {
             return new GroceryItem[size];
         }
     };
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
