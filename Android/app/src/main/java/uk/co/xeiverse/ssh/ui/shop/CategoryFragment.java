@@ -4,17 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
+import uk.co.xeiverse.ssh.adapters.GroceryItemsAdapter;
 
 public class CategoryFragment extends Fragment {
 
@@ -30,7 +29,13 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Bundle args = getArguments();
-        ((TextView) view.findViewById(R.id.text1))
-                .setText(Integer.toString(args.getInt(ARG_OBJECT)));
+
+        ListView listView = (ListView) view.findViewById(R.id.listView);
+        assert args != null;
+        ArrayList<GroceryItem> groceryItems = args.getParcelableArrayList(ARG_OBJECT);
+
+        // Setup the adapter
+        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), groceryItems);
+        listView.setAdapter(groceryItemsAdapter);
     }
 }
