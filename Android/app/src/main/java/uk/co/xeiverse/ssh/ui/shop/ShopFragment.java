@@ -8,17 +8,33 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.databinding.FragmentShopBinding;
 
 public class ShopFragment extends Fragment {
 
     private FragmentShopBinding binding;
+
+    private TabLayout tabLayout;
+    private FloatingActionButton viewTrolleyBtn;
+    private ViewPager2 viewPager;
+
+    private CategoryTabsAdapter categoryTabsAdapter;
+    private List<String> itemCategories;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,33 +44,33 @@ public class ShopFragment extends Fragment {
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        TabLayout tabLayout = binding.tabLayout;
+        // Initialise UI elements
+        tabLayout = binding.tabLayout;
+        viewTrolleyBtn = binding.viewTrolleyIcon;
 
+        // Fetch categories from database
         String[] categories = {"OFFERS", "FROZEN", "FRUIT & VEG", "MEAT", "BAKERY", "DAIRY", "CLEANING", "PASTA & RICE"};
+        itemCategories = new ArrayList<>(Arrays.asList(categories));
 
-        for (String category : categories) {
-            tabLayout.addTab(tabLayout.newTab().setText(category));
-        }
-
-        FloatingActionButton fab = binding.viewTrolleyIcon;
-        SearchView searchView = binding.searchView;
-
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fab.setVisibility(View.GONE);
-            }
-        });
-
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                fab.setVisibility(View.VISIBLE);
-                return false;
-            }
+        // Set onclick listeners
+        viewTrolleyBtn.setOnClickListener(v -> {
+            // TODO: Navigate to trolley fragment
         });
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        // Set up the viewpager and adapter
+        categoryTabsAdapter = new CategoryTabsAdapter(this, itemCategories);
+        viewPager = view.findViewById(R.id.viewPager);
+        viewPager.setAdapter(categoryTabsAdapter);
+
+        // Link the tabs to the view pager
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(itemCategories.get(position))
+        ).attach();
     }
 
     @Override
@@ -63,3 +79,4 @@ public class ShopFragment extends Fragment {
         binding = null;
     }
 }
+
