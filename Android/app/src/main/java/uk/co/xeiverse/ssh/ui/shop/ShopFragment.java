@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -62,13 +63,9 @@ public class ShopFragment extends Fragment {
 
         // Fetch stores from the server
         storesList = serverHelper.getStores();
-        setupSpinner(storesList);
 
         // Fetch categories from database
         itemCategories = serverHelper.getCategories();
-
-        // Fetch the items from the database
-        itemsList = serverHelper.getItemsByStore(1);
 
         // Set onclick listeners
         viewTrolleyBtn.setOnClickListener(v -> {
@@ -80,15 +77,16 @@ public class ShopFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // Set up the viewpager and adapter
-        categoryTabsAdapter = new CategoryTabsAdapter(this, itemCategories, itemsList);
         viewPager = view.findViewById(R.id.viewPager);
-        viewPager.setAdapter(categoryTabsAdapter);
 
-        // Link the tabs to the view pager
-        new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(itemCategories.get(position))
-        ).attach();
+        // Setup the supermarkets spinner
+        setupSpinner(storesList);
+
+        // Fetch the items from the database
+        itemsList = serverHelper.getItemsByStore(((GroceryStore) supermarketSpinner.getSelectedItem()).getId());
+
+        // Populate the tab layout for first time
+        populateTabs();
     }
 
     @Override
@@ -100,6 +98,29 @@ public class ShopFragment extends Fragment {
     private void setupSpinner(List<GroceryStore> storesList) {
         GroceryStoreAdapter adapter = new GroceryStoreAdapter((MainActivity) getActivity(), R.layout.row_spinner, storesList, getResources());
         supermarketSpinner.setAdapter(adapter);
+        supermarketSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                itemsList = serverHelper.getItemsByStore(((GroceryStore) supermarketSpinner.getSelectedItem()).getId());
+                populateTabs();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                supermarketSpinner.setSelection(0);
+            }
+        });
+    }
+
+    private void populateTabs() {
+        // Set up the viewpager and adapter
+        categoryTabsAdapter = new CategoryTabsAdapter(this, itemCategories, itemsList);
+        viewPager.setAdapter(categoryTabsAdapter);
+
+        // Link the tabs to the view pager
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(itemCategories.get(position))
+        ).attach();
     }
 }
 

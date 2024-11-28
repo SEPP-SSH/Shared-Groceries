@@ -89,7 +89,7 @@ public class ServerHelper {
             double price = 1 + (10 - 1) * random.nextDouble(); // Price between 1 and 10
             int quantity = 1 + random.nextInt(5); // Quantity between 1 and 5
 
-            groceryItems.add(new GroceryItem(0, name, "https://picsum.photos/200/300", price, price, 1, 1));
+            groceryItems.add(new GroceryItem(0, name, "https://picsum.photos/200/300", price, price, 1, 1 + random.nextInt(5)));
         }
 
         return groceryItems;

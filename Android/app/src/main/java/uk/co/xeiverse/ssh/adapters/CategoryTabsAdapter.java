@@ -27,12 +27,22 @@ public class CategoryTabsAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        // Return a NEW fragment instance in createFragment(int).
+        // Create the new fragment
         Fragment fragment = new CategoryFragment();
+
+        // Sort through the items by category
+        ArrayList<GroceryItem> currentItems = new ArrayList<>();
+        for (GroceryItem item : items) {
+            if (item.getCategory().equals(position)) {
+                currentItems.add(item);
+            }
+        }
+
+        // Bundle the items list into the fragment
         Bundle args = new Bundle();
-        // The object is just an integer.
-        args.putParcelableArrayList(CategoryFragment.ARG_OBJECT, (ArrayList<GroceryItem>) items);
+        args.putParcelableArrayList(CategoryFragment.ARG_OBJECT, currentItems);
         fragment.setArguments(args);
+
         return fragment;
     }
 
