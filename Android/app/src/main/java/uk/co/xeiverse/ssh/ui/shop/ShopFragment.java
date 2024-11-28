@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,9 +17,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.xeiverse.ssh.MainActivity;
 import uk.co.xeiverse.ssh.R;
+import uk.co.xeiverse.ssh.adapters.GroceryStoreAdapter;
 import uk.co.xeiverse.ssh.databinding.FragmentShopBinding;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.adapters.CategoryTabsAdapter;
@@ -32,6 +37,7 @@ public class ShopFragment extends Fragment {
     private TabLayout tabLayout;
     private FloatingActionButton viewTrolleyBtn;
     private ViewPager2 viewPager;
+    private Spinner supermarketSpinner;
 
     private CategoryTabsAdapter categoryTabsAdapter;
     private List<String> itemCategories;
@@ -52,9 +58,11 @@ public class ShopFragment extends Fragment {
         // Initialise UI elements
         tabLayout = binding.tabLayout;
         viewTrolleyBtn = binding.viewTrolleyIcon;
+        supermarketSpinner = binding.supermarketSpinner;
 
         // Fetch stores from the server
         storesList = serverHelper.getStores();
+        setupSpinner(storesList);
 
         // Fetch categories from database
         itemCategories = serverHelper.getCategories();
@@ -87,6 +95,11 @@ public class ShopFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void setupSpinner(List<GroceryStore> storesList) {
+        GroceryStoreAdapter adapter = new GroceryStoreAdapter((MainActivity) getActivity(), R.layout.row_spinner, storesList, getResources());
+        supermarketSpinner.setAdapter(adapter);
     }
 }
 
