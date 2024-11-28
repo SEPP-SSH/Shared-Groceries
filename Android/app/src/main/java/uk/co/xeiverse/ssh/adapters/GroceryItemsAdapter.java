@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +17,21 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
+import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
+import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
 public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
 
-    public GroceryItemsAdapter(@NonNull Context context, ArrayList<GroceryItem> arrayList) {
+    private ServerHelper serverHelper;
+    private Integer storeId;
+
+    public GroceryItemsAdapter(@NonNull Context context, ArrayList<GroceryItem> arrayList,
+                               ServerHelper serverHelper, Integer storeId) {
         super(context, 0, arrayList);
+
+        this.serverHelper = serverHelper;
+        this.storeId = storeId;
     }
 
     @NonNull
@@ -43,10 +53,7 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         ImageView imageView = currentItemView.findViewById(R.id.itemImageView);
         TextView titleView = currentItemView.findViewById(R.id.itemTitleView);
         TextView priceView = currentItemView.findViewById(R.id.itemPriceView);
-        TextView quantityView = currentItemView.findViewById(R.id.itemQuantityView);
-
-        ImageView increaseQuantityBtn = currentItemView.findViewById(R.id.increaseQuantityBtn);
-        ImageView reduceQuantityBtn = currentItemView.findViewById(R.id.reduceQuantityBtn);
+        Button addToBasketBtn = currentItemView.findViewById(R.id.addToBasketBtn);
 
         // Set the text of the text views
         titleView.setText(currentGroceryItem.getName());
@@ -54,24 +61,14 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
 
         // TODO: Implement the offer price
 
-        // TODO: Set the quantity based on what's in the shopping basket
-        quantityView.setText("0");
-
         // Load the image URL into the imageview
         Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);
 
-        // Set the onclick listeners for the change quantity buttons
-        increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
+        // Add to basket btn
+        addToBasketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-            }
-        });
-
-        reduceQuantityBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
+                serverHelper.addItemToTrolley(ServerHelper.houseID, storeId, currentGroceryItem.getId());
             }
         });
 

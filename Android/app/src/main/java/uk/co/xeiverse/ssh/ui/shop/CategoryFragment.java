@@ -14,11 +14,19 @@ import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.GroceryItemsAdapter;
+import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class CategoryFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
+    private ServerHelper serverHelper;
+    private Integer storeId;
+
+    public CategoryFragment(ServerHelper serverHelper, Integer storeId) {
+        this.serverHelper = serverHelper;
+        this.storeId = storeId;
+    }
 
     @Nullable
     @Override
@@ -36,7 +44,7 @@ public class CategoryFragment extends Fragment {
         ArrayList<GroceryItem> groceryItems = args.getParcelableArrayList(ARG_OBJECT);
 
         // Setup the adapter
-        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), groceryItems);
+        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), groceryItems, serverHelper, storeId);
         listView.setAdapter(groceryItemsAdapter);
     }
 }

@@ -114,7 +114,8 @@ public class ShopFragment extends Fragment {
 
     private void populateTabs() {
         // Set up the viewpager and adapter
-        categoryTabsAdapter = new CategoryTabsAdapter(this, itemCategories, itemsList);
+        Integer storeId = ((GroceryStore) supermarketSpinner.getSelectedItem()).getId();
+        categoryTabsAdapter = new CategoryTabsAdapter(this, itemCategories, itemsList, serverHelper, storeId);
         viewPager.setAdapter(categoryTabsAdapter);
 
         // Link the tabs to the view pager
