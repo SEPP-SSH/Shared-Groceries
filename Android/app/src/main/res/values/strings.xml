@@ -3,7 +3,9 @@
     <string name="title_home">My Home</string>
     <string name="title_shopping">Shopping</string>
     <string name="title_settings">Settings</string>
-    <string name="title_trolley">My Trolley</string>
     <string name="placeholder">...</string>
     <string name="add_to_basket">Add to basket</string>
+    <string name="title_basket">BASKET</string>
+    <string name="close">Continue Shopping</string>
+    <string name="checkout">CHECKOUT</string>
 </resources>
