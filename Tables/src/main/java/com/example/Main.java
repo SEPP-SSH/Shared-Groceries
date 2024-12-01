@@ -15,32 +15,49 @@ public class Main {
 
         // Initialize repositories
         HouseRepository houseRepository = new HouseRepository(sessionFactory);
-        StoreRepository storeRepository = new StoreRepository(sessionFactory);
-        CategoryRepository categoryRepository = new CategoryRepository(sessionFactory);
-        ItemRepository itemRepository = new ItemRepository(sessionFactory);
+//        StoreRepository storeRepository = new StoreRepository(sessionFactory);
+//        CategoryRepository categoryRepository = new CategoryRepository(sessionFactory);
+//        ItemRepository itemRepository = new ItemRepository(sessionFactory);
+//        HousemateRepository housemateRepository = new HousemateRepository(sessionFactory);
 
-        try {
-            // Choose a task to perform
-            System.out.println("Select an option:");
-            System.out.println("1. Populate database from JSON files");
-            System.out.println("2. Export database to JSON files");
-            System.out.println("3. Exit");
-
-            // Simulate user choice (for simplicity)
-            int choice = 1; // Change this for testing purposes
-
-            switch (choice) {
-                case 1 -> populateDatabase(houseRepository, storeRepository, categoryRepository, itemRepository);
-                case 2 -> exportDatabase(houseRepository, storeRepository, categoryRepository, itemRepository);
-                case 3 -> System.out.println("Exiting application.");
-                default -> System.out.println("Invalid choice.");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            HibernateUtil.shutdown();
+        // add housemate data
+        try{
+            List<House> houses = JsonUtils.readJsonFile("src/main/resources/house.json", House[].class);
+            houses.forEach(houseRepository::create);
         }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        // get house data
+        List<House> returnedHouses = houseRepository.getAll();
+
+        // sanity test it
+        System.out.println(returnedHouses.getFirst().getHouseAddress());
+
+        HibernateUtil.shutdown();
+//        try {
+//            // Choose a task to perform
+//            System.out.println("Select an option:");
+//            System.out.println("1. Populate database from JSON files");
+//            System.out.println("2. Export database to JSON files");
+//            System.out.println("3. Exit");
+//
+//            // Simulate user choice (for simplicity)
+//            int choice = 1; // Change this for testing purposes
+//
+//            switch (choice) {
+//                case 1 -> populateDatabase(houseRepository, storeRepository, categoryRepository, itemRepository);
+//                case 2 -> exportDatabase(houseRepository, storeRepository, categoryRepository, itemRepository);
+//                case 3 -> System.out.println("Exiting application.");
+//                default -> System.out.println("Invalid choice.");
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            HibernateUtil.shutdown();
+//        }
     }
 
     /**

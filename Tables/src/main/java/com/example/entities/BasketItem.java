@@ -15,13 +15,13 @@ public class BasketItem {
     @EmbeddedId
     private BasketItemId id;
 
-    @ManyToOne
-    @MapsId("basketId")
-    private Basket basket;
+//    @ManyToOne
+//    @MapsId("basketId")
+//    private Basket basket;
 
-    @ManyToOne
-    @MapsId("itemId")
-    private Item item;
+//    @ManyToOne
+//    @MapsId("itemId")
+//    private Item item;
 
     @ManyToOne
     @JoinColumn(name = "housemate_id", nullable = false)

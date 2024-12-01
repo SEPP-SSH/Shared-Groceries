@@ -16,13 +16,16 @@ public class Item {
     @EmbeddedId
     private ItemId id;
 
-    @ManyToOne
-    @MapsId("storeId")
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+//    @ManyToOne
+//    @MapsId("storeId")
+//    @JoinColumn(name = "store_id", nullable = false)
+//    private Store store;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumns({
+            @JoinColumn(name = "categoryId", nullable = false),
+            @JoinColumn(name = "store_id", nullable = false)
+    })
     private Category category;
 
     @Column(name = "item_name", nullable = false)

@@ -16,10 +16,10 @@ public class Category {
     @EmbeddedId
     private CategoryId id;
 
-    @ManyToOne
-    @MapsId("storeId")
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
+//    @ManyToOne
+//    @MapsId("storeId")
+//    @JoinColumn(name = "store_id", nullable = false)
+//    private Store store;
 
     @Column(name = "category_name", nullable = false)
     @JsonProperty("category_name")
