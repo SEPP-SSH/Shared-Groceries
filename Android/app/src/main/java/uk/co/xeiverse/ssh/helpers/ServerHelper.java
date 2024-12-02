@@ -42,8 +42,9 @@ public class ServerHelper {
 
     public List<GroceryItem> getTrolleyItems(Integer houseID, Integer storeID) {
         // TODO: Fetch trolley items from database
+        List<GroceryItem> basketItems = new ArrayList<>();
 
-        return null;
+        return basketItems;
     }
 
     public void addItemToTrolley(Integer houseID, Integer storeID, Integer itemID) {

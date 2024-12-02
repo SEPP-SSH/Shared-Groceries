@@ -103,16 +103,16 @@ public class ShopFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 storeId = ((GroceryStore) supermarketSpinner.getSelectedItem()).getId();
-                if (fragmentContainerView.getFragment().equals(browseFragment)) {
-                    itemsList = serverHelper.getItemsByStore(storeId);
-                    // Repopulate tabs
-                    try {
+                try {
+                    if (fragmentContainerView.getFragment().equals(browseFragment)) {
+                        itemsList = serverHelper.getItemsByStore(storeId);
+                        // Repopulate tabs
                         browseFragment.populateTabs(storeId, itemsList);
-                    } catch (Exception e) {
-                        // Do nothing
+                    } else {
+                        // TODO: Load the items for the selected store
                     }
-                } else {
-                    // TODO: Load the items for the selected store
+                } catch (Exception e) {
+                    // Do nothing
                 }
             }
 
@@ -133,7 +133,7 @@ public class ShopFragment extends Fragment {
 
     private void loadBasketFragment() {
         bottomLayout.setVisibility(View.GONE);
-        basketFragment = new BasketFragment(this);
+        basketFragment = new BasketFragment(this, storeId, serverHelper);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, basketFragment);
         transaction.commit();
