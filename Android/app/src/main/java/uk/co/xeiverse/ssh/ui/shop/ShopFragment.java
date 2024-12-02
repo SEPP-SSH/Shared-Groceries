@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 import uk.co.xeiverse.ssh.MainActivity;
 import uk.co.xeiverse.ssh.R;
@@ -32,6 +33,10 @@ public class ShopFragment extends Fragment {
     private ServerHelper serverHelper;
 
     private FragmentShopBinding binding;
+
+    public static final Integer BROWSE_FRAGMENT = 0;
+    public static final Integer BASKET_FRAGMENT = 1;
+    private Integer currentFragment = BROWSE_FRAGMENT;
 
     private FloatingActionButton viewTrolleyBtn;
     private Spinner supermarketSpinner;
@@ -104,12 +109,13 @@ public class ShopFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 storeId = ((GroceryStore) supermarketSpinner.getSelectedItem()).getId();
                 try {
-                    if (fragmentContainerView.getFragment().equals(browseFragment)) {
+                    if (Objects.equals(currentFragment, BROWSE_FRAGMENT)) {
                         itemsList = serverHelper.getItemsByStore(storeId);
                         // Repopulate tabs
                         browseFragment.populateTabs(storeId, itemsList);
                     } else {
-                        // TODO: Load the items for the selected store
+                        // Reload the basket fragment
+                        loadBasketFragment();
                     }
                 } catch (Exception e) {
                     // Do nothing
@@ -124,6 +130,7 @@ public class ShopFragment extends Fragment {
     }
 
     void loadBrowseFragment() {
+        currentFragment = BROWSE_FRAGMENT;
         bottomLayout.setVisibility(View.VISIBLE);
         browseFragment = new BrowseFragment(storeId, itemCategories, itemsList, serverHelper);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -132,11 +139,16 @@ public class ShopFragment extends Fragment {
     }
 
     private void loadBasketFragment() {
+        currentFragment = BASKET_FRAGMENT;
         bottomLayout.setVisibility(View.GONE);
         basketFragment = new BasketFragment(this, storeId, serverHelper);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, basketFragment);
         transaction.commit();
+    }
+
+    public Integer getCurrentFragment() {
+        return currentFragment;
     }
 }
 

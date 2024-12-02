@@ -44,6 +44,14 @@ public class ServerHelper {
         // TODO: Fetch trolley items from database
         List<GroceryItem> basketItems = new ArrayList<>();
 
+        if (storeID == 0) {
+            // TEMPORARY SOLUTION
+            basketItems = createRandomGroceryItems(3);
+        }
+        else {
+            // TEMPORARY SOLUTION
+        }
+
         return basketItems;
     }
 
