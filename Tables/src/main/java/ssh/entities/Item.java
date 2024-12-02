@@ -2,19 +2,22 @@ package ssh.entities;
 
 import javax.persistence.*;
 
-import com.example.entities.embeddables.ItemId;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Item")
 public class Item {
 
-    @EmbeddedId
-    private ItemId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("item_id")
+    private int itemId;
 
 //    @ManyToOne
 //    @MapsId("storeId")
@@ -22,11 +25,9 @@ public class Item {
 //    private Store store;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "categoryId", nullable = false),
-            @JoinColumn(name = "store_id", nullable = false)
-    })
-    private Category category;
+    @JoinColumn(name = "store_id", nullable = false)
+    @JsonProperty("store")
+    private Store store;
 
     @Column(name = "item_name", nullable = false)
     @JsonProperty("item_name")
@@ -47,6 +48,11 @@ public class Item {
     @Column(name = "is_item_in_stock", nullable = false)
     @JsonProperty("is_item_in_stock")
     private boolean isItemInStock;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    @JsonProperty("category")
+    private Category category;
 
     // Getters and Setters
 }

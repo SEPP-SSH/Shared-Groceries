@@ -9,10 +9,12 @@ import org.hibernate.SessionFactory;
 import java.util.List;
 
 public class PopulateTables {
-    public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    public static void populate() {
+        SessionFactory sessionFactory;
 
         try {
+            sessionFactory = HibernateUtil.getSessionFactory();
+
             // Repositories
             HouseHandler houseHandler = new HouseHandler(sessionFactory);
             HousemateHandler housemateHandler = new HousemateHandler(sessionFactory);
@@ -52,10 +54,10 @@ public class PopulateTables {
 
             System.out.println("All tables populated successfully!");
 
+            HibernateUtil.shutdown();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            HibernateUtil.shutdown();
         }
     }
 }

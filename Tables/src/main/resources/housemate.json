@@ -3,18 +3,24 @@
     "housemate_forename": "John",
     "housemate_surname": "Doe",
     "housemate_img": "john.png",
-    "house_id": 1
+    "house" : {
+      "house_id": 1
+    }
   },
   {
     "housemate_forename": "Jane",
     "housemate_surname": "Smith",
     "housemate_img": "jane.png",
-    "house_id": 1
+    "house" : {
+      "house_id": 1
+    }
   },
   {
     "housemate_forename": "Emily",
     "housemate_surname": "Johnson",
     "housemate_img": "emily.png",
-    "house_id": 1
+    "house" : {
+      "house_id": 1
+    }
   }
 ]

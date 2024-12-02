@@ -1,6 +1,8 @@
 [
   {
-    "id": { "category_id": 1, "store_id": 1 },
+    "store" : {
+      "store_id": 1
+    },
     "category_name": "Produce"
   }
 ]

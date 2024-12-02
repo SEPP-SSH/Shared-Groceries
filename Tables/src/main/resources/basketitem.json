@@ -1,12 +1,32 @@
 [
   {
-    "id": { "basket_id": 1, "store_id": 1, "item_id": 1 },
-    "housemate_id": 1,
+    "basket" : {
+      "basket_id": 1
+    },
+    "store" : {
+      "store_id": 1
+    },
+    "item" : {
+      "item_id": 1
+    },
+    "housemate" : {
+      "housemate_id": 1
+    },
     "item_quantity": 5
   },
   {
-    "id": { "basket_id": 1, "store_id": 1, "item_id": 2 },
-    "housemate_id": 1,
+    "basket" : {
+      "basket_id": 1
+    },
+    "store" : {
+      "store_id": 1
+    },
+    "item" : {
+      "item_id": 2
+    },
+    "housemate" : {
+      "housemate_id": 1
+    },
     "item_quantity": 10
   }
 ]

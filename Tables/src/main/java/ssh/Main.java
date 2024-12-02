@@ -1,14 +1,7 @@
 package ssh;
 
-import com.example.entities.*;
-import com.example.repositories.*;
-import ssh.entities.Category;
-import ssh.entities.House;
-import ssh.entities.Item;
-import ssh.entities.Store;
-import ssh.handlers.HouseHandler;
-import ssh.handlers.ItemHandler;
-import ssh.handlers.StoreHandler;
+import ssh.entities.*;
+import ssh.handlers.*;
 import ssh.utils.HibernateUtil;
 import ssh.utils.JsonUtils;
 import org.hibernate.SessionFactory;
@@ -19,33 +12,41 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // Initialize Hibernate session factory
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         // Initialize repositories
-        HouseHandler houseHandler = new HouseHandler(sessionFactory);
+//        HouseHandler houseHandler = new HouseHandler(sessionFactory);
 //        StoreHandler storeRepository = new StoreHandler(sessionFactory);
 //        CategoryHandler categoryRepository = new CategoryHandler(sessionFactory);
 //        ItemHandler itemRepository = new ItemHandler(sessionFactory);
 //        HousemateHandler housemateRepository = new HousemateHandler(sessionFactory);
 
-        // add housemate data
-        try{
-            List<House> houses = JsonUtils.readJsonFile("src/main/resources/house.json", House[].class);
-            houses.forEach(houseHandler::create);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        // add housemate data
+//        try{
+//            List<House> houses = JsonUtils.readJsonFile("src/main/resources/house.json", House[].class);
+//            houses.forEach(houseHandler::create);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        // get house data
+//        List<House> returnedHouses = houseHandler.getAll();
+//        System.out.println("num of returned houses = " + Integer.toString(returnedHouses.size()));
+//
+//        // sanity test it
+//        System.out.println(returnedHouses.getFirst().getHouseAddress());
 
-        // get house data
-        List<House> returnedHouses = houseHandler.getAll();
+//        HibernateUtil.shutdown();
+        try {
+            PopulateTables.populate();
 
-        // sanity test it
-        System.out.println(returnedHouses.getFirst().getHouseAddress());
-
-        HibernateUtil.shutdown();
-//        try {
-//            // Choose a task to perform
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            HouseHandler houseHandler = new HouseHandler(sessionFactory);
+            List<House> returnedHouses = houseHandler.getAll();
+            System.out.println("first id = " + Integer.toString(returnedHouses.getFirst().getHouseId()));
+            HibernateUtil.shutdown();
+            // Choose a task to perform
 //            System.out.println("Select an option:");
 //            System.out.println("1. Populate database from JSON files");
 //            System.out.println("2. Export database to JSON files");
@@ -60,12 +61,10 @@ public class Main {
 //                case 3 -> System.out.println("Exiting application.");
 //                default -> System.out.println("Invalid choice.");
 //            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            HibernateUtil.shutdown();
-//        }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

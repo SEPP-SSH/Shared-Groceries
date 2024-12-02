@@ -2,12 +2,14 @@ package ssh.entities;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Basket")
 public class Basket {
 
@@ -18,10 +20,12 @@ public class Basket {
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
+    @JsonProperty("store")
     private Store store;
 
     @ManyToOne
     @JoinColumn(name = "house_id", nullable = false)
+    @JsonProperty("house")
     private House house;
 
     // Getters and Setters

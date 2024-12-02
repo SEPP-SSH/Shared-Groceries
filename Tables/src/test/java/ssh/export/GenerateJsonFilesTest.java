@@ -1,6 +1,6 @@
 package ssh.export;
 
-import com.example.entities.*;
+import ssh.entities.*;
 import ssh.entities.House;
 import ssh.entities.Store;
 import ssh.handlers.HouseHandler;

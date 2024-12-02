@@ -12,9 +12,11 @@ import java.util.List;
 
 public class GenerateJsonFiles {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        SessionFactory sessionFactory;
 
         try {
+            sessionFactory = HibernateUtil.getSessionFactory();
+
             // Initialize repositories
             HouseHandler houseHandler = new HouseHandler(sessionFactory);
             HousemateHandler housemateHandler = new HousemateHandler(sessionFactory);
@@ -59,10 +61,10 @@ public class GenerateJsonFiles {
 
             System.out.println("JSON files generated successfully!");
 
+            HibernateUtil.shutdown();
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            HibernateUtil.shutdown();
         }
     }
 }

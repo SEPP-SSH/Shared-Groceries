@@ -1,7 +1,6 @@
 package ssh.handlers;
 
 import ssh.entities.Item;
-import com.example.entities.embeddables.ItemId;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,13 +28,13 @@ public class ItemHandler {
         }
     }
 
-    public Item getById(ItemId id) {
+    public Item getById(int id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Item.class, id);
         }
     }
 
-    public void deleteById(ItemId id) {
+    public void deleteById(int id) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             Item item = session.get(Item.class, id);
