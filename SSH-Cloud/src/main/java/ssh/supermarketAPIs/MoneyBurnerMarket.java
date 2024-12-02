@@ -1,17 +1,17 @@
-package ssh;
+package ssh.supermarketAPIs;
 
 import ssh.entities.*;
 import ssh.handlers.*;
-import ssh.utils.HibernateUtil;
-import ssh.utils.JsonUtils;
+import ssh.utilities.HibernateUtility;
+import ssh.utilities.JsonUtilities;
 import org.hibernate.SessionFactory;
 import java.util.List;
 
-public class PopulateTables {
-    public static void populate() {
+public class MoneyBurnerMarket {
+    public static void populateSshDatabase() {
         try {
             // get SessionFactory object
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 
             // initialise handler objects
             BasketHandler basketHandler = new BasketHandler(sessionFactory);
@@ -23,31 +23,31 @@ public class PopulateTables {
             StoreHandler storeHandler = new StoreHandler(sessionFactory);
 
             // read objects from JSON file, and populate into database
-            List<Basket> baskets = JsonUtils.readJsonFile("src/main/resources/basket.json", Basket[].class);
+            List<Basket> baskets = JsonUtilities.readJsonFile("src/main/resources/basket.json", Basket[].class);
             baskets.forEach(basketHandler::create);
 
-            List<BasketItem> basketItems = JsonUtils.readJsonFile("src/main/resources/basketitem.json", BasketItem[].class);
+            List<BasketItem> basketItems = JsonUtilities.readJsonFile("src/main/resources/basketItem.json", BasketItem[].class);
             basketItems.forEach(basketItemHandler::create);
 
-            List<Category> categories = JsonUtils.readJsonFile("src/main/resources/category.json", Category[].class);
+            List<Category> categories = JsonUtilities.readJsonFile("src/main/resources/category.json", Category[].class);
             categories.forEach(categoryHandler::create);
 
-            List<House> houses = JsonUtils.readJsonFile("src/main/resources/house.json", House[].class);
+            List<House> houses = JsonUtilities.readJsonFile("src/main/resources/house.json", House[].class);
             houses.forEach(houseHandler::create);
 
-            List<Housemate> housemates = JsonUtils.readJsonFile("src/main/resources/housemate.json", Housemate[].class);
+            List<Housemate> housemates = JsonUtilities.readJsonFile("src/main/resources/housemate.json", Housemate[].class);
             housemates.forEach(housemateHandler::create);
 
-            List<Item> items = JsonUtils.readJsonFile("src/main/resources/item.json", Item[].class);
+            List<Item> items = JsonUtilities.readJsonFile("src/main/resources/item.json", Item[].class);
             items.forEach(itemHandler::create);
 
-            List<Store> stores = JsonUtils.readJsonFile("src/main/resources/store.json", Store[].class);
+            List<Store> stores = JsonUtilities.readJsonFile("src/main/resources/store.json", Store[].class);
             stores.forEach(storeHandler::create);
 
 
             System.out.println("success: tables populated");
 
-            HibernateUtil.shutdown();
+            HibernateUtility.shutdown();
 
         } catch (Exception e) {
             e.printStackTrace();

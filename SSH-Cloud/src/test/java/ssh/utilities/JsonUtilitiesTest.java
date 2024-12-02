@@ -1,4 +1,4 @@
-package ssh.utils;
+package ssh.utilities;
 
 import ssh.entities.House;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class JsonUtilsTest {
+class JsonUtilitiesTest {
 
     @Test
     void testReadJsonFile() throws Exception {
@@ -28,7 +28,7 @@ class JsonUtilsTest {
         mapper.writeValue(temp, houses);
 
         // read in the JSON file we've just wrote out
-        List<House> returnedHouses = JsonUtils.readJsonFile(temp.getAbsolutePath(), House[].class);
+        List<House> returnedHouses = JsonUtilities.readJsonFile(temp.getAbsolutePath(), House[].class);
 
         // check result
         assertNotNull(returnedHouses);
@@ -43,7 +43,7 @@ class JsonUtilsTest {
     void testJsonFileNotFound() {
         // test what happens when reading in a JSON that doesn't exist
         Exception exception = assertThrows(Exception.class, () -> {
-            JsonUtils.readJsonFile("nonexistent.json", House[].class);
+            JsonUtilities.readJsonFile("nonexistent.json", House[].class);
         });
 
         String expectedMessage = "nonexistent.json";

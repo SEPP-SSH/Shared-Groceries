@@ -1,6 +1,5 @@
-package ssh.export;
+package ssh.utilities;
 
-import ssh.utils.HibernateUtil;
 import ssh.entities.*;
 import ssh.handlers.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,11 +7,11 @@ import org.hibernate.SessionFactory;
 import java.io.File;
 import java.util.List;
 
-public class GenerateJsonFiles {
+public class DatabaseExporter {
     public static void main(String[] args) {
         try {
             // get session factory object
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
 
             // initialise handler objects
             BasketHandler basketHandler = new BasketHandler(sessionFactory);
@@ -31,7 +30,7 @@ public class GenerateJsonFiles {
             mapper.writeValue(new File("output/basket.json"), baskets);
 
             List<BasketItem> basketItems = basketItemHandler.getAll();
-            mapper.writeValue(new File("output/basketitem.json"), basketItems);
+            mapper.writeValue(new File("output/basketItem.json"), basketItems);
 
             List<Category> categories = categoryHandler.getAll();
             mapper.writeValue(new File("output/category.json"), categories);
@@ -51,7 +50,7 @@ public class GenerateJsonFiles {
 
             System.out.println("success: generated JSON files");
 
-            HibernateUtil.shutdown();
+            HibernateUtility.shutdown();
 
         } catch (Exception e) {
             e.printStackTrace();

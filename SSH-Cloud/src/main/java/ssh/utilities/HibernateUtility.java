@@ -1,10 +1,10 @@
-package ssh.utils;
+package ssh.utilities;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import java.util.Objects;
 
-public class HibernateUtil {
+public class HibernateUtility {
     private static SessionFactory sessionFactory;
 
     static {

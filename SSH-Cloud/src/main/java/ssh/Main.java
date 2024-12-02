@@ -2,17 +2,15 @@ package ssh;
 
 import ssh.entities.*;
 import ssh.handlers.*;
-import ssh.utils.HibernateUtil;
-import ssh.utils.JsonUtils;
-import org.hibernate.SessionFactory;
 import ssh.handlers.CategoryHandler;
+import ssh.supermarketAPIs.MoneyBurnerMarket;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         try {
-            PopulateTables.populate();
+            MoneyBurnerMarket.populateSshDatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }

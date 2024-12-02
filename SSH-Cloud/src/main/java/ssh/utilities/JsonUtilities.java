@@ -1,11 +1,11 @@
-package ssh.utils;
+package ssh.utilities;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class JsonUtils {
+public class JsonUtilities {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 

@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.List;
 import static org.mockito.Mockito.*;
 
-class GenerateJsonFilesTest {
+class DatabaseExporterTest {
 
     @Test
     void testGenerateJsonForHouses() throws Exception {
