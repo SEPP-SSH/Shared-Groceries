@@ -9,12 +9,12 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Mapping classes -->
-        <mapping class="com.example.entities.House" />
-        <mapping class="com.example.entities.Housemate" />
-        <mapping class="com.example.entities.Store" />
-        <mapping class="com.example.entities.Category" />
-        <mapping class="com.example.entities.Item" />
-        <mapping class="com.example.entities.Basket" />
-        <mapping class="com.example.entities.BasketItem" />
+        <mapping class="ssh.entities.House" />
+        <mapping class="ssh.entities.Housemate" />
+        <mapping class="ssh.entities.Store" />
+        <mapping class="ssh.entities.Category" />
+        <mapping class="ssh.entities.Item" />
+        <mapping class="ssh.entities.Basket" />
+        <mapping class="ssh.entities.BasketItem" />
     </session-factory>
 </hibernate-configuration>
