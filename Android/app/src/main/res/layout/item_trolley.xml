@@ -11,7 +11,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="60dp"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:contentDescription="TODO" />
 
     <TextView
@@ -31,7 +31,7 @@
         android:id="@+id/itemTitleView"
         android:layout_toEndOf="@id/itemImageView"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:layout_toStartOf="@id/quantityView"
         android:maxHeight="100dp"

@@ -14,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
@@ -40,7 +42,7 @@ public class TrolleyAdapter extends ArrayAdapter<GroceryItem> {
 
         if (currentItemView == null) {
             currentItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.item_grocery,
+                    R.layout.item_trolley,
                     parent,
                     false
             );
@@ -52,7 +54,10 @@ public class TrolleyAdapter extends ArrayAdapter<GroceryItem> {
         ImageView imageView = currentItemView.findViewById(R.id.itemImageView);
         TextView titleView = currentItemView.findViewById(R.id.itemTitleView);
         TextView priceView = currentItemView.findViewById(R.id.itemPriceView);
-        Button addToBasketBtn = currentItemView.findViewById(R.id.addToBasketBtn);
+
+        TextView quantityView = currentItemView.findViewById(R.id.itemQuantityView);
+        ImageView increaseQuantityBtn = currentItemView.findViewById(R.id.increaseQuantityBtn);
+        ImageView decreaseQuantityBtn = currentItemView.findViewById(R.id.reduceQuantityBtn);
 
         // Set the text of the text views
         titleView.setText(currentGroceryItem.getName());
@@ -63,11 +68,25 @@ public class TrolleyAdapter extends ArrayAdapter<GroceryItem> {
         // Load the image URL into the imageview
         Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);
 
-        // Add to basket btn
-        addToBasketBtn.setOnClickListener(new View.OnClickListener() {
+        // Get the items quantity
+        // TODO: Fetch quantity from database
+        Integer quantity = 1;
+
+        // Set the quantity
+        quantityView.setText(quantity.toString());
+
+        // Implement change quantity buttons
+        increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                serverHelper.addItemToTrolley(ServerHelper.houseID, storeId, currentGroceryItem.getId());
+                // TODO: Implement increase quantity
+            }
+        });
+
+        decreaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: Implement decrease quantity
             }
         });
 
