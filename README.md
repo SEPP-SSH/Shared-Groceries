@@ -1,5 +1,14 @@
 # SEPP-SSH
 
+## Orientation
+*to do - add in basic information relating to what we're prototyping, who is working on the project, and anything else indicated as required for assignment submission.*
+
+#### Where to find documentation?
+Project documentation - both organisational and technical - can be found [here!](./Documentation)
+
+---
+---
+
 ## Milestone Progress
 | Milestone | Progress | Date Completed |
 | - | - | - |
