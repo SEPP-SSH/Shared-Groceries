@@ -8,4 +8,6 @@
     <string name="title_basket">BASKET</string>
     <string name="close">Close Basket</string>
     <string name="checkout">CHECKOUT</string>
+    <string name="empty_trolley_title">Your trolley is empty</string>
+    <string name="empty_trolley_message">Add some items to your trolley and they will appear here…</string>
 </resources>

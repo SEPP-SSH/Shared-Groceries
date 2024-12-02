@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,9 @@ public class BasketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Setup basket empty layout
+        LinearLayout basketEmptyLayout = (LinearLayout) view.findViewById(R.id.emptyTrolleyView);
+
         // Setup back btn
         Button backBtn = (Button) view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -69,12 +73,16 @@ public class BasketFragment extends Fragment {
         ArrayList<GroceryItem> basketItems = (ArrayList<GroceryItem>) serverHelper.getTrolleyItems(ServerHelper.houseID, storeID);
 
         if (!basketItems.isEmpty()) {
+            // Hide empty basket layout
+            basketEmptyLayout.setVisibility(View.GONE);
+
             // Setup the adapter
             TrolleyAdapter adapter = new TrolleyAdapter(requireActivity(), basketItems, serverHelper, storeID);
             listView.setAdapter(adapter);
         }
         else {
-            // TODO: Display no items message
+            // Hide checkout button
+            checkoutBtn.setVisibility(View.INVISIBLE);
         }
     }
 }
