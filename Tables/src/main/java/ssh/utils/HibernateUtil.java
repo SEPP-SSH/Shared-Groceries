@@ -2,7 +2,6 @@ package ssh.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
 import java.util.Objects;
 
 public class HibernateUtil {
@@ -29,5 +28,6 @@ public class HibernateUtil {
 
     public static void shutdown() throws Exception{
         //getSessionFactory().close();
+        // commented out as this fixed an issue - may need to clean this up later
     }
 }

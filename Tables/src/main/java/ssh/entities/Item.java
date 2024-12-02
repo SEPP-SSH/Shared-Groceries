@@ -1,7 +1,6 @@
 package ssh.entities;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -13,16 +12,10 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "Item")
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("item_id")
     private int itemId;
-
-//    @ManyToOne
-//    @MapsId("storeId")
-//    @JoinColumn(name = "store_id", nullable = false)
-//    private Store store;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
@@ -54,5 +47,4 @@ public class Item {
     @JsonProperty("category")
     private Category category;
 
-    // Getters and Setters
 }

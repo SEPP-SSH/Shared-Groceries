@@ -1,6 +1,5 @@
 package ssh.export;
 
-import ssh.entities.*;
 import ssh.entities.House;
 import ssh.entities.Store;
 import ssh.handlers.HouseHandler;
@@ -8,79 +7,77 @@ import ssh.handlers.StoreHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.io.File;
 import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 class GenerateJsonFilesTest {
 
     @Test
     void testGenerateJsonForHouses() throws Exception {
-        // Mock the repository
+        // mock the handler
         HouseHandler houseHandler = Mockito.mock(HouseHandler.class);
 
-        // Mock data for houses
+        // mock data for the houses
         List<House> mockHouses = List.of(
-                new House() {{setHouseId(1); setHouseAddress("123 Main Street"); }}
+                new House() {{setHouseId(1); setHouseAddress("10 Downing Street"); }}
         );
 
-        // Mock the repository behavior
+        // mock the handler behaviour
         when(houseHandler.getAll()).thenReturn(mockHouses);
 
-        // Serialize data to JSON
+        // serialise the objects to the JSON file
         ObjectMapper mapper = new ObjectMapper();
         File outputFile = new File("test-output/house.json");
 
-        // Ensure output directory exists
+        // make the output directory if it doesn't already exist
         if (!outputFile.getParentFile().exists()) {
             outputFile.getParentFile().mkdirs();
         }
 
-        // Write JSON to file
+        // output to JSON
         mapper.writeValue(outputFile, mockHouses);
 
-        // Verify repository call
+        // verify handler call
         verify(houseHandler, times(1)).getAll();
 
-        // Assert that file exists
+        // success of test depends on whether file exists
         assert outputFile.exists();
 
-        System.out.println("Generated test JSON file for houses: " + outputFile.getAbsolutePath());
+        System.out.println("Test JSON for Houses at: " + outputFile.getAbsolutePath());
     }
 
     @Test
     void testGenerateJsonForStores() throws Exception {
-        // Mock the repository
+        // mock the handler
         StoreHandler storeHandler = Mockito.mock(StoreHandler.class);
 
-        // Mock data for stores
+        // mock data for the stores
         List<Store> mockStores = List.of(
                 new Store() {{ setStoreId(1); setStoreName("SuperMart"); setStoreLogo("supermart.png"); }}
         );
 
-        // Mock the repository behavior
+        // mock the handler behaviour
         when(storeHandler.getAll()).thenReturn(mockStores);
 
-        // Serialize data to JSON
+        // serialise the objects to the JSON file
         ObjectMapper mapper = new ObjectMapper();
         File outputFile = new File("test-output/store.json");
 
-        // Ensure output directory exists
+        // make the output directory if it doesn't already exist
         if (!outputFile.getParentFile().exists()) {
             outputFile.getParentFile().mkdirs();
         }
 
-        // Write JSON to file
+        // output to JSON
         mapper.writeValue(outputFile, mockStores);
 
-        // Verify repository call
+        // verify handler call
         verify(storeHandler, times(1)).getAll();
 
-        // Assert that file exists
+        // success of test depends on whether file exists
         assert outputFile.exists();
 
-        System.out.println("Generated test JSON file for stores: " + outputFile.getAbsolutePath());
+        System.out.println("Test JSON for Stores at: " + outputFile.getAbsolutePath());
     }
 }

@@ -12,7 +12,6 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "House")
 public class House {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("house_id")
@@ -22,5 +21,4 @@ public class House {
     @JsonProperty("house_address")
     private String houseAddress;
 
-    // Getters and Setters
 }

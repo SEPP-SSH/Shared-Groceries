@@ -12,7 +12,6 @@ import lombok.*;
 @NoArgsConstructor
 @Table(name = "Basket")
 public class Basket {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("basket_id")
@@ -28,5 +27,4 @@ public class Basket {
     @JsonProperty("house")
     private House house;
 
-    // Getters and Setters
 }
