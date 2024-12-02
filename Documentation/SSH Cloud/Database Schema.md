@@ -12,3 +12,4 @@ The schema for this database has been constructed, as shown below:
 ## Changes made from the EDR
 As of Milestone 1:
 - An error has been corrected in the `BasketApproval` table, where in the EDR, both attributes of the composite primary key erroneously ommitted foreign key declarations.
+- An attribute has been added to the `Store` table - namely `store_logo`, which allows client UI applications to show a logo for stores, rather than *just* their name.
