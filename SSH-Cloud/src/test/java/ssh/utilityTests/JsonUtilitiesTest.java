@@ -1,8 +1,10 @@
-package ssh.utilities;
+package ssh.utilityTests;
 
 import ssh.entities.House;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import ssh.utilities.JsonUtilities;
+
 import java.io.File;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;

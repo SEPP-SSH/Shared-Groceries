@@ -1,4 +1,4 @@
-package ssh.export;
+package ssh.utilityTests;
 
 import ssh.entities.House;
 import ssh.entities.Store;

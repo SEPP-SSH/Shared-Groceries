@@ -4,7 +4,6 @@ import ssh.entities.*;
 import ssh.handlers.*;
 import ssh.handlers.CategoryHandler;
 import ssh.supermarketAPIs.MoneyBurnerMarket;
-
 import java.util.List;
 
 public class Main {
