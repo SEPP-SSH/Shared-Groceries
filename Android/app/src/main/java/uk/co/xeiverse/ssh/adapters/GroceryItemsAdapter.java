@@ -68,7 +68,7 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         addToBasketBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                serverHelper.addItemToTrolley(ServerHelper.houseID, storeId, currentGroceryItem.getId());
+                serverHelper.addItemToBasket(ServerHelper.houseID, storeId, currentGroceryItem.getId());
             }
         });
 

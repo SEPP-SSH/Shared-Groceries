@@ -45,7 +45,7 @@
             android:background="@drawable/myrect" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/viewTrolleyIcon"
+            android:id="@+id/viewBasketIcon"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_weight="1"
@@ -53,7 +53,7 @@
             android:contentDescription="TODO"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_trolley_black_24"/>
+            android:src="@drawable/ic_basket_black_24"/>
 
     </LinearLayout>
 

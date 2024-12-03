@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.xeiverse.ssh.R;
-import uk.co.xeiverse.ssh.adapters.TrolleyAdapter;
+import uk.co.xeiverse.ssh.adapters.BasketAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 
@@ -36,7 +36,7 @@ public class BasketFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_trolley, container, false);
+        View root = inflater.inflate(R.layout.fragment_basket, container, false);
 
         return root;
     }
@@ -46,7 +46,7 @@ public class BasketFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Setup basket empty layout
-        LinearLayout basketEmptyLayout = (LinearLayout) view.findViewById(R.id.emptyTrolleyView);
+        LinearLayout basketEmptyLayout = (LinearLayout) view.findViewById(R.id.emptyBasketView);
 
         // Setup back btn
         Button backBtn = (Button) view.findViewById(R.id.backBtn);
@@ -69,15 +69,15 @@ public class BasketFragment extends Fragment {
         // Setup listview
         ListView listView = (ListView) view.findViewById(R.id.listView);
 
-        // Get the items in the trolley
-        ArrayList<GroceryItem> basketItems = (ArrayList<GroceryItem>) serverHelper.getTrolleyItems(ServerHelper.houseID, storeID);
+        // Get the items in the basket
+        ArrayList<GroceryItem> basketItems = (ArrayList<GroceryItem>) serverHelper.getBasketItems(ServerHelper.houseID, storeID);
 
         if (!basketItems.isEmpty()) {
             // Hide empty basket layout
             basketEmptyLayout.setVisibility(View.GONE);
 
             // Setup the adapter
-            TrolleyAdapter adapter = new TrolleyAdapter(requireActivity(), basketItems, serverHelper, storeID);
+            BasketAdapter adapter = new BasketAdapter(requireActivity(), basketItems, serverHelper, storeID);
             listView.setAdapter(adapter);
         }
         else {

@@ -38,7 +38,7 @@ public class ShopFragment extends Fragment {
     public static final Integer BASKET_FRAGMENT = 1;
     private Integer currentFragment = BROWSE_FRAGMENT;
 
-    private FloatingActionButton viewTrolleyBtn;
+    private FloatingActionButton viewBasketBtn;
     private Spinner supermarketSpinner;
     private FragmentContainerView fragmentContainerView;
     private LinearLayout bottomLayout;
@@ -63,7 +63,7 @@ public class ShopFragment extends Fragment {
         serverHelper = new ServerHelper();
 
         // Initialise UI elements
-        viewTrolleyBtn = binding.viewTrolleyIcon;
+        viewBasketBtn = binding.viewBasketIcon;
         supermarketSpinner = binding.supermarketSpinner;
         fragmentContainerView = binding.fragmentContainerView;
         bottomLayout = binding.bottomLayout;
@@ -75,7 +75,7 @@ public class ShopFragment extends Fragment {
         itemCategories = serverHelper.getCategories();
 
         // Set onclick listeners
-        viewTrolleyBtn.setOnClickListener(v -> {
+        viewBasketBtn.setOnClickListener(v -> {
             loadBasketFragment();
         });
 

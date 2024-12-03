@@ -22,12 +22,12 @@ import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 
-public class TrolleyAdapter extends ArrayAdapter<GroceryItem> {
+public class BasketAdapter extends ArrayAdapter<GroceryItem> {
 
     private ServerHelper serverHelper;
     private Integer storeId;
 
-    public TrolleyAdapter(@NonNull Context context, ArrayList<GroceryItem> arrayList,
+    public BasketAdapter(@NonNull Context context, ArrayList<GroceryItem> arrayList,
                           ServerHelper serverHelper, Integer storeId) {
         super(context, 0, arrayList);
 
@@ -42,7 +42,7 @@ public class TrolleyAdapter extends ArrayAdapter<GroceryItem> {
 
         if (currentItemView == null) {
             currentItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.item_trolley,
+                    R.layout.item_basket,
                     parent,
                     false
             );
