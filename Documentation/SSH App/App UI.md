@@ -5,9 +5,9 @@
 
 The following UI mock-up was created based on the features and description from the selected EDR.
 
-![Screenshot 1](./Attachments/Screenshot1.png)
-![Screenshot 2](./Attachments/Screenshot2.png)
-![Screenshot 3](./Attachments/Screenshot3.png)
+  Browse View              |  Basket View              |  Empty Basket View
+:-------------------------:|:-------------------------:|:-------------------------:
+![Screenshot 1](./Attachments/Screenshot1.png)  |  ![Screenshot 2](./Attachments/Screenshot2.png)  |  ![Screenshot 3](./Attachments/Screenshot3.png)
 
 ## Features
 - Browse groceries from multiple categories in a tab layout.
