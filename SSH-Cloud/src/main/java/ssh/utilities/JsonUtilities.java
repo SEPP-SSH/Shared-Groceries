@@ -22,4 +22,10 @@ public class JsonUtilities {
         T[] objects = mapper.readValue(new File(filePath), clazz); // Deserialize JSON array
         return List.of(objects); // Convert the array to a List
     }
+
+    public static <T> List<T> readJsonString(String jsonString, Class<T[]> clazz) throws IOException {
+        T[] objects = mapper.readValue(jsonString, clazz); // Deserialize JSON array
+        return List.of(objects); // Convert the array to a List
+    }
+
 }
