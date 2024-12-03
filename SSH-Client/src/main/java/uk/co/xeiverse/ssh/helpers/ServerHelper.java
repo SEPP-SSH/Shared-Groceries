@@ -33,19 +33,19 @@ public class ServerHelper {
         return itemsList;
     }
 
-    public List<GroceryItem> getTrolleyItems(Integer houseID, Integer storeID) {
-        // TODO: Fetch trolley items from database
-        List<GroceryItem> trolleyItemsList = new ArrayList<>();
+    public List<GroceryItem> getBasketItems(Integer houseID, Integer storeID) {
+        // TODO: Fetch basket items from database
+        List<GroceryItem> basketItemsList = new ArrayList<>();
 
-        return trolleyItemsList;
+        return basketItemsList;
     }
 
-    public void addItemToTrolley(Integer houseID, Integer storeID, Integer itemID) {
-        // TODO: Add item to trolley in database
+    public void addItemToBasket(Integer houseID, Integer storeID, Integer itemID) {
+        // TODO: Add item to basket in database
     }
 
-    public void removeItemFromTrolley(Integer houseID, Integer storeID, Integer itemID) {
-        // TODO: Remove item from trolley in database
+    public void removeItemFromBasket(Integer houseID, Integer storeID, Integer itemID) {
+        // TODO: Remove item from basket in database
     }
 
     public void updateItemQuantity(Integer houseID, Integer storeID, Integer itemID, Integer quantity) {
