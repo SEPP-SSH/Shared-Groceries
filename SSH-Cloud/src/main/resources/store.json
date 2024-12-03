@@ -1,4 +1,14 @@
 [
-  { "store_name": "MoneyBurnerMarket",
-    "store_logo": "MoneyBurnerMarket.png" }
+  {
+    "store_name": "Tesco",
+    "store_logo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Tesco_Logo.svg/2560px-Tesco_Logo.svg.png"
+  },
+  {
+    "store_name": "Sainsbury's",
+    "store_logo": "https://www.sainsburysforbusiness.co.uk/wp-content/uploads/2019/02/Sainsburys_Logo_Masterbrand_Orange_CMYK.jpg"
+  },
+  {
+    "store_name": "Aldi",
+    "store_logo": "https://standfirst-designweek-production.imgix.net/uploads/2017/03/13124707/ALDI-New-Logo.jpg"
+  }
 ]
