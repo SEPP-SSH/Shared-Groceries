@@ -5,11 +5,62 @@ import ssh.handlers.*;
 import ssh.handlers.CategoryHandler;
 import ssh.supermarketAPIs.MoneyBurnerMarket;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         try {
+            // populates test data from the simulated supermarket API
             MoneyBurnerMarket.populateSshDatabase();
+
+            // TESTING LINES - WILL BE REMOVED
+            List<Store> allStores = QueryServicer.returnStores(1,1);
+            for (Store store : allStores){
+                System.out.println("name of store: " + store.getStoreName());
+            }
+
+            List<Category> allCategories = QueryServicer.returnCategories(allStores.getFirst().getStoreId());
+            for (Category category : allCategories){
+                System.out.println("name of category : " + category.getCategoryName());
+            }
+
+            Map<Integer, List<BasketItem>> basket = QueryServicer.returnBasketId(1, 1);
+            System.out.println("basket id = " + basket.get(basket.keySet().toArray()[0])); // gets first key
+            for (BasketItem basketItem : (List<BasketItem>)basket.values().toArray()[0]){
+                System.out.println("basket item name = " + basketItem.getItem().getItemName() + ", quantity = " + basketItem.getItemQuantity());
+            }
+
+            boolean addToBasketResult = QueryServicer.addToBasket(1, 1, 1, 1, 26);
+            if (addToBasketResult){
+                System.out.println("add to basket success");
+
+                basket.clear();
+                basket = QueryServicer.returnBasketId(1, 1);
+                System.out.println("basket id = " + basket.get(basket.keySet().toArray()[0])); // gets first key
+                for (BasketItem basketItem : (List<BasketItem>)basket.values().toArray()[0]){
+                    System.out.println("basket item name = " + basketItem.getItem().getItemName() + ", quantity = " + basketItem.getItemQuantity());
+                }
+            }
+            else{
+                System.out.println("add to basket failure");
+            }
+
+            boolean removeFromBasketResult = QueryServicer.removeFromBasket(1, 1, 1, 35);
+            if (addToBasketResult){
+                System.out.println("add to basket success");
+
+                basket.clear();
+                basket = QueryServicer.returnBasketId(1, 1);
+                System.out.println("basket id = " + basket.get(basket.keySet().toArray()[0])); // gets first key
+                for (BasketItem basketItem : (List<BasketItem>)basket.values().toArray()[0]){
+                    System.out.println("basket item name = " + basketItem.getItem().getItemName() + ", quantity = " + basketItem.getItemQuantity());
+                }
+            }
+            else{
+                System.out.println("add to basket failure");
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
