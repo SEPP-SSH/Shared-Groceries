@@ -24,6 +24,8 @@ For SSH Cloud, we propose implementing a networked server in Java, that creates,
 
 The reason we chose Java and MySQL is due to the developers' familiarity with the technologies, and the excellent documentation for both platforms, which we hope will reduce the time taken to produce the prototype.
 
+We also propose using Javalin to implement networking between the SSH Cloud and SSH App products.
+
 #### SSH App
 *to do !*
 
