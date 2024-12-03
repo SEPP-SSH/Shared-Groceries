@@ -1,5 +1,7 @@
 package ssh.handlers;
 
+import org.hibernate.query.Query;
+import ssh.entities.House;
 import ssh.entities.Housemate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,6 +32,15 @@ public class HousemateHandler {
     public Housemate getById(int id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Housemate.class, id);
+        }
+    }
+
+    public List<Housemate> getByHouse(int houseId) {
+        System.out.println("in get by house");
+        try (Session session = sessionFactory.openSession()) {
+            System.out.println("opened session");
+            String queryString = "from Housemate where house.houseId = " + houseId;
+            return session.createQuery(queryString, Housemate.class).list();
         }
     }
 
