@@ -27,6 +27,7 @@ public class ServerHelper {
     private List<GroceryItem> itemsList;
     private Integer basketId;
     private List<BasketItem> basketItemsList;
+    private List<Housemate> housemateList;
 
     public ServerHelper(Integer housemateId, Integer houseId) {
         this.housemateId = housemateId;
@@ -112,6 +113,10 @@ public class ServerHelper {
                     )
             );
         }
+
+        housemateList = new ArrayList<>();
+        housemateList.add(new Housemate(1, "George", "Clooney", "", TEMP_HOUSE_ID));
+        housemateList.add(new Housemate(2, "Tom", "Cruise", "", TEMP_HOUSE_ID));
         // ^^
     }
 
@@ -194,5 +199,9 @@ public class ServerHelper {
 
     public List<BasketItem> getBasketItemsList() {
         return basketItemsList;
+    }
+
+    public List<Housemate> getHousemateList() {
+        return housemateList;
     }
 }

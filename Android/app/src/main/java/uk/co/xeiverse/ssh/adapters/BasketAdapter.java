@@ -23,6 +23,7 @@ import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.BasketItem;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
+import uk.co.xeiverse.ssh.objects.Housemate;
 
 public class BasketAdapter extends ArrayAdapter<BasketItem> {
 
@@ -90,7 +91,11 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         Glide.with(getContext()).load(currentBasketItem.getImgUrl()).into(imageView);
 
         // Set user view
-        userTextView.setText(currentBasketItem.getUserId().toString());
+        for (Housemate current : serverHelper.getHousemateList()) {
+            if (current.getId().equals(currentBasketItem.getUserId())) {
+                userTextView.setText(current.getFullName());
+            }
+        }
 
         // Set the quantity
         quantityView.setText(currentBasketItem.getQuantity().toString());
@@ -99,8 +104,8 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer newQuantity = currentBasketItem.getQuantity() + 1;
-                quantityView.setText(newQuantity.toString());
+                int newQuantity = currentBasketItem.getQuantity() + 1;
+                quantityView.setText(Integer.toString(newQuantity));
                 serverHelper.addItemToBasket(currentBasketItem, 1);
             }
         });
@@ -108,9 +113,9 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         decreaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer newQuantity = currentBasketItem.getQuantity() - 1;
+                int newQuantity = currentBasketItem.getQuantity() - 1;
                 if (newQuantity >= 0) {
-                    quantityView.setText(newQuantity.toString());
+                    quantityView.setText(Integer.toString(newQuantity));
                 }
                 serverHelper.removeItemFromBasket(currentBasketItem, 1);
             }
