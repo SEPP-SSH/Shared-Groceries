@@ -1,10 +1,14 @@
 package uk.co.xeiverse.ssh.helpers;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import uk.co.xeiverse.ssh.objects.BasketItem;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 import uk.co.xeiverse.ssh.objects.GroceryStore;
 import uk.co.xeiverse.ssh.objects.Housemate;
@@ -12,95 +16,126 @@ import uk.co.xeiverse.ssh.objects.Housemate;
 public class ServerHelper {
 
     // Hardcoded for prototype
-    public static final Integer housemateID = 1;
-    public static final Integer houseID = 1;
+    public static final Integer TEMP_HOUSEMATE_ID = 1;
+    public static final Integer TEMP_HOUSE_ID = 1;
 
-    public ServerHelper() {
+    private Integer housemateId;
+    private Integer houseId;
+    private List<GroceryStore> storesList;
+    private Integer currentStoreId;
+    private List<String> categoriesList;
+    private List<GroceryItem> itemsList;
+    private Integer basketId;
+    private List<BasketItem> basketItemsList;
 
+    public ServerHelper(Integer housemateId, Integer houseId) {
+        this.housemateId = housemateId;
+        this.houseId = houseId;
     }
 
-    public List<String> getCategories() {
-        // TODO: Fetch categories from database
-        List<String> itemCategories = new ArrayList<>();
+    public Boolean start() {
+        // Send houseID and housemateID
 
-        // TEMPORARY SOLUTION
-        String[] categories = {"OFFERS", "FROZEN", "FRUIT & VEG", "MEAT", "BAKERY", "DAIRY", "CLEANING", "PASTA & RICE"};
-        itemCategories = new ArrayList<>(Arrays.asList(categories));
+        // Server returns list of stores
+        storesList = new ArrayList<>();
 
-        return itemCategories;
-    }
-
-    public List<GroceryItem> getItemsByStore(Integer storeID) {
-        // TODO: Fetch items by store from database
-        List<GroceryItem> itemsList = new ArrayList<>();
-
-        // TEMPORARY SOLUTION
-        itemsList = createRandomGroceryItems(10);
-
-        return itemsList;
-    }
-
-    public List<GroceryItem> getBasketItems(Integer houseID, Integer storeID) {
-        // TODO: Fetch basket items from database
-        List<GroceryItem> basketItems = new ArrayList<>();
-
-        if (storeID == 0) {
-            // TEMPORARY SOLUTION
-            basketItems = createRandomGroceryItems(3);
-        }
-        else {
-            // TEMPORARY SOLUTION
+        // Check the list isn't empty
+        if (!storesList.isEmpty()) {
+            // Load the first store
+            loadStore(storesList.get(0).getId());
         }
 
-        return basketItems;
+        return true;
     }
 
-    public void addItemToBasket(Integer houseID, Integer storeID, Integer itemID) {
+    public void loadStore(Integer storeId) {
+        // Send store to server
+
+        // Server returns categories and items for that store,
+        // the basket ID for that store and list of items in basket.
+        categoriesList = new ArrayList<>();
+        itemsList = new ArrayList<>();
+        basketId = 1;
+        basketItemsList = new ArrayList<>();
+    }
+
+    public void addItemToBasket(GroceryItem item, Integer quantity) {
         // TODO: Add item to basket in database
+
+        // Add to local list
+        // Check if the item is already in the list
+        boolean found = false;
+        for (BasketItem current : basketItemsList) {
+            if (current.getId().equals(item.getId())) {
+                current.setQuantity(current.getQuantity() + quantity);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            BasketItem basketItem = (BasketItem) item;
+            basketItem.setQuantity(quantity);
+            basketItemsList.add(basketItem);
+        }
+
+        // Send storeId, basketId, itemId, housemateId and quantity
     }
 
-    public void removeItemFromBasket(Integer houseID, Integer storeID, Integer itemID) {
+    public void removeItemFromBasket(GroceryItem item, Integer quantity) {
         // TODO: Remove item from basket in database
+
+        // Remove from local list
+        for (BasketItem basketItem : basketItemsList) {
+            if (basketItem.getId().equals(item.getId())) {
+                if (quantity == 0) {
+                    basketItemsList.remove(basketItem);
+                }
+                else {
+                    basketItem.setQuantity(quantity);
+                }
+            }
+        }
+
+        // Send basketId, itemId, housemateId and quantity
     }
 
-    public void updateItemQuantity(Integer houseID, Integer storeID, Integer itemID, Integer quantity) {
-        // TODO: Update item quantity in database
+    public void submitOrder() {
+        // Send basket ID
+
+        // Wait for confirmation
     }
 
-    public List<GroceryStore> getStores() {
-        // TODO: Fetch stores from database
-        List<GroceryStore> storesList = new ArrayList<>();
+    // GETTERS
 
-        // TEMPORARY SOLUTION
-        storesList.add(new GroceryStore(0, "Tesco", "https://picsum.photos/200/300"));
-        storesList.add(new GroceryStore(1, "Sainsbury's", "https://picsum.photos/200/300"));
-        storesList.add(new GroceryStore(2, "Aldi", "https://picsum.photos/200/300"));
+    public Integer getHousemateId() {
+        return housemateId;
+    }
 
+    public Integer getHouseId() {
+        return houseId;
+    }
+
+    public List<GroceryStore> getStoresList() {
         return storesList;
     }
 
-    public List<Housemate> getHousemates(Integer houseID) {
-        // TODO: Fetch housemates from database
-        List<Housemate> housematesList = new ArrayList<>();
-
-        return housematesList;
+    public Integer getCurrentStoreId() {
+        return currentStoreId;
     }
 
-    public List<GroceryItem> createRandomGroceryItems(int numItems) {
-        List<GroceryItem> groceryItems = new ArrayList<>();
-        List<String> categories = Arrays.asList("Fruits", "Vegetables", "Dairy", "Bakery", "Snacks");
-        List<String> itemNames = Arrays.asList("Apple", "Banana", "Milk", "Bread", "Chips", "Orange", "Carrot", "Yogurt", "Cake", "Cookies");
-        Random random = new Random();
+    public List<String> getCategoriesList() {
+        return categoriesList;
+    }
 
-        for (int i = 0; i < numItems; i++) {
-            String category = categories.get(random.nextInt(categories.size()));
-            String name = itemNames.get(random.nextInt(itemNames.size()));
-            double price = 1 + (10 - 1) * random.nextDouble(); // Price between 1 and 10
-            int quantity = 1 + random.nextInt(5); // Quantity between 1 and 5
+    public List<GroceryItem> getItemsList() {
+        return itemsList;
+    }
 
-            groceryItems.add(new GroceryItem(0, name, "https://picsum.photos/200/300", price, price, 1, 1 + random.nextInt(5)));
-        }
+    public Integer getBasketId() {
+        return basketId;
+    }
 
-        return groceryItems;
+    public List<BasketItem> getBasketItemsList() {
+        return basketItemsList;
     }
 }

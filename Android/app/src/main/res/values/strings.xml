@@ -10,4 +10,5 @@
     <string name="checkout">CHECKOUT</string>
     <string name="empty_basket_title">Your basket is empty</string>
     <string name="empty_basket_message">Add some items to your basket and they will appear here…</string>
+    <string name="added_by">Added by</string>
 </resources>

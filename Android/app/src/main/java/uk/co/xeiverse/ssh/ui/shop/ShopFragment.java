@@ -43,11 +43,6 @@ public class ShopFragment extends Fragment {
     private FragmentContainerView fragmentContainerView;
     private LinearLayout bottomLayout;
 
-    private Integer storeId = 0;
-    private List<String> itemCategories;
-    private List<GroceryItem> itemsList;
-    private List<GroceryStore> storesList;
-
     private BrowseFragment browseFragment;
     private BasketFragment basketFragment;
 
@@ -61,18 +56,13 @@ public class ShopFragment extends Fragment {
 
         // Initialise server helper
         serverHelper = new ServerHelper();
+        Boolean started = serverHelper.start();
 
         // Initialise UI elements
         viewBasketBtn = binding.viewBasketIcon;
         supermarketSpinner = binding.supermarketSpinner;
         fragmentContainerView = binding.fragmentContainerView;
         bottomLayout = binding.bottomLayout;
-
-        // Fetch stores from the server
-        storesList = serverHelper.getStores();
-
-        // Fetch categories from database
-        itemCategories = serverHelper.getCategories();
 
         // Set onclick listeners
         viewBasketBtn.setOnClickListener(v -> {

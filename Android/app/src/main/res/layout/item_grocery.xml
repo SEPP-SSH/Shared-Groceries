@@ -14,18 +14,39 @@
         android:layout_margin="10dp"
         android:contentDescription="TODO" />
 
-    <TextView
-        android:id="@+id/itemPriceView"
+    <LinearLayout
+        android:id="@+id/priceLayout"
+        android:layout_margin="15dp"
+        android:gravity="end"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/itemTitleView"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_margin="15dp"
-        android:gravity="end"
-        android:text="@string/placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/offerPriceView"
+            android:layout_marginEnd="5dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:text="@string/placeholder"
+            android:textStyle="bold"
+            android:textColor="#b32a00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/basePriceView"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:gravity="end"
+            android:text="@string/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/itemTitleView"
@@ -33,7 +54,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_toStartOf="@id/addToBasketBtn"
+        android:layout_toStartOf="@id/buttonLayout"
         android:maxHeight="100dp"
         android:maxLines="6"
         android:textStyle="bold"
@@ -42,21 +63,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/addToBasketBtn"
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:orientation="horizontal"
+        android:layout_margin="15dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="@string/add_to_basket"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@drawable/myrect"
-        android:backgroundTint="@color/design_default_color_secondary"
-        android:layout_margin="15dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
+        android:gravity="bottom|end"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/quantityView"
+            android:visibility="gone"
+            android:background="@drawable/myrect"
+            android:backgroundTint="@color/design_default_color_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/reduceQuantityBtn"
+                android:src="@drawable/ic_remove_black_24"
+                android:layout_gravity="center"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="8dp"
+                android:contentDescription="TODO"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/itemQuantityView"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="1"
+                android:background="@color/white"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="37dp"
+                android:layout_height="37dp" />
+
+            <ImageView
+                android:id="@+id/increaseQuantityBtn"
+                android:src="@drawable/ic_add_black_24"
+                android:layout_gravity="center"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="8dp"
+                android:contentDescription="TODO"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addToBasketBtn"
+            android:text="@string/add_to_basket"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@drawable/myrect"
+            android:backgroundTint="@color/design_default_color_secondary"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </RelativeLayout>

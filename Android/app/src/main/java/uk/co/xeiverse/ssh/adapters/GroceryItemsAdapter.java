@@ -1,6 +1,7 @@
 package uk.co.xeiverse.ssh.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,24 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
 
         ImageView imageView = currentItemView.findViewById(R.id.itemImageView);
         TextView titleView = currentItemView.findViewById(R.id.itemTitleView);
-        TextView priceView = currentItemView.findViewById(R.id.itemPriceView);
+        TextView basePriceView = currentItemView.findViewById(R.id.basePriceView);
+        TextView offerPriceView = currentItemView.findViewById(R.id.offerPriceView);
         Button addToBasketBtn = currentItemView.findViewById(R.id.addToBasketBtn);
 
         // Set the text of the text views
         titleView.setText(currentGroceryItem.getName());
-        priceView.setText("£" + currentGroceryItem.getBasePrice().toString());
 
-        // TODO: Implement the offer price
+        // Set price text
+        if (currentGroceryItem.getOfferPrice().equals(currentGroceryItem.getBasePrice())) {
+            basePriceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+            offerPriceView.setVisibility(View.GONE);
+        }
+        else {
+            basePriceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+            basePriceView.setPaintFlags(basePriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            offerPriceView.setText("£" + currentGroceryItem.getOfferPrice().toString());
+        }
 
         // Load the image URL into the imageview
         Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);
