@@ -125,7 +125,7 @@ public class QueryServicer {
      * @param storeId
      * @return A Map object with an Integer for the basket_id and a List of BasketItem objects for the basket items. (This list may be empty).
      */
-    public static Map<Integer, List<BasketItem>> returnBasketId(int houseId, int storeId){
+    public static ReturnedBasket returnBasketId(int houseId, int storeId){
         // look for basket entry in the basket table of the database corresponding to the values provided
         List<Basket> matchedBaskets =  new ArrayList<>(); // need to init for length check
         try{
@@ -150,9 +150,7 @@ public class QueryServicer {
                 SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
                 basketItems = new BasketItemHandler(sessionFactory).getByBasketId(matchedBaskets.getFirst().getBasketId());
 
-                Map<Integer, List<BasketItem>> returnVal = new HashMap<>();
-                returnVal.put(matchedBaskets.getFirst().getBasketId(), basketItems);
-                return returnVal;
+                return new ReturnedBasket(matchedBaskets.getFirst().getBasketId(), basketItems);
             }
             catch (Exception e){
                 // error
@@ -170,16 +168,14 @@ public class QueryServicer {
 
                 Basket newlyCreatedBasket = basketHandler.getByAppInfo(houseId, storeId).getFirst();
 
-                Map<Integer, List<BasketItem>> returnVal = new HashMap<>();
-                returnVal.put(newlyCreatedBasket.getBasketId(), new ArrayList<>()); // returns empty list as there's no items in the basket, as the basket has just been made
-                return returnVal;
+                return new ReturnedBasket(newlyCreatedBasket.getBasketId(), new ArrayList<>());
             }
             catch (Exception e){
                 return null;
             }
         }
     }
-    public static Map<Integer, List<BasketItem>> returnBasketId(ReturnBasketIdQueryParameter param){
+    public static ReturnedBasket returnBasketId(ReturnBasketIdQueryParameter param){
         return returnBasketId(param.getHouseId(), param.getStoreId());
     }
                                                                 /**
