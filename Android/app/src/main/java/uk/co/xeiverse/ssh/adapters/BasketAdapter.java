@@ -26,11 +26,13 @@ import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class BasketAdapter extends ArrayAdapter<BasketItem> {
 
+    private Context context;
     private ServerHelper serverHelper;
 
     public BasketAdapter(@NonNull Context context, ServerHelper serverHelper) {
         super(context, 0, serverHelper.getBasketItemsList());
 
+        this.context = context;
         this.serverHelper = serverHelper;
     }
 
@@ -55,6 +57,7 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         TextView basePriceView = currentItemView.findViewById(R.id.basePriceView);
         TextView offerPriceView = currentItemView.findViewById(R.id.offerPriceView);
         TextView userTextView = currentItemView.findViewById(R.id.userView);
+        TextView stockView = currentItemView.findViewById(R.id.stockView);
 
         TextView quantityView = currentItemView.findViewById(R.id.itemQuantityView);
         ImageView increaseQuantityBtn = currentItemView.findViewById(R.id.increaseQuantityBtn);
@@ -73,6 +76,14 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
             basePriceView.setPaintFlags(basePriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             offerPriceView.setText("£" + currentBasketItem.getOfferPrice().toString());
+        }
+
+        // Check if in stock
+        if (currentBasketItem.getInStock() > 0) {
+            stockView.setText(context.getString(R.string.in_stock));
+        }
+        else {
+            stockView.setText(context.getString(R.string.out_of_stock));
         }
 
         // Load the image URL into the imageview

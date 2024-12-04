@@ -16,36 +16,56 @@
 
     <LinearLayout
         android:id="@+id/priceLayout"
-        android:layout_margin="15dp"
-        android:gravity="end"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_above="@id/quantityView"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/itemTitleView"
-        android:orientation="horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/offerPriceView"
-            android:layout_marginEnd="5dp"
-            android:maxLines="1"
-            android:ellipsize="end"
+        <LinearLayout
             android:gravity="end"
-            android:text="@string/placeholder"
-            android:textStyle="bold"
-            android:textColor="#b32a00"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/offerPriceView"
+                android:layout_marginEnd="5dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:text="@string/placeholder"
+                android:textStyle="bold"
+                android:textColor="#b32a00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/basePriceView"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:text="@string/placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/basePriceView"
+            android:id="@+id/stockView"
+            android:text="@string/in_stock"
+            android:gravity="end"
+            android:textStyle="italic"
             android:maxLines="1"
             android:ellipsize="end"
-            android:gravity="end"
-            android:text="@string/placeholder"
-            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
 
     <TextView

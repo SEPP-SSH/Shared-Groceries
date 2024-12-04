@@ -27,11 +27,13 @@ import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
 public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
 
+    private Context context;
     private ServerHelper serverHelper;
 
     public GroceryItemsAdapter(@NonNull Context context, ServerHelper serverHelper, List<GroceryItem> arrayList) {
         super(context, 0, arrayList);
 
+        this.context = context;
         this.serverHelper = serverHelper;
     }
 
@@ -55,6 +57,7 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         TextView titleView = currentItemView.findViewById(R.id.itemTitleView);
         TextView basePriceView = currentItemView.findViewById(R.id.basePriceView);
         TextView offerPriceView = currentItemView.findViewById(R.id.offerPriceView);
+        TextView stockView = currentItemView.findViewById(R.id.stockView);
         Button addToBasketBtn = currentItemView.findViewById(R.id.addToBasketBtn);
 
         LinearLayout quantityLayout = currentItemView.findViewById(R.id.quantityView);
@@ -75,6 +78,14 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
             basePriceView.setPaintFlags(basePriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             offerPriceView.setText("£" + currentGroceryItem.getOfferPrice().toString());
+        }
+
+        // Check if in stock
+        if (currentGroceryItem.getInStock() > 0) {
+            stockView.setText(context.getString(R.string.in_stock));
+        }
+        else {
+            stockView.setText(context.getString(R.string.out_of_stock));
         }
 
         // Load the image URL into the imageview
