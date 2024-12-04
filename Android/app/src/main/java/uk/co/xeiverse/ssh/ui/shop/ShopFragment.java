@@ -55,7 +55,7 @@ public class ShopFragment extends Fragment {
         View root = binding.getRoot();
 
         // Initialise server helper
-        serverHelper = new ServerHelper();
+        serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
         Boolean started = serverHelper.start();
 
         // Initialise UI elements
@@ -75,11 +75,7 @@ public class ShopFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Setup the supermarkets spinner
-        setupSpinner(storesList);
-
-        // Fetch the items from the database
-        storeId = ((GroceryStore) supermarketSpinner.getSelectedItem()).getId();
-        itemsList = serverHelper.getItemsByStore(storeId);
+        setupSpinner(serverHelper.getStoresList());
 
         // Load the browse fragment
         loadBrowseFragment();
@@ -97,12 +93,14 @@ public class ShopFragment extends Fragment {
         supermarketSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                storeId = ((GroceryStore) supermarketSpinner.getSelectedItem()).getId();
+                // Load the new storeId
+                Integer newStoreId = ((GroceryStore) supermarketSpinner.getSelectedItem()).getId();
+                // Load store information
+                serverHelper.loadStore(newStoreId);
                 try {
                     if (Objects.equals(currentFragment, BROWSE_FRAGMENT)) {
-                        itemsList = serverHelper.getItemsByStore(storeId);
-                        // Repopulate tabs
-                        browseFragment.populateTabs(storeId, itemsList);
+                        // Reload the browse fragment
+                        loadBrowseFragment();
                     } else {
                         // Reload the basket fragment
                         loadBasketFragment();
@@ -122,7 +120,7 @@ public class ShopFragment extends Fragment {
     void loadBrowseFragment() {
         currentFragment = BROWSE_FRAGMENT;
         bottomLayout.setVisibility(View.VISIBLE);
-        browseFragment = new BrowseFragment(storeId, itemCategories, itemsList, serverHelper);
+        browseFragment = new BrowseFragment(serverHelper);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, browseFragment);
         transaction.commit();
@@ -131,7 +129,7 @@ public class ShopFragment extends Fragment {
     private void loadBasketFragment() {
         currentFragment = BASKET_FRAGMENT;
         bottomLayout.setVisibility(View.GONE);
-        basketFragment = new BasketFragment(this, storeId, serverHelper);
+        basketFragment = new BasketFragment(this, serverHelper);
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainerView, basketFragment);
         transaction.commit();

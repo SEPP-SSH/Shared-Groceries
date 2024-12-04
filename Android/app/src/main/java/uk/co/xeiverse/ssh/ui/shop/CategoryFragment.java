@@ -21,11 +21,9 @@ public class CategoryFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
     private ServerHelper serverHelper;
-    private Integer storeId;
 
-    public CategoryFragment(ServerHelper serverHelper, Integer storeId) {
+    public CategoryFragment(ServerHelper serverHelper) {
         this.serverHelper = serverHelper;
-        this.storeId = storeId;
     }
 
     @Nullable
@@ -44,7 +42,7 @@ public class CategoryFragment extends Fragment {
         ArrayList<GroceryItem> groceryItems = args.getParcelableArrayList(ARG_OBJECT);
 
         // Setup the adapter
-        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), groceryItems, serverHelper, storeId);
+        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), serverHelper, groceryItems);
         listView.setAdapter(groceryItemsAdapter);
     }
 }

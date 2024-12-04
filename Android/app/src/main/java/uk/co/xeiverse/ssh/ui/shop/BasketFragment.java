@@ -18,6 +18,7 @@ import java.util.List;
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.BasketAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
+import uk.co.xeiverse.ssh.objects.BasketItem;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class BasketFragment extends Fragment {
@@ -26,10 +27,9 @@ public class BasketFragment extends Fragment {
     private ServerHelper serverHelper;
     private Integer storeID;
 
-    public BasketFragment(ShopFragment shopFragment, Integer storeID, ServerHelper serverHelper) {
+    public BasketFragment(ShopFragment shopFragment, ServerHelper serverHelper) {
         this.shopFragment = shopFragment;
         this.serverHelper = serverHelper;
-        this.storeID = storeID;
     }
 
     @Nullable
@@ -62,22 +62,19 @@ public class BasketFragment extends Fragment {
         checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Implement checkout
+                serverHelper.submitOrder();
             }
         });
 
         // Setup listview
         ListView listView = (ListView) view.findViewById(R.id.listView);
 
-        // Get the items in the basket
-        ArrayList<GroceryItem> basketItems = (ArrayList<GroceryItem>) serverHelper.getBasketItems(ServerHelper.houseID, storeID);
-
-        if (!basketItems.isEmpty()) {
+        if (!serverHelper.getBasketItemsList().isEmpty()) {
             // Hide empty basket layout
             basketEmptyLayout.setVisibility(View.GONE);
 
             // Setup the adapter
-            BasketAdapter adapter = new BasketAdapter(requireActivity(), basketItems, serverHelper, storeID);
+            BasketAdapter adapter = new BasketAdapter(requireActivity(), serverHelper);
             listView.setAdapter(adapter);
         }
         else {

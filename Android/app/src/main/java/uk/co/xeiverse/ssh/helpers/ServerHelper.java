@@ -31,13 +31,26 @@ public class ServerHelper {
     public ServerHelper(Integer housemateId, Integer houseId) {
         this.housemateId = housemateId;
         this.houseId = houseId;
+
+        // Initialise variables
+        storesList = new ArrayList<>();
+        currentStoreId = -1;
+        categoriesList = new ArrayList<>();
+        itemsList = new ArrayList<>();
+        basketId = -1;
+        basketItemsList = new ArrayList<>();
     }
 
     public Boolean start() {
         // Send houseID and housemateID
 
         // Server returns list of stores
+
+        // TEMPORARY
         storesList = new ArrayList<>();
+        storesList.add(new GroceryStore(1, "Tesco", "https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Tesco_Logo.svg/2560px-Tesco_Logo.svg.png"));
+        storesList.add(new GroceryStore(2, "Sainsbury's", "https://www.sainsburysforbusiness.co.uk/wp-content/uploads/2019/02/Sainsburys_Logo_Masterbrand_Orange_CMYK.jpg"));
+        // ^^
 
         // Check the list isn't empty
         if (!storesList.isEmpty()) {
@@ -49,14 +62,57 @@ public class ServerHelper {
     }
 
     public void loadStore(Integer storeId) {
+        // Set current store
+        currentStoreId = storeId;
+
         // Send store to server
 
         // Server returns categories and items for that store,
         // the basket ID for that store and list of items in basket.
+
+        // TEMPORARY!!
         categoriesList = new ArrayList<>();
+        if (storeId == 1) {
+            categoriesList.add("Fruit");
+            categoriesList.add("Vegetables");
+            categoriesList.add("Meat");
+            categoriesList.add("Dairy");
+            categoriesList.add("Bakery");
+        }
+
         itemsList = new ArrayList<>();
-        basketId = 1;
+        if (storeId == 1) {
+            itemsList.add(
+                    new GroceryItem(
+                            1,
+                            "Apples",
+                            "https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",
+                            1.99,
+                            1.59,
+                            1,
+                            0
+                    )
+            );
+        }
+
         basketItemsList = new ArrayList<>();
+        if (storeId == 1) {
+            basketId = 1;
+            basketItemsList.add(
+                    new BasketItem(
+                            1,
+                            "Apples",
+                            "https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",
+                            1.99,
+                            1.59,
+                            1,
+                            0,
+                            2,
+                            2
+                    )
+            );
+        }
+        // ^^
     }
 
     public void addItemToBasket(GroceryItem item, Integer quantity) {
@@ -66,15 +122,16 @@ public class ServerHelper {
         // Check if the item is already in the list
         boolean found = false;
         for (BasketItem current : basketItemsList) {
-            if (current.getId().equals(item.getId())) {
+            if (current.getId().equals(item.getId()) && current.getUserId().equals(housemateId)) {
                 current.setQuantity(current.getQuantity() + quantity);
                 found = true;
             }
         }
 
         if (!found) {
-            BasketItem basketItem = (BasketItem) item;
+            BasketItem basketItem = new BasketItem(item);
             basketItem.setQuantity(quantity);
+            basketItem.setUserId(ServerHelper.TEMP_HOUSEMATE_ID);
             basketItemsList.add(basketItem);
         }
 
@@ -85,13 +142,13 @@ public class ServerHelper {
         // TODO: Remove item from basket in database
 
         // Remove from local list
-        for (BasketItem basketItem : basketItemsList) {
-            if (basketItem.getId().equals(item.getId())) {
-                if (quantity == 0) {
-                    basketItemsList.remove(basketItem);
-                }
-                else {
-                    basketItem.setQuantity(quantity);
+        for (BasketItem current : basketItemsList) {
+            if (current.getId().equals(item.getId()) && current.getUserId().equals(housemateId)) {
+                // Check if should totally remove item
+                if ((current.getQuantity() - quantity) > 0) {
+                    current.setQuantity(current.getQuantity() - quantity);
+                } else {
+                    basketItemsList.remove(current);
                 }
             }
         }

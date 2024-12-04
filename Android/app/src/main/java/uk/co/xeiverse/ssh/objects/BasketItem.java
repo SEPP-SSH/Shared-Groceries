@@ -34,6 +34,10 @@ public class BasketItem extends GroceryItem {
         this.userId = userId;
     }
 
+    public BasketItem(GroceryItem item) {
+        super(item.getId(), item.getName(), item.getImgUrl(), item.getBasePrice(), item.getOfferPrice(), item.getInStock(), item.getCategory());
+    }
+
     public Integer getQuantity() {
         return quantity;
     }

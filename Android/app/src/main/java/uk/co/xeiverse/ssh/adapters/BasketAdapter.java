@@ -27,14 +27,11 @@ import uk.co.xeiverse.ssh.objects.GroceryItem;
 public class BasketAdapter extends ArrayAdapter<BasketItem> {
 
     private ServerHelper serverHelper;
-    private Integer storeId;
 
-    public BasketAdapter(@NonNull Context context, ArrayList<BasketItem> arrayList,
-                          ServerHelper serverHelper, Integer storeId) {
-        super(context, 0, arrayList);
+    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper) {
+        super(context, 0, serverHelper.getBasketItemsList());
 
         this.serverHelper = serverHelper;
-        this.storeId = storeId;
     }
 
     @NonNull
@@ -51,7 +48,7 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         }
 
         // Get the current grocery item
-        BasketItem currentGroceryItem = getItem(position);
+        BasketItem currentBasketItem = getItem(position);
 
         ImageView imageView = currentItemView.findViewById(R.id.itemImageView);
         TextView titleView = currentItemView.findViewById(R.id.itemTitleView);
@@ -64,45 +61,47 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         ImageView decreaseQuantityBtn = currentItemView.findViewById(R.id.reduceQuantityBtn);
 
         // Set the text of the text views
-        titleView.setText(currentGroceryItem.getName());
+        titleView.setText(currentBasketItem.getName());
 
         // Set price text
-        if (currentGroceryItem.getOfferPrice().equals(currentGroceryItem.getBasePrice())) {
-            basePriceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+        if (currentBasketItem.getOfferPrice().equals(currentBasketItem.getBasePrice())) {
+            basePriceView.setText("£" + currentBasketItem.getBasePrice().toString());
             offerPriceView.setVisibility(View.GONE);
         }
         else {
-            basePriceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+            basePriceView.setText("£" + currentBasketItem.getBasePrice().toString());
             basePriceView.setPaintFlags(basePriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            offerPriceView.setText("£" + currentGroceryItem.getOfferPrice().toString());
+            offerPriceView.setText("£" + currentBasketItem.getOfferPrice().toString());
         }
 
         // Load the image URL into the imageview
-        Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);
+        Glide.with(getContext()).load(currentBasketItem.getImgUrl()).into(imageView);
 
         // Set user view
-        userTextView.setText(currentGroceryItem.getUserId());
-
-        // Get the items quantity
-        // TODO: Fetch quantity from database
-        Integer quantity = 1;
+        userTextView.setText(currentBasketItem.getUserId().toString());
 
         // Set the quantity
-        quantityView.setText(quantity.toString());
+        quantityView.setText(currentBasketItem.getQuantity().toString());
 
         // Implement change quantity buttons
         increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Implement increase quantity
+                Integer newQuantity = currentBasketItem.getQuantity() + 1;
+                quantityView.setText(newQuantity.toString());
+                serverHelper.addItemToBasket(currentBasketItem, 1);
             }
         });
 
         decreaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Implement decrease quantity
+                Integer newQuantity = currentBasketItem.getQuantity() - 1;
+                if (newQuantity >= 0) {
+                    quantityView.setText(newQuantity.toString());
+                }
+                serverHelper.removeItemFromBasket(currentBasketItem, 1);
             }
         });
 
