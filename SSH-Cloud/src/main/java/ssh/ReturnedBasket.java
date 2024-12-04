@@ -10,6 +10,7 @@ public class ReturnedBasket{
     private List<BasketItem> basketItems;
 
     // constructor
+    public ReturnedBasket() {} // needs default constructor for object serialisation
     public ReturnedBasket(Integer basketid, List<BasketItem> basketItems){
         this.basketid = basketid;
         this.basketItems = basketItems;
