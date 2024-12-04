@@ -3,11 +3,11 @@ package ssh;
 import org.hibernate.SessionFactory;
 import ssh.entities.*;
 import ssh.handlers.*;
+import ssh.queryParameterWrappers.*;
 import ssh.utilities.HibernateUtility;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 
 public class QueryServicer {
 
@@ -69,6 +69,9 @@ public class QueryServicer {
             return null;
         }
     }
+    public static List<Store> returnStores(ReturnStoresQueryParameter param){
+        return returnStores(param.getHouseId(), param.getHousemateId());
+    }
 
     /**
      * For a given supermarket, it returns all shopping item categories for that store.
@@ -88,6 +91,9 @@ public class QueryServicer {
             // error
             return null;
         }
+    }
+    public static List<Category> returnCategories(ReturnCategoriesQueryParameter param){
+        return returnCategories(param.getStoreId());
     }
 
     // explanation of return type: the key is the basket_id, and the value is the list of BasketItem objects
@@ -152,8 +158,10 @@ public class QueryServicer {
             }
         }
     }
-
-    /**
+    public static Map<Integer, List<BasketItem>> returnBasketId(ReturnBasketIdQueryParameter param){
+        return returnBasketId(param.getHouseId(), param.getStoreId());
+    }
+                                                                /**
      * Given necessary information, adds a quantity of an item from a supermarket to the relevant basket, so that it can be included in the order.
      * The function requires that the quantity supplied be strictly greater than zero.
      * The function will create a new record in the database in the case that a record already exists for the item, but was added by another housemate.
@@ -193,6 +201,9 @@ public class QueryServicer {
             // error
             return false;
         }
+    }
+    public static boolean addToBasket(AddToBasketQueryParameter param){
+        return addToBasket(param.getBasketId(), param.getStoreId(), param.getItemId(), param.getHousemateId(), param.getQuantity());
     }
 
     /**
@@ -239,6 +250,9 @@ public class QueryServicer {
             return false;
         }
     }
+    public static boolean removeFromBasket(RemoveFromBasketQueryParameter param){
+        return removeFromBasket(param.getBasketId(), param.getItemId(), param.getHousemateId(), param.getQuantity());
+    }
 
     /**
      * Simulates the order submission process with the supermarket API, by returning hard-coded approval and acknowledgement of the order submission.
@@ -250,5 +264,8 @@ public class QueryServicer {
         // SIMULATES API CALL - WOULD NEED TO IMPLEMENT FOR FULL DEVELOPMENT
 
         return true; // ie. order success
+    }
+    public static boolean submitOrder(SubmitOrderQueryParameter param){
+        return submitOrder(param.getBasketId());
     }
 }
