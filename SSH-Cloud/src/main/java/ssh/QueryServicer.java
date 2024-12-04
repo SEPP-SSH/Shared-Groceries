@@ -115,6 +115,9 @@ public class QueryServicer {
             return null;
         }
     }
+    public static List<Housemate> returnHousemates(ReturnHousematesQueryParameter param){
+        return returnHousemates(param.getHouseId());
+    }
 
     /**
      * For a given house and store, looks up whether a basket entry exists in the database, returning a basket_id and list of corresponding items in the basket if so, or creates a new basket if not.
