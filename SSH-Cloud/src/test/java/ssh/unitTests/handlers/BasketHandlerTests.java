@@ -31,7 +31,7 @@ public class BasketHandlerTests {
 
         // Preload house and store
         house = new House();
-        house.setHouseAddress("10 Downing Street");
+        house.setHouseAddress("11 Downing Street");
         houseHandler.create(house);
 
         store = new Store();
@@ -46,7 +46,7 @@ public class BasketHandlerTests {
         basketHandler.create(basket);
     }
 
-    @BeforeEach
+//    @BeforeEach
     void cleanDatabase() throws Exception {
         List<Basket> baskets = basketHandler.getAll();
         for (Basket basket : baskets) {
@@ -75,7 +75,15 @@ public class BasketHandlerTests {
     void testGetAllBaskets() {
         List<Basket> baskets = basketHandler.getAll();
         assertEquals(1, baskets.size());
-        assertEquals(basket.getBasketId(), baskets.get(0).getBasketId());
+        boolean basketFound = false;
+        for (Basket returnedBasket : baskets){
+            if (basket.getBasketId() == returnedBasket.getBasketId()){
+                basketFound = true;
+                break;
+            }
+        }
+//        assertEquals(basket.getBasketId(), baskets.get(0).getBasketId());
+        assertTrue(basketFound);
     }
 
     @Test
@@ -97,7 +105,7 @@ public class BasketHandlerTests {
         assertNotNull(basketHandler.getById(basket.getBasketId()));
         basketHandler.deleteById(basket.getBasketId());
         assertNull(basketHandler.getById(basket.getBasketId()));
-        basketHandler.create(basket);
+        basketHandler.create(basket); // recreate basket for subsequent test
     }
 
     @Test
