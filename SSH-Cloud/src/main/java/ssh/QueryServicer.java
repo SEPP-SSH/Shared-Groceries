@@ -96,7 +96,25 @@ public class QueryServicer {
         return returnCategories(param.getStoreId());
     }
 
-    // explanation of return type: the key is the basket_id, and the value is the list of BasketItem objects
+    /**
+     * Queries and returns all housemates associated with a given house id
+     * @param houseId
+     * @return List of Housemate objects (this may be empty) in the case of success, or null in the case of computation failure
+     */
+    public static List<Housemate> returnHousemates(int houseId){
+        // lookup all housemates in the database belonging to the indicated house
+        List<Housemate> matchedHousemates = new ArrayList<>(); // init for return, in the case there are no housemates in the house
+        try{
+            // get SessionFactory object
+            SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+            matchedHousemates = new HousemateHandler(sessionFactory).getByHouse(houseId);
+            return matchedHousemates;
+        }
+        catch (Exception e){
+            // error
+            return null;
+        }
+    }
 
     /**
      * For a given house and store, looks up whether a basket entry exists in the database, returning a basket_id and list of corresponding items in the basket if so, or creates a new basket if not.
@@ -268,4 +286,5 @@ public class QueryServicer {
     public static boolean submitOrder(SubmitOrderQueryParameter param){
         return submitOrder(param.getBasketId());
     }
+
 }
