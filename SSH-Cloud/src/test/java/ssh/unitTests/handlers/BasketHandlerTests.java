@@ -45,6 +45,11 @@ public class BasketHandlerTests {
     }
 
     @Test
+    void temporaryAlwaysFails(){
+        fail();
+    }
+
+    @Test
     void testCreateBasket() {
         // Arrange
         Basket newBasket = new Basket();
