@@ -99,19 +99,20 @@ public class ServerHelper {
         basketItemsList = new ArrayList<>();
         if (storeId == 1) {
             basketId = 1;
-            basketItemsList.add(
-                    new BasketItem(
-                            1,
-                            "Apples",
-                            "https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",
-                            1.99,
-                            1.59,
-                            1,
-                            0,
-                            2,
-                            2
-                    )
-            );
+            for (int i = 0; i < 1; i++)
+                basketItemsList.add(
+                        new BasketItem(
+                                1,
+                                "Apples",
+                                "https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",
+                                1.99,
+                                1.59,
+                                1,
+                                0,
+                                2,
+                                2
+                        )
+                );
         }
 
         housemateList = new ArrayList<>();

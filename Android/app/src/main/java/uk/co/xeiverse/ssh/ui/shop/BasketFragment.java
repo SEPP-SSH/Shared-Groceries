@@ -7,25 +7,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.BasketAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.BasketItem;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class BasketFragment extends Fragment {
 
     private ShopFragment shopFragment;
     private ServerHelper serverHelper;
     private Integer storeID;
+
+    private TextView userTotalView;
+    private TextView orderTotalView;
 
     public BasketFragment(ShopFragment shopFragment, ServerHelper serverHelper) {
         this.shopFragment = shopFragment;
@@ -66,6 +66,9 @@ public class BasketFragment extends Fragment {
             }
         });
 
+        // Setup checkout layout
+        LinearLayout checkoutLayout = (LinearLayout) view.findViewById(R.id.checkoutLayout);
+
         // Setup listview
         ListView listView = (ListView) view.findViewById(R.id.listView);
 
@@ -74,12 +77,45 @@ public class BasketFragment extends Fragment {
             basketEmptyLayout.setVisibility(View.GONE);
 
             // Setup the adapter
-            BasketAdapter adapter = new BasketAdapter(requireActivity(), serverHelper, shopFragment);
+            BasketAdapter adapter = new BasketAdapter(requireActivity(), serverHelper, shopFragment, this);
             listView.setAdapter(adapter);
+
+            // Setup total price display
+            userTotalView = (TextView) view.findViewById(R.id.userTotalView);
+            orderTotalView = (TextView) view.findViewById(R.id.orderTotalView);
+            updatePrices();
         }
         else {
             // Hide checkout button
-            checkoutBtn.setVisibility(View.INVISIBLE);
+            checkoutLayout.setVisibility(View.GONE);
         }
+    }
+
+    private double calculateTotalPrice() {
+        double totalPrice = 0;
+        for (BasketItem item : serverHelper.getBasketItemsList()) {
+            totalPrice += item.getOfferPrice() * item.getQuantity();
+        }
+        return totalPrice;
+    }
+
+    private double calculateUserPrice() {
+        double userPrice = 0;
+        for (BasketItem item : serverHelper.getBasketItemsList()) {
+            if (item.getUserId().equals(serverHelper.getHousemateId())) {
+                userPrice += item.getOfferPrice() * item.getQuantity();
+            }
+        }
+        return userPrice;
+    }
+
+    public void updatePrices() {
+        // Calculate total price
+        double totalPrice = calculateTotalPrice();
+        orderTotalView.setText("£" + String.format("%.2f", totalPrice));
+
+        // Calculate user price
+        double userPrice = calculateUserPrice();
+        userTotalView.setText("£" + String.format("%.2f", userPrice));
     }
 }
