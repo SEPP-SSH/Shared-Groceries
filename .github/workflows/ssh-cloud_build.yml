@@ -25,7 +25,7 @@ jobs:
 
     - name: Run the docker-compose file
       working-directory: SSH-Cloud
-      run: docker-compose -f "docker-compose.yml" up -d --build
+      run: docker compose up
 
     - name: Set up JDK 21
       uses: actions/setup-java@v4
