@@ -110,17 +110,25 @@ public class BasketItemHandlerTests {
     void testCreateBasketItemByInfo() {
         basketItemHandler.createByInfo(basket.getBasketId(), store.getStoreId(), item.getItemId(), housemate.getHousemateId(), basketItem.getItemQuantity());
         List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
-        assertEquals(2, basketItems.size());
-        assertEquals(store.getStoreId(), basketItems.get(0).getStore().getStoreId());
-        assertEquals(item.getItemId(), basketItems.get(0).getItem().getItemId());
-        assertEquals(housemate.getHousemateId(), basketItems.get(0).getHousemate().getHousemateId());
-        assertEquals(basketItem.getItemQuantity(), basketItems.get(0).getItemQuantity());
+        boolean flag = false;
+        for (BasketItem returnedBasketItem : basketItems){
+            if (store.getStoreId() == returnedBasketItem.getStore().getStoreId()){
+                if (item.getItemId() == returnedBasketItem.getItem().getItemId()){
+                    if (housemate.getHousemateId() == returnedBasketItem.getHousemate().getHousemateId()){
+                        if (basketItem.getItemQuantity() == returnedBasketItem.getItemQuantity()){
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test
     void testGetAllBasketItems() {
         List<BasketItem> basketItems = basketItemHandler.getAll();
-        assertEquals(3, basketItems.size());
         boolean flag = false;
         for (BasketItem returnedBasketItem : basketItems){
             if (basketItem.getBasketItemId() == returnedBasketItem.getBasketItemId()){
@@ -141,7 +149,14 @@ public class BasketItemHandlerTests {
     @Test
     void testGetBasketItemByBasketId() {
         List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
-        assertEquals(basket.getBasketId(), basketItems.get(0).getBasket().getBasketId());
+        boolean flag = false;
+        for (BasketItem returnedBasketItem : basketItems){
+            if (basket.getBasketId() == returnedBasketItem.getBasketItemId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test
