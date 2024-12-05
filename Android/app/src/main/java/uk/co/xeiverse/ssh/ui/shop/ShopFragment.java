@@ -126,7 +126,7 @@ public class ShopFragment extends Fragment {
         transaction.commit();
     }
 
-    private void loadBasketFragment() {
+    public void loadBasketFragment() {
         currentFragment = BASKET_FRAGMENT;
         bottomLayout.setVisibility(View.GONE);
         basketFragment = new BasketFragment(this, serverHelper);

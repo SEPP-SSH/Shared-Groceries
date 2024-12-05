@@ -74,7 +74,7 @@ public class BasketFragment extends Fragment {
             basketEmptyLayout.setVisibility(View.GONE);
 
             // Setup the adapter
-            BasketAdapter adapter = new BasketAdapter(requireActivity(), serverHelper);
+            BasketAdapter adapter = new BasketAdapter(requireActivity(), serverHelper, shopFragment);
             listView.setAdapter(adapter);
         }
         else {

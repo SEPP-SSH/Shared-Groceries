@@ -24,17 +24,20 @@ import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.BasketItem;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 import uk.co.xeiverse.ssh.objects.Housemate;
+import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
 public class BasketAdapter extends ArrayAdapter<BasketItem> {
 
     private Context context;
     private ServerHelper serverHelper;
+    private ShopFragment shopFragment;
 
-    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper) {
+    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper, ShopFragment shopFragment) {
         super(context, 0, serverHelper.getBasketItemsList());
 
         this.context = context;
         this.serverHelper = serverHelper;
+        this.shopFragment = shopFragment;
     }
 
     @NonNull
@@ -104,20 +107,30 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int newQuantity = currentBasketItem.getQuantity() + 1;
-                quantityView.setText(Integer.toString(newQuantity));
-                serverHelper.addItemToBasket(currentBasketItem, 1);
+                // Check if it is this user's item
+                if (currentBasketItem.getUserId().equals(serverHelper.getHousemateId())) {
+                    int newQuantity = currentBasketItem.getQuantity() + 1;
+                    quantityView.setText(Integer.toString(newQuantity));
+                    serverHelper.addItemToBasket(currentBasketItem, 1);
+                }
             }
         });
 
         decreaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int newQuantity = currentBasketItem.getQuantity() - 1;
-                if (newQuantity >= 0) {
-                    quantityView.setText(Integer.toString(newQuantity));
+                // Check if it is this user's item
+                if (currentBasketItem.getUserId().equals(serverHelper.getHousemateId())) {
+                    int newQuantity = currentBasketItem.getQuantity() - 1;
+                    serverHelper.removeItemFromBasket(currentBasketItem, 1);
+                    if (newQuantity > 0) {
+                        quantityView.setText(Integer.toString(newQuantity));
+                    }
+                    else {
+                        // Reload basket fragment
+                        shopFragment.loadBasketFragment();
+                    }
                 }
-                serverHelper.removeItemFromBasket(currentBasketItem, 1);
             }
         });
 
