@@ -143,7 +143,7 @@ public class BasketItemHandlerTests {
     @Test
     void testGetBasketItemByBasketId() {
         List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
-        assertEquals(store.getStoreId(), basketItems.get(0).getStore().getStoreId());
+        assertEquals(basket.getBasketId(), basketItems.get(0).getBasket().getBasketId());
     }
 
     @Test
