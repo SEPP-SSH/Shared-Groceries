@@ -286,7 +286,4 @@ public class QueryServicer {
         return submitOrder(param.getBasketId());
     }
 
-
-    // nested classes
-
 }
