@@ -48,4 +48,17 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation(libs.glide)
+
+    implementation("org.apache.httpcomponents.core5:httpcore5:5.3.1")
+    implementation("org.apache.httpcomponents.client5:httpclient5-fluent:5.4.1")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.15.0")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+    implementation("javax.persistence:javax.persistence-api:2.2")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+
+
+
+
+
+
 }
