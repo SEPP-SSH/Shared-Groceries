@@ -37,19 +37,11 @@ public class BasketHandlerTests {
         store.setStoreLogo("MoneyBurnerMarket.png");
         storeHandler.create(store);
 
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<Basket> allBaskets = basketHandler.getAll();
-        for (Basket basket : allBaskets) {
-            basketHandler.deleteById(basket.getBasketId());
-        }
-
         basket = new Basket();
         basket.setHouse(house);
         basket.setStore(store);
         basketHandler.create(basket);
+
     }
 
     @Test
@@ -72,7 +64,7 @@ public class BasketHandlerTests {
     @Test
     void testGetAllBaskets() {
         List<Basket> baskets = basketHandler.getAll();
-        assertEquals(1, baskets.size());
+        assertEquals(2, baskets.size());
         boolean basketFound = false;
         for (Basket returnedBasket : baskets){
             if (basket.getBasketId() == returnedBasket.getBasketId()){

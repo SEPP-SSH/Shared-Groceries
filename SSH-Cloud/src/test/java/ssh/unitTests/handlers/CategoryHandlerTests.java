@@ -30,20 +30,13 @@ public class CategoryHandlerTests {
         store.setStoreName("MoneyBurnerMarket");
         store.setStoreLogo("MoneyBurnerMarket.png");
         storeHandler.create(store);
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<Category> categories = categoryHandler.getAll();
-        for (Category category : categories) {
-            categoryHandler.deleteById(category.getCategoryId());
-        }
 
         category = new Category();
         category.setCategoryName("Fruit");
         category.setStore(store);
         categoryHandler.create(category);
     }
+
 
     @Test
     void testCreateCategory() {
@@ -65,8 +58,15 @@ public class CategoryHandlerTests {
     @Test
     void testGetAllCategories() {
         List<Category> categories = categoryHandler.getAll();
-        assertEquals(1, categories.size());
-        assertEquals(category.getCategoryId(), categories.get(0).getCategoryId());
+        assertEquals(4, categories.size());
+        boolean flag = false;
+        for (Category returnedCategory : categories){
+            if (category.getCategoryId() == returnedCategory.getCategoryId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test

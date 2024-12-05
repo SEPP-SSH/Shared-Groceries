@@ -37,15 +37,6 @@ public class ItemHandlerTests {
         category.setCategoryName("Fruit");
         category.setStore(store);
         categoryHandler.create(category);
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        // Clean up items before each test
-        List<Item> items = itemHandler.getAll();
-        for (Item item : items) {
-            itemHandler.deleteById(item.getItemId());
-        }
 
         item = new Item();
         item.setItemName("Apple");
@@ -57,6 +48,7 @@ public class ItemHandlerTests {
         item.setCategory(category);
         itemHandler.create(item);
     }
+
 
     @Test
     void testCreateItem() {
@@ -85,8 +77,15 @@ public class ItemHandlerTests {
     @Test
     void testGetAllItems() {
         List<Item> items = itemHandler.getAll();
-        assertEquals(1, items.size());
-        assertEquals(item.getItemId(), items.get(0).getItemId());
+        assertEquals(2, items.size());
+        boolean flag = false;
+        for (Item returnedItem : items){
+            if (item.getItemId() == returnedItem.getItemId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test

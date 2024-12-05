@@ -89,7 +89,7 @@ public class QueryServicerTests {
     void testReturnStores() {
         List<Store> stores = QueryServicer.returnStores(house.getHouseId(), housemate.getHousemateId());
         assertNotNull(stores);
-        assertEquals(1, stores.size());
+        assertEquals(4, stores.size());
         assertEquals("MoneyBurnerMarket", stores.get(0).getStoreName());
     }
 

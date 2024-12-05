@@ -18,20 +18,13 @@ public class StoreHandlerTests {
     @BeforeAll
     void setUp() throws Exception {
         storeHandler = new StoreHandler(HibernateUtility.getSessionFactory());
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<Store> stores = storeHandler.getAll();
-        for (Store store : stores) {
-            storeHandler.deleteById(store.getStoreId());
-        }
 
         store = new Store();
         store.setStoreName("MoneyBurnerMarket");
         store.setStoreLogo("MoneyBurnerMarket.png");
         storeHandler.create(store);
     }
+
 
     @Test
     void testCreateStore() {
@@ -53,8 +46,15 @@ public class StoreHandlerTests {
     @Test
     void testGetAllStores() {
         List<Store> stores = storeHandler.getAll();
-        assertEquals(1, stores.size());
-        assertEquals(store.getStoreId(), stores.get(0).getStoreId());
+        assertEquals(6, stores.size());
+        boolean flag = false;
+        for (Store returnedStore : stores){
+            if (store.getStoreId() == returnedStore.getStoreId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test

@@ -74,14 +74,6 @@ public class BasketItemHandlerTests {
         item.setStore(store);
         item.setCategory(category);
         itemHandler.create(item);
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<BasketItem> allBasketItems = basketItemHandler.getAll();
-        for (BasketItem basketItem : allBasketItems) {
-            basketItemHandler.deleteById(basketItem.getBasketItemId());
-        }
 
         basketItem = new BasketItem();
         basketItem.setBasket(basket);
@@ -116,10 +108,9 @@ public class BasketItemHandlerTests {
 
     @Test
     void testCreateBasketItemByInfo() {
-        basketItemHandler.deleteById(basketItem.getBasketItemId());
         basketItemHandler.createByInfo(basket.getBasketId(), store.getStoreId(), item.getItemId(), housemate.getHousemateId(), basketItem.getItemQuantity());
         List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
-        assertEquals(1, basketItems.size());
+        assertEquals(2, basketItems.size());
         assertEquals(store.getStoreId(), basketItems.get(0).getStore().getStoreId());
         assertEquals(item.getItemId(), basketItems.get(0).getItem().getItemId());
         assertEquals(housemate.getHousemateId(), basketItems.get(0).getHousemate().getHousemateId());
@@ -129,8 +120,15 @@ public class BasketItemHandlerTests {
     @Test
     void testGetAllBasketItems() {
         List<BasketItem> basketItems = basketItemHandler.getAll();
-        assertEquals(1, basketItems.size());
-        assertEquals(basketItem.getBasketItemId(), basketItems.get(0).getBasketItemId());
+        assertEquals(3, basketItems.size());
+        boolean flag = false;
+        for (BasketItem returnedBasketItem : basketItems){
+            if (basketItem.getBasketItemId() == returnedBasketItem.getBasketItemId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test

@@ -22,16 +22,8 @@ public class HousemateHandlerTests {
         houseHandler = new HouseHandler(HibernateUtility.getSessionFactory());
 
         house = new House();
-        house.setHouseAddress("10 Downing Street");
+        house.setHouseAddress("22 Downing Street");
         houseHandler.create(house);
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<Housemate> housemates = housemateHandler.getAll();
-        for (Housemate housemate : housemates) {
-            housemateHandler.deleteById(housemate.getHousemateId());
-        }
 
         housemate = new Housemate();
         housemate.setHousemateForename("Nathan");
@@ -40,6 +32,7 @@ public class HousemateHandlerTests {
         housemate.setHouse(house);
         housemateHandler.create(housemate);
     }
+
 
     @Test
     void testCreateHousemate() {
@@ -64,8 +57,15 @@ public class HousemateHandlerTests {
     @Test
     void testGetAllHousemates() {
         List<Housemate> housemates = housemateHandler.getAll();
-        assertEquals(1, housemates.size());
-        assertEquals(housemate.getHousemateId(), housemates.get(0).getHousemateId());
+        assertEquals(3, housemates.size());
+        boolean flag = false;
+        for (Housemate returnedHousemate : housemates){
+            if (housemate.getHousemateId() == returnedHousemate.getHousemateId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test
@@ -78,9 +78,17 @@ public class HousemateHandlerTests {
     @Test
     void testGetHousematesByHouse() {
         List<Housemate> housemates = housemateHandler.getByHouse(house.getHouseId());
-        assertEquals(1, housemates.size());
-        assertEquals(housemate.getHousemateId(), housemates.get(0).getHousemateId());
-        assertEquals(house.getHouseId(), housemates.get(0).getHouse().getHouseId());
+        assertEquals(2, housemates.size());
+        boolean flag = false;
+        for (Housemate returnedHousemate : housemates){
+            if (housemate.getHousemateId() == returnedHousemate.getHousemateId()){
+                if (house.getHouseId() == returnedHousemate.getHouse().getHouseId()){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test

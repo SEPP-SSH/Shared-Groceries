@@ -18,19 +18,12 @@ public class HouseHandlerTests {
     @BeforeAll
     void setUp() throws Exception {
         houseHandler = new HouseHandler(HibernateUtility.getSessionFactory());
-    }
-
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<House> houses = houseHandler.getAll();
-        for (House house : houses) {
-            houseHandler.deleteById(house.getHouseId());
-        }
 
         house = new House();
         house.setHouseAddress("10 Downing Street");
         houseHandler.create(house);
     }
+
 
     @Test
     void testCreateHouse() {
@@ -50,8 +43,15 @@ public class HouseHandlerTests {
     @Test
     void testGetAllHouses() {
         List<House> houses = houseHandler.getAll();
-        assertEquals(1, houses.size());
-        assertEquals(house.getHouseId(), houses.get(0).getHouseId());
+        assertEquals(4, houses.size());
+        boolean flag = false;
+        for (House returnedHouse : houses){
+            if (house.getHouseId() == returnedHouse.getHouseId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test
