@@ -8,10 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import uk.co.xeiverse.ssh.objects.BasketItem;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
-import uk.co.xeiverse.ssh.objects.GroceryStore;
-import uk.co.xeiverse.ssh.objects.Housemate;
+import uk.co.xeiverse.ssh.networking.Client;
+import uk.co.xeiverse.ssh.networking.entities.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.Housemate;
+import uk.co.xeiverse.ssh.networking.entities.Item;
+import uk.co.xeiverse.ssh.networking.entities.Store;
 
 public class ServerHelper {
 
@@ -21,10 +22,10 @@ public class ServerHelper {
 
     private Integer housemateId;
     private Integer houseId;
-    private List<GroceryStore> storesList;
+    private List<Store> storesList;
     private Integer currentStoreId;
     private List<String> categoriesList;
-    private List<GroceryItem> itemsList;
+    private List<Item> itemsList;
     private Integer basketId;
     private List<BasketItem> basketItemsList;
     private List<Housemate> housemateList;
@@ -43,20 +44,13 @@ public class ServerHelper {
     }
 
     public Boolean start() {
-        // Send houseID and housemateID
-
-        // Server returns list of stores
-
-        // TEMPORARY
-        storesList = new ArrayList<>();
-        storesList.add(new GroceryStore(1, "Tesco", "https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Tesco_Logo.svg/2560px-Tesco_Logo.svg.png"));
-        storesList.add(new GroceryStore(2, "Sainsbury's", "https://www.sainsburysforbusiness.co.uk/wp-content/uploads/2019/02/Sainsburys_Logo_Masterbrand_Orange_CMYK.jpg"));
-        // ^^
+        // Get list of stores from server
+        storesList = Client.returnStores(houseId, housemateId);
 
         // Check the list isn't empty
         if (!storesList.isEmpty()) {
             // Load the first store
-            loadStore(storesList.get(0).getId());
+            loadStore(storesList.get(0).getStoreId());
         }
 
         return true;
