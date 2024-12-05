@@ -28,7 +28,7 @@ jobs:
       run: docker compose up --exit-code-from	sshcloudserver
 
     - name: Copy the .jar file from the docker container image
-    - run: docker cp sshcloudserver:/app/target/ssh-cloud-1.0-SNAPSHOT.jar SSH-Cloud/target/ssh-cloud-1.0-SNAPSHOT.jar
+      run: docker cp sshcloudserver:/app/target/ssh-cloud-1.0-SNAPSHOT.jar SSH-Cloud/target/ssh-cloud-1.0-SNAPSHOT.jar
 
     # - name: Wait for MySQL server to be started
     #   run: sleep 30
