@@ -31,7 +31,7 @@ jobs:
 
     - name: Run the docker-compose file
       working-directory: SSH-Cloud
-      run: docker-compose up
+      run: docker-compose -f "docker-compose.yml" up -d --build
         
     - name: Build with Maven
       working-directory: SSH-Cloud
