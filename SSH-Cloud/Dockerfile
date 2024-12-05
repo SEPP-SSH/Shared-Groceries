@@ -5,7 +5,7 @@ COPY src /app/src
 COPY pom.xml /app
 
 WORKDIR /app
-#RUN sleep 22 # wait for server to start
+RUN sleep 25 # wait for server to start
 EXPOSE 8080
 EXPOSE 3306
 CMD mvn clean install -U
