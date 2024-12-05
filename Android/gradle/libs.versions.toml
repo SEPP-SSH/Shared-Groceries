@@ -1,9 +1,14 @@
 [versions]
 agp = "8.7.3"
+httpclient5Fluent = "5.4.1"
+httpcore5 = "5.3.1"
+jacksonCore = "2.15.0"
+javaxPersistenceApi = "2.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+lombok = "1.18.30"
 material = "1.12.0"
 constraintlayout = "2.2.0"
 lifecycleLivedataKtx = "2.8.7"
@@ -13,10 +18,16 @@ navigationUi = "2.8.4"
 glide = "4.16.0"
 
 [libraries]
+httpclient5-fluent = { module = "org.apache.httpcomponents.client5:httpclient5-fluent", version.ref = "httpclient5Fluent" }
+httpcore5 = { module = "org.apache.httpcomponents.core5:httpcore5", version.ref = "httpcore5" }
+jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jacksonCore" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonCore" }
+javax-persistence-api = { module = "javax.persistence:javax.persistence-api", version.ref = "javaxPersistenceApi" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
