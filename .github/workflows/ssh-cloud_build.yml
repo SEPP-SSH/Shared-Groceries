@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: SSH CI Workflow
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-        cache: mave
+        cache: maven
         
     - name: Build with Maven
       working-directory: ./SSH-Cloud
