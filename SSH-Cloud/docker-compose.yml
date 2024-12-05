@@ -16,13 +16,14 @@ services:
       - app-network
 
   sshcloudserver:
-      build: .
-      depends_on:
-        - mysql
-      ports:
-        - "8080:8080"
-      networks:
-        - app-network
+    container_name: sshcloudserver
+    build: .
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
 
 networks:
   app-network:
