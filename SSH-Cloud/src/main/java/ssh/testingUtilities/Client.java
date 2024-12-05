@@ -18,7 +18,7 @@ import java.util.Map;
 public class Client {
     public static void main(String[] args){
         // this should act as a test client to help work out the networking between SSH App and SSH Cloud
-        
+
     }
 
     public static List<Store> returnStores(int houseId, int housemateId){
