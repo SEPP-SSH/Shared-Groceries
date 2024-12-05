@@ -64,7 +64,6 @@ public class BasketHandlerTests {
     @Test
     void testGetAllBaskets() {
         List<Basket> baskets = basketHandler.getAll();
-//        assertEquals(2, baskets.size());
         boolean basketFound = false;
         for (Basket returnedBasket : baskets){
             if (basket.getBasketId() == returnedBasket.getBasketId()){

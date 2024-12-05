@@ -77,7 +77,6 @@ public class ItemHandlerTests {
     @Test
     void testGetAllItems() {
         List<Item> items = itemHandler.getAll();
-//        assertEquals(2, items.size());
         boolean flag = false;
         for (Item returnedItem : items){
             if (item.getItemId() == returnedItem.getItemId()){

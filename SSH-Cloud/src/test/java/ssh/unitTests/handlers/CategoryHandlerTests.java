@@ -58,7 +58,6 @@ public class CategoryHandlerTests {
     @Test
     void testGetAllCategories() {
         List<Category> categories = categoryHandler.getAll();
-//        assertEquals(4, categories.size());
         boolean flag = false;
         for (Category returnedCategory : categories){
             if (category.getCategoryId() == returnedCategory.getCategoryId()){

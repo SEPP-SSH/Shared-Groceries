@@ -89,7 +89,6 @@ public class QueryServicerTests {
     void testReturnStores() {
         List<Store> stores = QueryServicer.returnStores(house.getHouseId(), housemate.getHousemateId());
         assertNotNull(stores);
-//        assertEquals(4, stores.size());
         boolean flag = false;
         for (Store returnedStore : stores){
             if (returnedStore.getStoreName().equals("MoneyBurnerMarket")){
@@ -111,7 +110,6 @@ public class QueryServicerTests {
     void testReturnBasketId() {
         Map<Integer, List<BasketItem>> basketMap = QueryServicer.returnBasketId(house.getHouseId(), store.getStoreId());
         assertNotNull(basketMap);
-//        assertEquals(1, basketMap.size());
         assertTrue(basketMap.containsKey(basket.getBasketId()));
         assertTrue(basketMap.get(basket.getBasketId()).isEmpty());
     }
@@ -121,7 +119,6 @@ public class QueryServicerTests {
         boolean success = QueryServicer.addToBasket(basket.getBasketId(), store.getStoreId(), item.getItemId(), housemate.getHousemateId(), 5);
         assertTrue(success);
         List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
-//        assertEquals(1, basketItems.size());
         boolean flag = false;
         for (BasketItem returnedBasketItem : basketItems){
             if (item.getItemId() == returnedBasketItem.getItem().getItemId()){

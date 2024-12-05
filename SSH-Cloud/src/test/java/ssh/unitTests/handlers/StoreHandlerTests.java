@@ -46,7 +46,6 @@ public class StoreHandlerTests {
     @Test
     void testGetAllStores() {
         List<Store> stores = storeHandler.getAll();
-//        assertEquals(6, stores.size());
         boolean flag = false;
         for (Store returnedStore : stores){
             if (store.getStoreId() == returnedStore.getStoreId()){
