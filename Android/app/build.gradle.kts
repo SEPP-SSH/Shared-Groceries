@@ -56,9 +56,6 @@ dependencies {
     implementation(libs.javax.persistence.api)
     compileOnly(libs.lombok)
 
-
-
-
-
-
 }
+
+android { packaging { resources.excludes.add("META-INF/*") } }
