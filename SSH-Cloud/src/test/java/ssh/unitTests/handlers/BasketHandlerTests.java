@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BasketHandlerTests {
-
     private BasketHandler basketHandler;
     private HouseHandler houseHandler;
     private StoreHandler storeHandler;
@@ -29,7 +28,6 @@ public class BasketHandlerTests {
         houseHandler = new HouseHandler(HibernateUtility.getSessionFactory());
         storeHandler = new StoreHandler(HibernateUtility.getSessionFactory());
 
-        // Preload house and store
         house = new House();
         house.setHouseAddress("11 Downing Street");
         houseHandler.create(house);
@@ -39,19 +37,19 @@ public class BasketHandlerTests {
         store.setStoreLogo("MoneyBurnerMarket.png");
         storeHandler.create(store);
 
-        // Preload basket
+    }
+
+    @BeforeEach
+    void cleanDatabase() throws Exception {
+        List<Basket> allBaskets = basketHandler.getAll();
+        for (Basket basket : allBaskets) {
+            basketHandler.deleteById(basket.getBasketId());
+        }
+
         basket = new Basket();
         basket.setHouse(house);
         basket.setStore(store);
         basketHandler.create(basket);
-    }
-
-//    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<Basket> baskets = basketHandler.getAll();
-        for (Basket basket : baskets) {
-            basketHandler.deleteById(basket.getBasketId());
-        }
     }
 
     @Test
@@ -82,7 +80,6 @@ public class BasketHandlerTests {
                 break;
             }
         }
-//        assertEquals(basket.getBasketId(), baskets.get(0).getBasketId());
         assertTrue(basketFound);
     }
 

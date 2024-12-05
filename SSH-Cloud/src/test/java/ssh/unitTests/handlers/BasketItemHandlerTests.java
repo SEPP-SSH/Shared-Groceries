@@ -18,12 +18,15 @@ public class BasketItemHandlerTests {
     private ItemHandler itemHandler;
     private CategoryHandler categoryHandler;
     private HousemateHandler housemateHandler;
+    private HouseHandler houseHandler;
 
+    private BasketItem basketItem;
     private Basket basket;
     private Store store;
     private Item item;
     private Category category;
     private Housemate housemate;
+    private House house;
 
     @BeforeAll
     void setUp() throws Exception {
@@ -34,8 +37,8 @@ public class BasketItemHandlerTests {
         itemHandler = new ItemHandler(HibernateUtility.getSessionFactory());
         categoryHandler = new CategoryHandler(HibernateUtility.getSessionFactory());
         housemateHandler = new HousemateHandler(HibernateUtility.getSessionFactory());
+        houseHandler = new HouseHandler(HibernateUtility.getSessionFactory());
 
-        // Prepopulate the database with one store, one category, one basket, one item, and one housemate
         store = new Store();
         store.setStoreName("MoneyBurnerMarket");
         store.setStoreLogo("MoneyBurnerMarket.png");
@@ -46,8 +49,20 @@ public class BasketItemHandlerTests {
         category.setStore(store);
         categoryHandler.create(category);
 
+        house = new House();
+        house.setHouseAddress("11 Downing Street");
+        houseHandler.create(house);
+
+        housemate = new Housemate();
+        housemate.setHousemateForename("John");
+        housemate.setHousemateSurname("Doe");
+        housemate.setHousemateImg("john.png");
+        housemate.setHouse(house);
+        housemateHandler.create(housemate);
+
         basket = new Basket();
         basket.setStore(store);
+        basket.setHouse(house);
         basketHandler.create(basket);
 
         item = new Item();
@@ -59,22 +74,24 @@ public class BasketItemHandlerTests {
         item.setStore(store);
         item.setCategory(category);
         itemHandler.create(item);
-
-        housemate = new Housemate();
-        housemate.setHousemateForename("John");
-        housemate.setHousemateSurname("Doe");
-        housemate.setHousemateImg("john.png");
-        housemateHandler.create(housemate);
     }
 
     @BeforeEach
     void cleanDatabase() throws Exception {
-        // Clean up basket items before each test
-        List<BasketItem> basketItems = basketItemHandler.getAll();
-        for (BasketItem basketItem : basketItems) {
+        List<BasketItem> allBasketItems = basketItemHandler.getAll();
+        for (BasketItem basketItem : allBasketItems) {
             basketItemHandler.deleteById(basketItem.getBasketItemId());
         }
+
+        basketItem = new BasketItem();
+        basketItem.setBasket(basket);
+        basketItem.setStore(store);
+        basketItem.setItem(item);
+        basketItem.setHousemate(housemate);
+        basketItem.setItemQuantity(5);
+        basketItemHandler.create(basketItem);
     }
+
 
     @Test
     void testCreateBasketItem() {
@@ -91,96 +108,63 @@ public class BasketItemHandlerTests {
 
         // Assert
         BasketItem fetchedBasketItem = basketItemHandler.getById(basketItem.getBasketItemId());
-        assertNotNull(fetchedBasketItem);
-        assertEquals(5, fetchedBasketItem.getItemQuantity());
-        assertEquals(basket.getBasketId(), fetchedBasketItem.getBasket().getBasketId());
-        assertEquals(item.getItemName(), fetchedBasketItem.getItem().getItemName());
+        assertNotNull(fetchedBasketItem, "The basketItem should be successfully saved.");
+        assertEquals(5, fetchedBasketItem.getItemQuantity(), "The quantity should match.");
+        assertEquals(basket.getBasketId(), fetchedBasketItem.getBasket().getBasketId(), "The basket ID should match.");
+        assertEquals(item.getItemName(), fetchedBasketItem.getItem().getItemName(), "The item name should match.");
     }
 
     @Test
     void testCreateBasketItemByInfo() {
-        // Act
-        basketItemHandler.createByInfo(basket.getBasketId(), store.getStoreId(), item.getItemId(), housemate.getHousemateId(), 10);
-
-        // Assert
+        basketItemHandler.deleteById(basketItem.getBasketItemId());
+        basketItemHandler.createByInfo(basket.getBasketId(), store.getStoreId(), item.getItemId(), housemate.getHousemateId(), basketItem.getItemQuantity());
         List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
         assertEquals(1, basketItems.size());
-        assertEquals(10, basketItems.get(0).getItemQuantity());
-        assertEquals(item.getItemName(), basketItems.get(0).getItem().getItemName());
+        assertEquals(store.getStoreId(), basketItems.get(0).getStore().getStoreId());
+        assertEquals(item.getItemId(), basketItems.get(0).getItem().getItemId());
+        assertEquals(housemate.getHousemateId(), basketItems.get(0).getHousemate().getHousemateId());
+        assertEquals(basketItem.getItemQuantity(), basketItems.get(0).getItemQuantity());
     }
 
     @Test
     void testGetAllBasketItems() {
-        // Arrange
-        BasketItem basketItem = new BasketItem();
-        basketItem.setBasket(basket);
-        basketItem.setStore(store);
-        basketItem.setItem(item);
-        basketItem.setHousemate(housemate);
-        basketItem.setItemQuantity(5);
-        basketItemHandler.create(basketItem);
-
-        // Act
         List<BasketItem> basketItems = basketItemHandler.getAll();
-
-        // Assert
         assertEquals(1, basketItems.size());
         assertEquals(basketItem.getBasketItemId(), basketItems.get(0).getBasketItemId());
     }
 
     @Test
+    void testGetBasketItemById() {
+        BasketItem fetchedBasketItem = basketItemHandler.getById(basketItem.getBasketItemId());
+        assertNotNull(fetchedBasketItem);
+        assertEquals(basketItem.getBasketItemId(), fetchedBasketItem.getBasketItemId());
+    }
+
+    @Test
+    void testGetBasketItemByBasketId() {
+        List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
+        assertEquals(store.getStoreId(), basketItems.get(0).getStore().getStoreId());
+    }
+
+    @Test
     void testIncreaseItemQuantity() {
-        // Arrange
-        BasketItem basketItem = new BasketItem();
-        basketItem.setBasket(basket);
-        basketItem.setStore(store);
-        basketItem.setItem(item);
-        basketItem.setHousemate(housemate);
-        basketItem.setItemQuantity(5);
-        basketItemHandler.create(basketItem);
-
-        // Act
         basketItemHandler.increaseItemQuantity(basketItem.getBasketItemId(), 3);
-
-        // Assert
         BasketItem updatedBasketItem = basketItemHandler.getById(basketItem.getBasketItemId());
         assertEquals(8, updatedBasketItem.getItemQuantity());
     }
 
     @Test
     void testDecreaseItemQuantity() {
-        // Arrange
-        BasketItem basketItem = new BasketItem();
-        basketItem.setBasket(basket);
-        basketItem.setStore(store);
-        basketItem.setItem(item);
-        basketItem.setHousemate(housemate);
-        basketItem.setItemQuantity(5);
-        basketItemHandler.create(basketItem);
-
-        // Act
-        basketItemHandler.decreaseItemQuantity(basketItem.getBasketItemId(), 2);
-
-        // Assert
+        basketItemHandler.decreaseItemQuantity(basketItem.getBasketItemId(), 3);
         BasketItem updatedBasketItem = basketItemHandler.getById(basketItem.getBasketItemId());
-        assertEquals(3, updatedBasketItem.getItemQuantity());
+        assertEquals(2, updatedBasketItem.getItemQuantity());
     }
 
     @Test
     void testDeleteBasketItemById() {
-        // Arrange
-        BasketItem basketItem = new BasketItem();
-        basketItem.setBasket(basket);
-        basketItem.setStore(store);
-        basketItem.setItem(item);
-        basketItem.setHousemate(housemate);
-        basketItem.setItemQuantity(5);
-        basketItemHandler.create(basketItem);
-
-        // Act
+        assertNotNull(basketItemHandler.getById(basketItem.getBasketItemId()));
         basketItemHandler.deleteById(basketItem.getBasketItemId());
-
-        // Assert
         assertNull(basketItemHandler.getById(basketItem.getBasketItemId()));
+        basketItemHandler.create(basketItem);
     }
 }

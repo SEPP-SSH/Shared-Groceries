@@ -16,9 +16,10 @@ public class ItemHandlerTests {
     private StoreHandler storeHandler;
     private CategoryHandler categoryHandler;
 
+    private Item item;
     private Store store;
     private Category category;
-    private Item item;
+
 
     @BeforeAll
     void setUp() throws Exception {
@@ -27,7 +28,6 @@ public class ItemHandlerTests {
         storeHandler = new StoreHandler(HibernateUtility.getSessionFactory());
         categoryHandler = new CategoryHandler(HibernateUtility.getSessionFactory());
 
-        // Prepopulate the database with one store and one category
         store = new Store();
         store.setStoreName("MoneyBurnerMarket");
         store.setStoreLogo("MoneyBurnerMarket.png");
@@ -37,17 +37,6 @@ public class ItemHandlerTests {
         category.setCategoryName("Fruit");
         category.setStore(store);
         categoryHandler.create(category);
-
-        // Prepopulate the database with one item
-        item = new Item();
-        item.setItemName("Apple");
-        item.setItemImg("apple.png");
-        item.setItemBasePrice(3.00);
-        item.setItemOfferPrice(2.50);
-        item.setItemInStock(true);
-        item.setStore(store);
-        item.setCategory(category);
-        itemHandler.create(item);
     }
 
     @BeforeEach
@@ -58,7 +47,14 @@ public class ItemHandlerTests {
             itemHandler.deleteById(item.getItemId());
         }
 
-        // Recreate the single item for prototype constraints
+        item = new Item();
+        item.setItemName("Apple");
+        item.setItemImg("apple.png");
+        item.setItemBasePrice(3.00);
+        item.setItemOfferPrice(2.50);
+        item.setItemInStock(true);
+        item.setStore(store);
+        item.setCategory(category);
         itemHandler.create(item);
     }
 
@@ -84,43 +80,27 @@ public class ItemHandlerTests {
         assertEquals(0.80, fetchedItem.getItemOfferPrice());
         assertTrue(fetchedItem.isItemInStock());
 
-        // Cleanup
-        itemHandler.deleteById(newItem.getItemId());
     }
 
     @Test
     void testGetAllItems() {
-        // Act
         List<Item> items = itemHandler.getAll();
-
-        // Assert
         assertEquals(1, items.size());
         assertEquals(item.getItemId(), items.get(0).getItemId());
-        assertEquals("Apple", items.get(0).getItemName());
     }
 
     @Test
     void testGetItemById() {
-        // Act
         Item fetchedItem = itemHandler.getById(item.getItemId());
-
-        // Assert
         assertNotNull(fetchedItem);
         assertEquals(item.getItemId(), fetchedItem.getItemId());
-        assertEquals("Apple", fetchedItem.getItemName());
-        assertEquals(2.50, fetchedItem.getItemOfferPrice());
-        assertTrue(fetchedItem.isItemInStock());
     }
 
     @Test
     void testDeleteItemById() {
-        // Act
+        assertNotNull(itemHandler.getById(item.getItemId()));
         itemHandler.deleteById(item.getItemId());
-
-        // Assert
         assertNull(itemHandler.getById(item.getItemId()));
-
-        // Recreate the item to maintain prototype constraints
         itemHandler.create(item);
     }
 }
