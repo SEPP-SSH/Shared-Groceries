@@ -14,18 +14,59 @@
         android:layout_margin="15dp"
         android:contentDescription="TODO" />
 
-    <TextView
-        android:id="@+id/itemPriceView"
+    <LinearLayout
+        android:id="@+id/priceLayout"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_above="@id/quantityView"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@id/itemTitleView"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_margin="15dp"
-        android:gravity="end"
-        android:text="@string/placeholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/offerPriceView"
+                android:layout_marginEnd="5dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:text="@string/placeholder"
+                android:textStyle="bold"
+                android:textColor="#b32a00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/basePriceView"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:text="@string/placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/stockView"
+            android:text="@string/in_stock"
+            android:gravity="end"
+            android:textStyle="italic"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/itemTitleView"
@@ -34,6 +75,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:layout_toStartOf="@id/quantityView"
+        android:layout_above="@id/userLayout"
         android:maxHeight="100dp"
         android:maxLines="6"
         android:textStyle="bold"
@@ -41,6 +83,33 @@
         android:text="@string/placeholder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/userLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/itemImageView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@id/quantityView"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="@string/added_by"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/userView"
+            android:text="@string/placeholder"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/quantityView"

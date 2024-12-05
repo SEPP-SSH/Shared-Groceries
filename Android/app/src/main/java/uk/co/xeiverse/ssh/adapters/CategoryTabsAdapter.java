@@ -15,30 +15,23 @@ import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class CategoryTabsAdapter extends FragmentStateAdapter {
 
-    private List<String> categories;
-    private List<GroceryItem> items;
     private ServerHelper serverHelper;
-    private Integer storeId;
 
-    public CategoryTabsAdapter(@NonNull Fragment fragment, List<String> categories,
-                               List<GroceryItem> groceryItems, ServerHelper serverHelper, Integer storeId) {
+    public CategoryTabsAdapter(@NonNull Fragment fragment, ServerHelper serverHelper) {
         super(fragment);
 
-        this.categories = categories;
-        this.items = groceryItems;
         this.serverHelper = serverHelper;
-        this.storeId = storeId;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         // Create the new fragment
-        Fragment fragment = new CategoryFragment(serverHelper, storeId);
+        Fragment fragment = new CategoryFragment(serverHelper);
 
         // Sort through the items by category
         ArrayList<GroceryItem> currentItems = new ArrayList<>();
-        for (GroceryItem item : items) {
+        for (GroceryItem item : serverHelper.getItemsList()) {
             if (item.getCategory().equals(position)) {
                 currentItems.add(item);
             }
@@ -54,6 +47,6 @@ public class CategoryTabsAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return serverHelper.getCategoriesList().size();
     }
 }

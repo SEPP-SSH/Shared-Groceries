@@ -24,17 +24,10 @@ import uk.co.xeiverse.ssh.objects.GroceryStore;
 public class BrowseFragment extends Fragment {
     private ServerHelper serverHelper;
 
-    private Integer storeId;
-    private List<String> itemCategories;
-    private List<GroceryItem> itemsList;
-
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
 
-    public BrowseFragment(Integer storeId, List<String> itemCategories, List<GroceryItem> itemsList, ServerHelper serverHelper) {
-        this.storeId = storeId;
-        this.itemCategories = itemCategories;
-        this.itemsList = itemsList;
+    public BrowseFragment(ServerHelper serverHelper) {
         this.serverHelper = serverHelper;
     }
 
@@ -53,18 +46,18 @@ public class BrowseFragment extends Fragment {
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager = (ViewPager2) view.findViewById(R.id.viewPager);
 
-        populateTabs(storeId, itemsList);
+        populateTabs();
     }
 
-    public void populateTabs(Integer storeId, List<GroceryItem> itemsList) {
+    public void populateTabs() {
         // Set up the viewpager and adapter
         if (viewPager != null && tabLayout != null) {
-            CategoryTabsAdapter categoryTabsAdapter = new CategoryTabsAdapter(this, itemCategories, itemsList, serverHelper, storeId);
+            CategoryTabsAdapter categoryTabsAdapter = new CategoryTabsAdapter(this, serverHelper);
             viewPager.setAdapter(categoryTabsAdapter);
 
             // Link the tabs to the view pager
             new TabLayoutMediator(tabLayout, viewPager,
-                    (tab, position) -> tab.setText(itemCategories.get(position))
+                    (tab, position) -> tab.setText(serverHelper.getCategoriesList().get(position))
             ).attach();
         }
     }
