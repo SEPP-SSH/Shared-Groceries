@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    container_name: SSH-Cloud-DB-Server
+    container_name: mysql
     image: mysql:latest
     environment:
       MYSQL_DATABASE: sshCloud
@@ -12,3 +12,18 @@ services:
     ports:
       - "3306:3306"
     restart: unless-stopped
+    networks:
+      - app-network
+
+  sshcloudserver:
+      build: .
+      depends_on:
+        - mysql
+      ports:
+        - "8080:8080"
+      networks:
+        - app-network
+
+networks:
+  app-network:
+    driver: bridge
