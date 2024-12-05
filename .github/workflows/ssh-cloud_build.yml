@@ -37,7 +37,7 @@ jobs:
 
     - name: Run the docker-compose file
       working-directory: SSH-Cloud
-      run: docker compose up --build
+      run: docker compose up --exit-code-from	sshcloudserver
 
     # - name: Wait for MySQL server to be started
     #   run: sleep 30
