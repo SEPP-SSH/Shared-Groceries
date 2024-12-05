@@ -28,6 +28,10 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
+
+    - name: Run the docker-compose file
+      working-directory: SSH-Cloud
+      run: docker-compose up
         
     - name: Build with Maven
       working-directory: SSH-Cloud
