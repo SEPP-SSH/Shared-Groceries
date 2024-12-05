@@ -23,6 +23,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.1.0
 
+    - name: debug - print working directory
+      run: pwd
+
     - name: Run the docker-compose file
       working-directory: SSH-Cloud
       run: docker compose up --exit-code-from	sshcloudserver
