@@ -23,6 +23,7 @@ import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.networking.entities.BasketItem;
 import uk.co.xeiverse.ssh.networking.entities.Housemate;
+import uk.co.xeiverse.ssh.ui.shop.BasketFragment;
 import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
 public class BasketAdapter extends ArrayAdapter<BasketItem> {
