@@ -2,6 +2,7 @@ package ssh.unitTests.queries;
 
 import org.junit.jupiter.api.*;
 import ssh.QueryServicer;
+import ssh.ReturnedBasket;
 import ssh.entities.*;
 import ssh.handlers.*;
 import ssh.utilities.HibernateUtility;
@@ -111,6 +112,7 @@ public class QueryServicerTests {
 
     @Test
     void testReturnBasketId() {
+<<<<<<< Updated upstream
         // Act
         Map<Integer, List<BasketItem>> basketMap = QueryServicer.returnBasketId(house.getHouseId(), store.getStoreId());
 
@@ -119,6 +121,12 @@ public class QueryServicerTests {
         assertEquals(1, basketMap.size());
         assertTrue(basketMap.containsKey(basket.getBasketId()));
         assertTrue(basketMap.get(basket.getBasketId()).isEmpty());
+=======
+        ReturnedBasket returnedBasket = QueryServicer.returnBasketId(house.getHouseId(), store.getStoreId());
+        assertNotNull(returnedBasket);
+        assertEquals(returnedBasket.getBasketid(), basket.getBasketId());
+        assertTrue(returnedBasket.getBasketItems().isEmpty());
+>>>>>>> Stashed changes
     }
 
     @Test
