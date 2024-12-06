@@ -30,13 +30,15 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
     private Context context;
     private ServerHelper serverHelper;
     private ShopFragment shopFragment;
+    private BasketFragment basketFragment;
 
-    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper, ShopFragment shopFragment) {
+    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper, ShopFragment shopFragment, BasketFragment basketFragment) {
         super(context, 0, serverHelper.getBasketItemsList());
 
         this.context = context;
         this.serverHelper = serverHelper;
         this.shopFragment = shopFragment;
+        this.basketFragment = basketFragment;
     }
 
     @NonNull
@@ -115,6 +117,9 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
                     int newQuantity = currentBasketItem.getItemQuantity() + 1;
                     quantityView.setText(Integer.toString(newQuantity));
                     serverHelper.addItemToBasket(currentBasketItem.getItem(), 1);
+
+                    // Display change in price
+                    basketFragment.updatePrices();
                 }
             }
         });
@@ -128,6 +133,8 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
                     serverHelper.removeItemFromBasket(currentBasketItem.getItem(), 1);
                     if (newQuantity > 0) {
                         quantityView.setText(Integer.toString(newQuantity));
+                        // Display change in price
+                        basketFragment.updatePrices();
                     }
                     else {
                         // Reload basket fragment
