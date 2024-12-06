@@ -24,6 +24,7 @@ import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.objects.BasketItem;
 import uk.co.xeiverse.ssh.objects.GroceryItem;
 import uk.co.xeiverse.ssh.objects.Housemate;
+import uk.co.xeiverse.ssh.ui.shop.BasketFragment;
 import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
 public class BasketAdapter extends ArrayAdapter<BasketItem> {
@@ -31,13 +32,15 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
     private Context context;
     private ServerHelper serverHelper;
     private ShopFragment shopFragment;
+    private BasketFragment basketFragment;
 
-    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper, ShopFragment shopFragment) {
+    public BasketAdapter(@NonNull Context context, ServerHelper serverHelper, ShopFragment shopFragment, BasketFragment basketFragment) {
         super(context, 0, serverHelper.getBasketItemsList());
 
         this.context = context;
         this.serverHelper = serverHelper;
         this.shopFragment = shopFragment;
+        this.basketFragment = basketFragment;
     }
 
     @NonNull
@@ -112,6 +115,9 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
                     int newQuantity = currentBasketItem.getQuantity() + 1;
                     quantityView.setText(Integer.toString(newQuantity));
                     serverHelper.addItemToBasket(currentBasketItem, 1);
+
+                    // Display change in price
+                    basketFragment.updatePrices();
                 }
             }
         });
@@ -125,6 +131,8 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
                     serverHelper.removeItemFromBasket(currentBasketItem, 1);
                     if (newQuantity > 0) {
                         quantityView.setText(Integer.toString(newQuantity));
+                        // Display change in price
+                        basketFragment.updatePrices();
                     }
                     else {
                         // Reload basket fragment

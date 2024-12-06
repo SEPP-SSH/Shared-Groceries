@@ -14,4 +14,6 @@
     <string name="in_stock">In stock</string>
     <string name="out_of_stock">Out of stock</string>
     <string name="sign_out">Sign Out</string>
+    <string name="your_total">Your total:</string>
+    <string name="order_total">Order total:</string>
 </resources>
