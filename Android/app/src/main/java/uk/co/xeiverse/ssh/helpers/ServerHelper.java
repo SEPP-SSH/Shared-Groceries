@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Random;
 
 import uk.co.xeiverse.ssh.networking.Client;
+import uk.co.xeiverse.ssh.networking.ReturnedBasket;
+import uk.co.xeiverse.ssh.networking.entities.Basket;
 import uk.co.xeiverse.ssh.networking.entities.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.Category;
+import uk.co.xeiverse.ssh.networking.entities.House;
 import uk.co.xeiverse.ssh.networking.entities.Housemate;
 import uk.co.xeiverse.ssh.networking.entities.Item;
 import uk.co.xeiverse.ssh.networking.entities.Store;
@@ -24,7 +28,7 @@ public class ServerHelper {
     private Integer houseId;
     private List<Store> storesList;
     private Integer currentStoreId;
-    private List<String> categoriesList;
+    private List<Category> categoriesList;
     private List<Item> itemsList;
     private Integer basketId;
     private List<BasketItem> basketItemsList;
@@ -48,104 +52,81 @@ public class ServerHelper {
         storesList = Client.returnStores(houseId, housemateId);
 
         // Check the list isn't empty
-        if (!storesList.isEmpty()) {
-            // Load the first store
-            loadStore(storesList.get(0).getStoreId());
+        if (storesList != null) {
+            if (!storesList.isEmpty()) {
+                // Load the first store
+                loadStore(storesList.get(0).getStoreId());
+                return true;
+            }
         }
 
-        return true;
+        return false;
     }
 
     public void loadStore(Integer storeId) {
         // Set current store
         currentStoreId = storeId;
 
-        // Send store to server
 
         // Server returns categories and items for that store,
         // the basket ID for that store and list of items in basket.
 
-        // TEMPORARY!!
-        categoriesList = new ArrayList<>();
-        if (storeId == 1) {
-            categoriesList.add("Fruit");
-            categoriesList.add("Vegetables");
-            categoriesList.add("Meat");
-            categoriesList.add("Dairy");
-            categoriesList.add("Bakery");
-        }
-
+        categoriesList = Client.returnCategories(storeId);
+        //itemsList = Client.returnItems(storeId);
         itemsList = new ArrayList<>();
-        if (storeId == 1) {
-            itemsList.add(
-                    new GroceryItem(
-                            1,
-                            "Apples",
-                            "https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",
-                            1.99,
-                            1.59,
-                            1,
-                            0
-                    )
-            );
-        }
 
-        basketItemsList = new ArrayList<>();
-        if (storeId == 1) {
-            basketId = 1;
-            basketItemsList.add(
-                    new BasketItem(
-                            1,
-                            "Apples",
-                            "https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",
-                            1.99,
-                            1.59,
-                            1,
-                            0,
-                            2,
-                            2
-                    )
-            );
-        }
+        // Get basket information
+        ReturnedBasket returnedBasket = Client.returnBasketId(houseId, storeId);
+        basketId = returnedBasket.getBasketid();
+        basketItemsList = returnedBasket.getBasketItems();
 
-        housemateList = new ArrayList<>();
-        housemateList.add(new Housemate(1, "George", "Clooney", "", TEMP_HOUSE_ID));
-        housemateList.add(new Housemate(2, "Tom", "Cruise", "", TEMP_HOUSE_ID));
-        // ^^
+        // Get list of housemates
+        housemateList = Client.returnHousemates(houseId);
     }
 
-    public void addItemToBasket(GroceryItem item, Integer quantity) {
-        // TODO: Add item to basket in database
-
+    public void addItemToBasket(Item item, Integer quantity) {
         // Add to local list
         // Check if the item is already in the list
         boolean found = false;
         for (BasketItem current : basketItemsList) {
-            if (current.getId().equals(item.getId()) && current.getUserId().equals(housemateId)) {
-                current.setQuantity(current.getQuantity() + quantity);
+            if (current.getItem().getItemId() == item.getItemId() && current.getHousemate().getHousemateId() == housemateId) {
+                current.setItemQuantity(current.getItemQuantity() + quantity);
                 found = true;
             }
         }
 
         if (!found) {
-            BasketItem basketItem = new BasketItem(item);
-            basketItem.setQuantity(quantity);
-            basketItem.setUserId(ServerHelper.TEMP_HOUSEMATE_ID);
+            House tempHouse = new House();
+            tempHouse.setHouseId(houseId);
+
+            Basket tempBasket = new Basket();
+            tempBasket.setBasketId(basketId);
+            tempBasket.setHouse(tempHouse);
+            tempBasket.setStore(getStore(currentStoreId));
+
+            BasketItem basketItem = new BasketItem();
+            basketItem.setBasketItemId(-1); // Assign -1 because its only an offline list
+            basketItem.setBasket(tempBasket);
+            basketItem.setItem(item);
+            basketItem.setStore(getStore(currentStoreId));
+            basketItem.setHousemate(getHousemate(housemateId));
+            basketItem.setItemQuantity(quantity);
+
             basketItemsList.add(basketItem);
         }
 
         // Send storeId, basketId, itemId, housemateId and quantity
+        Client.addToBasket(basketId, currentStoreId, item.getItemId(), housemateId, quantity);
     }
 
-    public void removeItemFromBasket(GroceryItem item, Integer quantity) {
-        // TODO: Remove item from basket in database
-
+    public void removeItemFromBasket(Item item, Integer quantity) {
         // Remove from local list
         for (BasketItem current : basketItemsList) {
-            if (current.getId().equals(item.getId()) && current.getUserId().equals(housemateId)) {
+            if (current.getItem().getItemId() == item.getItemId() &&
+                    current.getHousemate().getHousemateId() == housemateId) {
                 // Check if should totally remove item
-                if ((current.getQuantity() - quantity) > 0) {
-                    current.setQuantity(current.getQuantity() - quantity);
+                if ((current.getItemQuantity() - quantity) > 0) {
+                    current.setItemQuantity(current.getItemQuantity() - quantity);
                 } else {
                     basketItemsList.remove(current);
                 }
@@ -153,12 +134,11 @@ public class ServerHelper {
         }
 
         // Send basketId, itemId, housemateId and quantity
+        Client.removeFromBasket(basketId, item.getItemId(), housemateId, quantity);
     }
 
     public void submitOrder() {
-        // Send basket ID
-
-        // Wait for confirmation
+        Boolean success = Client.submitOrder(basketId);
     }
 
     // GETTERS
@@ -171,7 +151,7 @@ public class ServerHelper {
         return houseId;
     }
 
-    public List<GroceryStore> getStoresList() {
+    public List<Store> getStoresList() {
         return storesList;
     }
 
@@ -179,11 +159,11 @@ public class ServerHelper {
         return currentStoreId;
     }
 
-    public List<String> getCategoriesList() {
+    public List<Category> getCategoriesList() {
         return categoriesList;
     }
 
-    public List<GroceryItem> getItemsList() {
+    public List<Item> getItemsList() {
         return itemsList;
     }
 
@@ -197,5 +177,23 @@ public class ServerHelper {
 
     public List<Housemate> getHousemateList() {
         return housemateList;
+    }
+
+    private Housemate getHousemate(int housemateId) {
+        for (Housemate current : housemateList) {
+            if (current.getHousemateId() == housemateId) {
+                return current;
+            }
+        }
+        return null;
+    }
+
+    private Store getStore(int storeId) {
+        for (Store current : storesList) {
+            if (current.getStoreId() == storeId) {
+                return current;
+            }
+        }
+        return null;
     }
 }

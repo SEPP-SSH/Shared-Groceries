@@ -20,19 +20,18 @@ import java.util.List;
 
 import uk.co.xeiverse.ssh.MainActivity;
 import uk.co.xeiverse.ssh.R;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
-import uk.co.xeiverse.ssh.objects.GroceryStore;
+import uk.co.xeiverse.ssh.networking.entities.Store;
 
-public class GroceryStoreAdapter extends ArrayAdapter<GroceryStore> {
+public class GroceryStoreAdapter extends ArrayAdapter<Store> {
 
     private Activity activity;
-    private List<GroceryStore> data;
+    private List<Store> data;
     public Resources res;
-    GroceryStore tempValues = null;
+    Store tempValues = null;
     LayoutInflater inflater;
 
     public GroceryStoreAdapter(MainActivity activitySpinner, int textViewResourceId,
-                               List<GroceryStore> objects, Resources resLocal) {
+                               List<Store> objects, Resources resLocal) {
         super(activitySpinner, textViewResourceId, objects);
 
         activity = activitySpinner;
@@ -57,14 +56,14 @@ public class GroceryStoreAdapter extends ArrayAdapter<GroceryStore> {
         View row = inflater.inflate(R.layout.row_spinner, parent, false);
 
         tempValues = null;
-        tempValues = (GroceryStore) data.get(position);
+        tempValues = (Store) data.get(position);
 
         TextView label = (TextView)row.findViewById(R.id.text);
         ImageView companyLogo = (ImageView)row.findViewById(R.id.icon);
 
         // Set values for spinner each row
-        label.setText(tempValues.getName());
-        Glide.with(getContext()).load(tempValues.getLogoUrl()).into(companyLogo);
+        label.setText(tempValues.getStoreName());
+        Glide.with(getContext()).load(tempValues.getStoreLogo()).into(companyLogo);
 
         return row;
     }

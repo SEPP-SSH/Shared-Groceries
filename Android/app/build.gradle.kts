@@ -55,7 +55,7 @@ dependencies {
     implementation(libs.jackson.databind)
     implementation(libs.javax.persistence.api)
     compileOnly(libs.lombok)
-
+    annotationProcessor(libs.lombok)
 }
 
 android { packaging { resources.excludes.add("META-INF/*") } }

@@ -18,8 +18,6 @@ import java.util.List;
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.BasketAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.BasketItem;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class BasketFragment extends Fragment {
 
