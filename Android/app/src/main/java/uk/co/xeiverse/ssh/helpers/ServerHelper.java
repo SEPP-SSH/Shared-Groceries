@@ -72,8 +72,7 @@ public class ServerHelper {
         // the basket ID for that store and list of items in basket.
 
         categoriesList = Client.returnCategories(storeId);
-        //itemsList = Client.returnItems(storeId);
-        itemsList = new ArrayList<>();
+        itemsList = Client.returnitems(storeId);
 
         // Get basket information
         ReturnedBasket returnedBasket = Client.returnBasketId(houseId, storeId);
