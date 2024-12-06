@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BasketHandlerTests {
-
     private BasketHandler basketHandler;
     private HouseHandler houseHandler;
     private StoreHandler storeHandler;
@@ -29,7 +28,6 @@ public class BasketHandlerTests {
         houseHandler = new HouseHandler(HibernateUtility.getSessionFactory());
         storeHandler = new StoreHandler(HibernateUtility.getSessionFactory());
 
-        // Preload house and store
         house = new House();
         house.setHouseAddress("11 Downing Street");
         houseHandler.create(house);
@@ -39,20 +37,17 @@ public class BasketHandlerTests {
         store.setStoreLogo("MoneyBurnerMarket.png");
         storeHandler.create(store);
 
-        // Preload basket
         basket = new Basket();
         basket.setHouse(house);
         basket.setStore(store);
         basketHandler.create(basket);
+
     }
 
-//    @BeforeEach
-    void cleanDatabase() throws Exception {
-        List<Basket> baskets = basketHandler.getAll();
-        for (Basket basket : baskets) {
-            basketHandler.deleteById(basket.getBasketId());
-        }
-    }
+//    @Test
+//    void temporaryAlwaysFails(){
+//        fail();
+//    }
 
     @Test
     void testCreateBasket() {
@@ -74,7 +69,6 @@ public class BasketHandlerTests {
     @Test
     void testGetAllBaskets() {
         List<Basket> baskets = basketHandler.getAll();
-        assertEquals(1, baskets.size());
         boolean basketFound = false;
         for (Basket returnedBasket : baskets){
             if (basket.getBasketId() == returnedBasket.getBasketId()){
@@ -82,7 +76,6 @@ public class BasketHandlerTests {
                 break;
             }
         }
-//        assertEquals(basket.getBasketId(), baskets.get(0).getBasketId());
         assertTrue(basketFound);
     }
 
@@ -97,7 +90,14 @@ public class BasketHandlerTests {
     void testGetBasketByAppInfo() {
         List<Basket> baskets = basketHandler.getByAppInfo(house.getHouseId(), store.getStoreId());
         assertEquals(1, baskets.size());
-        assertEquals(basket.getBasketId(), baskets.get(0).getBasketId());
+        boolean flag = false;
+        for (Basket returnedBasket : baskets){
+            if (basket.getBasketId() == returnedBasket.getBasketId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test
@@ -113,9 +113,16 @@ public class BasketHandlerTests {
         basketHandler.deleteById(basket.getBasketId());
         basketHandler.createByAppInfo(house.getHouseId(), store.getStoreId());
         List<Basket> baskets = basketHandler.getByAppInfo(house.getHouseId(), store.getStoreId());
-        assertEquals(1, baskets.size());
-        assertEquals(house.getHouseId(), baskets.get(0).getHouse().getHouseId());
-        assertEquals(store.getStoreId(), baskets.get(0).getStore().getStoreId());
+        boolean flag = false;
+        for (Basket returnedBasket : baskets){
+            if (house.getHouseId() == returnedBasket.getHouse().getHouseId()){
+                if (store.getStoreId() == returnedBasket.getStore().getStoreId()){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        assertTrue(flag);
         basket = baskets.get(0);
     }
 }

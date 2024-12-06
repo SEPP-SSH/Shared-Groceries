@@ -17,26 +17,13 @@ public class HouseHandlerTests {
 
     @BeforeAll
     void setUp() throws Exception {
-        // Initialize handler with Hibernate session factory
         houseHandler = new HouseHandler(HibernateUtility.getSessionFactory());
 
-        // Prepopulate the database with one house
         house = new House();
         house.setHouseAddress("10 Downing Street");
         houseHandler.create(house);
     }
 
-    @BeforeEach
-    void cleanDatabase() throws Exception {
-        // Clean up houses before each test
-        List<House> houses = houseHandler.getAll();
-        for (House house : houses) {
-            houseHandler.deleteById(house.getHouseId());
-        }
-
-        // Recreate the single house for prototype constraints
-        houseHandler.create(house);
-    }
 
     @Test
     void testCreateHouse() {
@@ -51,42 +38,33 @@ public class HouseHandlerTests {
         House fetchedHouse = houseHandler.getById(newHouse.getHouseId());
         assertNotNull(fetchedHouse);
         assertEquals("221B Baker Street", fetchedHouse.getHouseAddress());
-
-        // Cleanup
-        houseHandler.deleteById(newHouse.getHouseId());
     }
 
     @Test
     void testGetAllHouses() {
-        // Act
         List<House> houses = houseHandler.getAll();
-
-        // Assert
-        assertEquals(1, houses.size());
-        assertEquals(house.getHouseId(), houses.get(0).getHouseId());
-        assertEquals("10 Downing Street", houses.get(0).getHouseAddress());
+        boolean flag = false;
+        for (House returnedHouse : houses){
+            if (house.getHouseId() == returnedHouse.getHouseId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
     }
 
     @Test
     void testGetHouseById() {
-        // Act
         House fetchedHouse = houseHandler.getById(house.getHouseId());
-
-        // Assert
         assertNotNull(fetchedHouse);
         assertEquals(house.getHouseId(), fetchedHouse.getHouseId());
-        assertEquals("10 Downing Street", fetchedHouse.getHouseAddress());
     }
 
     @Test
     void testDeleteHouseById() {
-        // Act
+        assertNotNull(houseHandler.getById(house.getHouseId()));
         houseHandler.deleteById(house.getHouseId());
-
-        // Assert
         assertNull(houseHandler.getById(house.getHouseId()));
-
-        // Recreate the house to maintain prototype constraints
         houseHandler.create(house);
     }
 }

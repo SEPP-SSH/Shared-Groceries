@@ -24,23 +24,24 @@ public class BasketItemHandler {
         }
     }
 
-    public void createByInfo(int basketId, int storeId, int itemId, int housmateId, int itemQuantity){
-        String basketItemJson = String.format("[{\"basket\" : {\"basket_id\" : ", basketId, " }, \"store\" : { \"store_id\" : ",
-                                               storeId, " }, \"item\" : { \"item_id\" : ",
-                                               itemId, " }, \"housemate\" : { \"housemate_id\" : ",
-                                               housmateId, " }, \"item_quantity\" : ",
-                                               itemQuantity, " }]");
+    public void createByInfo(int basketId, int storeId, int itemId, int housemateId, int itemQuantity) {
+        // Correct JSON formatting with placeholders
+        String basketItemJson = String.format(
+                "[{\"basket\": {\"basket_id\": %d}, \"store\": {\"store_id\": %d}, \"item\": {\"item_id\": %d}, \"housemate\": {\"housemate_id\": %d}, \"item_quantity\": %d}]",
+                basketId, storeId, itemId, housemateId, itemQuantity
+        );
 
         try (Session session = sessionFactory.openSession()) {
-            // read json string into object
+            // Deserialize JSON string into objects
             List<BasketItem> basketItemObjectList = JsonUtilities.readJsonString(basketItemJson, BasketItem[].class);
 
-            create(basketItemObjectList.getFirst());
-        }
-        catch (Exception e){
+            // Create the first BasketItem from the list
+            create(basketItemObjectList.get(0));
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public List<BasketItem> getAll() {
         try (Session session = sessionFactory.openSession()) {

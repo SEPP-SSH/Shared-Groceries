@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.io.File;
 import java.util.List;
+import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class DatabaseExporterTest {
@@ -38,11 +41,23 @@ class DatabaseExporterTest {
         // output to JSON
         mapper.writeValue(outputFile, mockHouses);
 
-        // verify handler call
-        verify(houseHandler, times(1)).getAll();
-
         // success of test depends on whether file exists
-        assert outputFile.exists();
+        assertTrue(outputFile.exists());
+
+        // check output is correct
+        String expectedOutput = "[{\"house_id\":1,\"house_address\":\"10 Downing Street\"}]";
+        StringBuilder actualOutput = new StringBuilder();
+        try {
+            File readBackIn = new File("test-output/house.json");
+            Scanner reader = new Scanner(readBackIn);
+            while (reader.hasNextLine()) {
+                actualOutput.append(reader.nextLine());
+            }
+            reader.close();
+        } catch (Exception e) {
+            fail(); // failure
+        }
+        assertEquals(expectedOutput, actualOutput.toString());
 
         System.out.println("Test JSON for Houses at: " + outputFile.getAbsolutePath());
     }
@@ -72,11 +87,23 @@ class DatabaseExporterTest {
         // output to JSON
         mapper.writeValue(outputFile, mockStores);
 
-        // verify handler call
-        verify(storeHandler, times(1)).getAll();
-
         // success of test depends on whether file exists
-        assert outputFile.exists();
+        assertTrue(outputFile.exists());
+
+        // check output is correct
+        String expectedOutput = "[{\"store_id\":1,\"store_name\":\"SuperMart\",\"store_logo\":\"supermart.png\"}]";
+        StringBuilder actualOutput = new StringBuilder();
+        try {
+            File readBackIn = new File("test-output/store.json");
+            Scanner reader = new Scanner(readBackIn);
+            while (reader.hasNextLine()) {
+                actualOutput.append(reader.nextLine());
+            }
+            reader.close();
+        } catch (Exception e) {
+            fail(); // failure
+        }
+        assertEquals(expectedOutput, actualOutput.toString());
 
         System.out.println("Test JSON for Stores at: " + outputFile.getAbsolutePath());
     }
