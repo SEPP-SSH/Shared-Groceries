@@ -6,6 +6,7 @@ import ssh.entities.BasketItem;
 import ssh.entities.Category;
 import ssh.entities.Housemate;
 import ssh.entities.Store;
+import ssh.entities.Item;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.client5.http.fluent.Request;
 import ssh.queryParameterWrappers.*;
@@ -61,6 +62,31 @@ public class Client {
                     .asString();
 
             List<Category> response = JsonUtilities.readJsonString(responseJson, Category[].class);
+
+            return response;
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<Item> returnitems(int storeId){
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ReturnItemsQueryParameter queryParam = new ReturnItemsQueryParameter(storeId);
+
+        try{
+            String queryParamJson = objectMapper.writeValueAsString(queryParam);
+
+            String responseJson = Request.post("http://localhost:8080/returnItems")
+                    .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
+                    .execute()
+                    .returnContent()
+                    .asString();
+
+            List<Item> response = JsonUtilities.readJsonString(responseJson, Item[].class);
 
             return response;
 

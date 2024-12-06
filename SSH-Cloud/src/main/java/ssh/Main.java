@@ -44,6 +44,13 @@ public class Main {
 
             ctx.json(returnObject);
         });
+        app.post("/returnItems", ctx ->{
+            ReturnItemsQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnItemsQueryParameter.class);
+
+            List<Item> returnObject = QueryServicer.returnItems(parameter);
+
+            ctx.json(returnObject);
+        });
         app.post("/returnHousemates", ctx ->{
             ReturnHousematesQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnHousematesQueryParameter.class);
 

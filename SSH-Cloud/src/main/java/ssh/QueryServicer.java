@@ -96,6 +96,24 @@ public class QueryServicer {
         return returnCategories(param.getStoreId());
     }
 
+    public static List<Item> returnItems (int storeId){
+        // lookup all items in the database with the storeId
+        List<Item> matchedItems = new ArrayList<>(); // init for return
+        try{
+            // get SessionFactory object
+            SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+            matchedItems = new ItemHandler(sessionFactory).getByStoreId(storeId);
+            return matchedItems;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+    public static List<Item> returnItems (ReturnItemsQueryParameter param){
+        return returnItems(param.getstoreId());
+    }
+
+
     /**
      * Queries and returns all housemates associated with a given house id
      * @param houseId
