@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
+import uk.co.xeiverse.ssh.networking.entities.Item;
 import uk.co.xeiverse.ssh.ui.shop.CategoryFragment;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
 
 public class CategoryTabsAdapter extends FragmentStateAdapter {
 
@@ -26,21 +26,16 @@ public class CategoryTabsAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        // Create the new fragment
-        Fragment fragment = new CategoryFragment(serverHelper);
-
         // Sort through the items by category
-        ArrayList<GroceryItem> currentItems = new ArrayList<>();
-        for (GroceryItem item : serverHelper.getItemsList()) {
-            if (item.getCategory().equals(position)) {
+        ArrayList<Item> currentItems = new ArrayList<>();
+        for (Item item : serverHelper.getItemsList()) {
+            if (item.getCategory() == serverHelper.getCategoriesList().get(position)) {
                 currentItems.add(item);
             }
         }
 
-        // Bundle the items list into the fragment
-        Bundle args = new Bundle();
-        args.putParcelableArrayList(CategoryFragment.ARG_OBJECT, currentItems);
-        fragment.setArguments(args);
+        // Create the new fragment
+        CategoryFragment fragment = new CategoryFragment(serverHelper, currentItems);
 
         return fragment;
     }

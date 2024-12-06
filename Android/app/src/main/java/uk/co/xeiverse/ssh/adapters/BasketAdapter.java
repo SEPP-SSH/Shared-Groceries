@@ -21,9 +21,8 @@ import java.util.ArrayList;
 
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.BasketItem;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
-import uk.co.xeiverse.ssh.objects.Housemate;
+import uk.co.xeiverse.ssh.networking.entities.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.Housemate;
 import uk.co.xeiverse.ssh.ui.shop.BasketFragment;
 import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
@@ -71,22 +70,25 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         ImageView decreaseQuantityBtn = currentItemView.findViewById(R.id.reduceQuantityBtn);
 
         // Set the text of the text views
-        titleView.setText(currentBasketItem.getName());
+        titleView.setText(currentBasketItem.getItem().getItemName());
 
         // Set price text
-        if (currentBasketItem.getOfferPrice().equals(currentBasketItem.getBasePrice())) {
-            basePriceView.setText("£" + currentBasketItem.getBasePrice().toString());
+        if (currentBasketItem.getItem().getItemOfferPrice() == currentBasketItem.getItem().getItemBasePrice()) {
+            String display = "£" + String.valueOf(currentBasketItem.getItem().getItemBasePrice());
+            basePriceView.setText(display);
             offerPriceView.setVisibility(View.GONE);
         }
         else {
-            basePriceView.setText("£" + currentBasketItem.getBasePrice().toString());
+            String display = "£" + String.valueOf(currentBasketItem.getItem().getItemBasePrice());
+            basePriceView.setText(display);
             basePriceView.setPaintFlags(basePriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            offerPriceView.setText("£" + currentBasketItem.getOfferPrice().toString());
+            display = "£" + String.valueOf(currentBasketItem.getItem().getItemOfferPrice());
+            offerPriceView.setText(display);
         }
 
         // Check if in stock
-        if (currentBasketItem.getInStock() > 0) {
+        if (currentBasketItem.getItem().isItemInStock()) {
             stockView.setText(context.getString(R.string.in_stock));
         }
         else {
@@ -94,27 +96,28 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         }
 
         // Load the image URL into the imageview
-        Glide.with(getContext()).load(currentBasketItem.getImgUrl()).into(imageView);
+        Glide.with(getContext()).load(currentBasketItem.getItem().getItemImg()).into(imageView);
 
         // Set user view
         for (Housemate current : serverHelper.getHousemateList()) {
-            if (current.getId().equals(currentBasketItem.getUserId())) {
-                userTextView.setText(current.getFullName());
+            if (current.getHousemateId() == currentBasketItem.getHousemate().getHousemateId()) {
+                String display = current.getHousemateForename() + " " + current.getHousemateSurname();
+                userTextView.setText(display);
             }
         }
 
         // Set the quantity
-        quantityView.setText(currentBasketItem.getQuantity().toString());
+        quantityView.setText(String.valueOf(currentBasketItem.getItemQuantity()));
 
         // Implement change quantity buttons
         increaseQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Check if it is this user's item
-                if (currentBasketItem.getUserId().equals(serverHelper.getHousemateId())) {
-                    int newQuantity = currentBasketItem.getQuantity() + 1;
+                if (currentBasketItem.getHousemate().getHousemateId() == serverHelper.getHousemateId()) {
+                    int newQuantity = currentBasketItem.getItemQuantity() + 1;
                     quantityView.setText(Integer.toString(newQuantity));
-                    serverHelper.addItemToBasket(currentBasketItem, 1);
+                    serverHelper.addItemToBasket(currentBasketItem.getItem(), 1);
 
                     // Display change in price
                     basketFragment.updatePrices();
@@ -126,9 +129,9 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
             @Override
             public void onClick(View view) {
                 // Check if it is this user's item
-                if (currentBasketItem.getUserId().equals(serverHelper.getHousemateId())) {
-                    int newQuantity = currentBasketItem.getQuantity() - 1;
-                    serverHelper.removeItemFromBasket(currentBasketItem, 1);
+                if (currentBasketItem.getHousemate().getHousemateId() == serverHelper.getHousemateId()) {
+                    int newQuantity = currentBasketItem.getItemQuantity() - 1;
+                    serverHelper.removeItemFromBasket(currentBasketItem.getItem(), 1);
                     if (newQuantity > 0) {
                         quantityView.setText(Integer.toString(newQuantity));
                         // Display change in price

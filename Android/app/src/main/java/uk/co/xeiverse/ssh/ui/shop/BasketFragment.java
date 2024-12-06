@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.BasketAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.BasketItem;
 
 public class BasketFragment extends Fragment {
 
@@ -94,7 +94,7 @@ public class BasketFragment extends Fragment {
     private double calculateTotalPrice() {
         double totalPrice = 0;
         for (BasketItem item : serverHelper.getBasketItemsList()) {
-            totalPrice += item.getOfferPrice() * item.getQuantity();
+            totalPrice += item.getItem().getItemOfferPrice() * item.getItemQuantity();
         }
         return totalPrice;
     }
@@ -102,8 +102,8 @@ public class BasketFragment extends Fragment {
     private double calculateUserPrice() {
         double userPrice = 0;
         for (BasketItem item : serverHelper.getBasketItemsList()) {
-            if (item.getUserId().equals(serverHelper.getHousemateId())) {
-                userPrice += item.getOfferPrice() * item.getQuantity();
+            if (item.getHousemate().getHousemateId() == serverHelper.getHousemateId()) {
+                userPrice += item.getItem().getItemOfferPrice() * item.getItemQuantity();
             }
         }
         return userPrice;

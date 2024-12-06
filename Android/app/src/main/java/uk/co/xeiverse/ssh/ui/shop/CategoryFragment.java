@@ -15,15 +15,18 @@ import java.util.ArrayList;
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.GroceryItemsAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
+import uk.co.xeiverse.ssh.networking.entities.Item;
 
 public class CategoryFragment extends Fragment {
 
     public static final String ARG_OBJECT = "object";
-    private ServerHelper serverHelper;
 
-    public CategoryFragment(ServerHelper serverHelper) {
+    private ServerHelper serverHelper;
+    private ArrayList<Item> items;
+
+    public CategoryFragment(ServerHelper serverHelper, ArrayList<Item> items) {
         this.serverHelper = serverHelper;
+        this.items = items;
     }
 
     @Nullable
@@ -38,11 +41,9 @@ public class CategoryFragment extends Fragment {
         Bundle args = getArguments();
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        assert args != null;
-        ArrayList<GroceryItem> groceryItems = args.getParcelableArrayList(ARG_OBJECT);
 
         // Setup the adapter
-        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), serverHelper, groceryItems);
+        GroceryItemsAdapter groceryItemsAdapter = new GroceryItemsAdapter(getContext(), serverHelper, items);
         listView.setAdapter(groceryItemsAdapter);
     }
 }

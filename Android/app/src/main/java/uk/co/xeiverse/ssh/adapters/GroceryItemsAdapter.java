@@ -21,16 +21,16 @@ import java.util.List;
 
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.BasketItem;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
+import uk.co.xeiverse.ssh.networking.entities.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.Item;
 import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
 
-public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
+public class GroceryItemsAdapter extends ArrayAdapter<Item> {
 
     private Context context;
     private ServerHelper serverHelper;
 
-    public GroceryItemsAdapter(@NonNull Context context, ServerHelper serverHelper, List<GroceryItem> arrayList) {
+    public GroceryItemsAdapter(@NonNull Context context, ServerHelper serverHelper, List<Item> arrayList) {
         super(context, 0, arrayList);
 
         this.context = context;
@@ -51,7 +51,7 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         }
 
         // Get the current grocery item
-        GroceryItem currentGroceryItem = getItem(position);
+        Item currentGroceryItem = getItem(position);
 
         ImageView imageView = currentItemView.findViewById(R.id.itemImageView);
         TextView titleView = currentItemView.findViewById(R.id.itemTitleView);
@@ -66,22 +66,25 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         TextView quantityTextView = currentItemView.findViewById(R.id.itemQuantityView);
 
         // Set the text of the text views
-        titleView.setText(currentGroceryItem.getName());
+        titleView.setText(currentGroceryItem.getItemName());
 
         // Set price text
-        if (currentGroceryItem.getOfferPrice().equals(currentGroceryItem.getBasePrice())) {
-            basePriceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+        if (currentGroceryItem.getItemOfferPrice() == currentGroceryItem.getItemBasePrice()) {
+            String display = "£" + String.valueOf(currentGroceryItem.getItemBasePrice());
+            basePriceView.setText(display);
             offerPriceView.setVisibility(View.GONE);
         }
         else {
-            basePriceView.setText("£" + currentGroceryItem.getBasePrice().toString());
+            String display = "£" + String.valueOf(currentGroceryItem.getItemBasePrice());
+            basePriceView.setText(display);
             basePriceView.setPaintFlags(basePriceView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            offerPriceView.setText("£" + currentGroceryItem.getOfferPrice().toString());
+            display = "£" + String.valueOf(currentGroceryItem.getItemOfferPrice());
+            offerPriceView.setText(display);
         }
 
         // Check if in stock
-        if (currentGroceryItem.getInStock() > 0) {
+        if (currentGroceryItem.isItemInStock()) {
             stockView.setText(context.getString(R.string.in_stock));
         }
         else {
@@ -89,13 +92,14 @@ public class GroceryItemsAdapter extends ArrayAdapter<GroceryItem> {
         }
 
         // Load the image URL into the imageview
-        Glide.with(getContext()).load(currentGroceryItem.getImgUrl()).into(imageView);
+        Glide.with(getContext()).load(currentGroceryItem.getItemImg()).into(imageView);
 
         // Check if item is already in basket
         Integer quantity = -1;
         for (BasketItem basketItem : serverHelper.getBasketItemsList()) {
-            if (basketItem.getId().equals(currentGroceryItem.getId()) && basketItem.getUserId().equals(serverHelper.getHousemateId())) {
-                quantity = basketItem.getQuantity();
+            if (basketItem.getItem().getItemId()  == currentGroceryItem.getItemId() &&
+                    basketItem.getHousemate().getHousemateId() == serverHelper.getHousemateId()) {
+                quantity = basketItem.getItemQuantity();
                 break;
             }
         }

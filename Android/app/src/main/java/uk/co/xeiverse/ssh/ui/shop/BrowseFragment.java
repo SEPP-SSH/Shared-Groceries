@@ -18,8 +18,6 @@ import java.util.List;
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.CategoryTabsAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
-import uk.co.xeiverse.ssh.objects.GroceryStore;
 
 public class BrowseFragment extends Fragment {
     private ServerHelper serverHelper;
@@ -57,7 +55,7 @@ public class BrowseFragment extends Fragment {
 
             // Link the tabs to the view pager
             new TabLayoutMediator(tabLayout, viewPager,
-                    (tab, position) -> tab.setText(serverHelper.getCategoriesList().get(position))
+                    (tab, position) -> tab.setText(serverHelper.getCategoriesList().get(position).getCategoryName())
             ).attach();
         }
     }

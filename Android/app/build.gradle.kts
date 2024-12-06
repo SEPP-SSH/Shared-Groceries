@@ -48,4 +48,14 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation(libs.glide)
+
+    implementation(libs.httpcore5)
+    implementation(libs.httpclient5.fluent)
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.databind)
+    implementation(libs.javax.persistence.api)
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
+
+android { packaging { resources.excludes.add("META-INF/*") } }
