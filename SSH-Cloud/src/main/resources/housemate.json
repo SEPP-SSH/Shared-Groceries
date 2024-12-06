@@ -1,0 +1,26 @@
+[
+  {
+    "housemate_forename": "Nathan",
+    "housemate_surname": "Drake",
+    "housemate_img": "john.png",
+    "house" : {
+      "house_id": 1
+    }
+  },
+  {
+    "housemate_forename": "Clara",
+    "housemate_surname": "Oswald",
+    "housemate_img": "jane.png",
+    "house" : {
+      "house_id": 1
+    }
+  },
+  {
+    "housemate_forename": "Mike",
+    "housemate_surname": "Ross",
+    "housemate_img": "emily.png",
+    "house" : {
+      "house_id": 1
+    }
+  }
+]
