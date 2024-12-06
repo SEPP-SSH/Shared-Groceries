@@ -2,6 +2,7 @@ package ssh.unitTests.queries;
 
 import org.junit.jupiter.api.*;
 import ssh.QueryServicer;
+import ssh.ReturnedBasket;
 import ssh.entities.*;
 import ssh.handlers.*;
 import ssh.utilities.HibernateUtility;
@@ -108,10 +109,10 @@ public class QueryServicerTests {
 
     @Test
     void testReturnBasketId() {
-        Map<Integer, List<BasketItem>> basketMap = QueryServicer.returnBasketId(house.getHouseId(), store.getStoreId());
-        assertNotNull(basketMap);
-        assertTrue(basketMap.containsKey(basket.getBasketId()));
-        assertTrue(basketMap.get(basket.getBasketId()).isEmpty());
+        ReturnedBasket returnedBasket = QueryServicer.returnBasketId(house.getHouseId(), store.getStoreId());
+        assertNotNull(returnedBasket);
+        assertEquals(returnedBasket.getBasketid(), basket.getBasketId());
+        assertTrue(returnedBasket.getBasketItems().isEmpty());
     }
 
     @Test
