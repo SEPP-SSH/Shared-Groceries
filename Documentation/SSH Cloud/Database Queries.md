@@ -256,4 +256,5 @@ Based on the previous sections, the following queries and commands have been ide
 | `void create(Basket bakset)` | Required to create a basket record in the database from a `Basket` object. Notably used in populating the datbaase to an initial state from JSON files. | No |
 | `void createByAppInfo(int houseId, int storeId)` | Required to create a basket record in the database from unpackaged values, notably when a new basket is created for a proposed order with a store. | No |
 | `List<Basket> getAll()` | Requried to get a list of all baskets that exist in the database, notably for exporting the database to JSON files. | No |
-| `Bakset getById(int id)` | Required to 
+| `Bakset getById(int id)` | Required for testing purposes, to see that the creation and deletion of baskets works correctly | No |
+| 
