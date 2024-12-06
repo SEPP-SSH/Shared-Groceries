@@ -248,6 +248,12 @@ public static boolean submitOrder(int basket_id){ .. }
 
 ## Database Queries/Commands
 Based on the previous sections, the following queries and commands have been identified as being required:
-> Note that these are not formed in SQL or in a well-formed syntax, due to the anticipation that Object/Relational Mapping will be used to implement the database, and by extension, the queries and commands that operate on it.
+> Note that these are not formed in SQL or in a particularly well-formed syntax, due to the anticipation that Object/Relational Mapping will be used to implement the database, and by extension, the queries and commands that operate on it.
 
-*to do!*
+### Pertaining to the `Basket` entity:
+| Query/Command Function Prototype | Explanation | Has a Unit Test? |
+| -------------------------------- | ----------- | ------------ |
+| `void create(Basket bakset)` | Required to create a basket record in the database from a `Basket` object. Notably used in populating the datbaase to an initial state from JSON files. | No |
+| `void createByAppInfo(int houseId, int storeId)` | Required to create a basket record in the database from unpackaged values, notably when a new basket is created for a proposed order with a store. | No |
+| `List<Basket> getAll()` | Requried to get a list of all baskets that exist in the database, notably for exporting the database to JSON files. | No |
+| `Bakset getById(int id)` | Required to 
