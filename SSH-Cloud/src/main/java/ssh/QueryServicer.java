@@ -3,11 +3,11 @@ package ssh;
 import org.hibernate.SessionFactory;
 import ssh.entities.*;
 import ssh.handlers.*;
+import ssh.queryParameterWrappers.*;
 import ssh.utilities.HibernateUtility;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
 
 public class QueryServicer {
 
@@ -69,6 +69,9 @@ public class QueryServicer {
             return null;
         }
     }
+    public static List<Store> returnStores(ReturnStoresQueryParameter param){
+        return returnStores(param.getHouseId(), param.getHousemateId());
+    }
 
     /**
      * For a given supermarket, it returns all shopping item categories for that store.
@@ -89,8 +92,50 @@ public class QueryServicer {
             return null;
         }
     }
+    public static List<Category> returnCategories(ReturnCategoriesQueryParameter param){
+        return returnCategories(param.getStoreId());
+    }
 
-    // explanation of return type: the key is the basket_id, and the value is the list of BasketItem objects
+    public static List<Item> returnItems (int storeId){
+        // lookup all items in the database with the storeId
+        List<Item> matchedItems = new ArrayList<>(); // init for return
+        try{
+            // get SessionFactory object
+            SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+            matchedItems = new ItemHandler(sessionFactory).getByStoreId(storeId);
+            return matchedItems;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+    public static List<Item> returnItems (ReturnItemsQueryParameter param){
+        return returnItems(param.getstoreId());
+    }
+
+
+    /**
+     * Queries and returns all housemates associated with a given house id
+     * @param houseId
+     * @return List of Housemate objects (this may be empty) in the case of success, or null in the case of computation failure
+     */
+    public static List<Housemate> returnHousemates(int houseId){
+        // lookup all housemates in the database belonging to the indicated house
+        List<Housemate> matchedHousemates = new ArrayList<>(); // init for return, in the case there are no housemates in the house
+        try{
+            // get SessionFactory object
+            SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
+            matchedHousemates = new HousemateHandler(sessionFactory).getByHouse(houseId);
+            return matchedHousemates;
+        }
+        catch (Exception e){
+            // error
+            return null;
+        }
+    }
+    public static List<Housemate> returnHousemates(ReturnHousematesQueryParameter param){
+        return returnHousemates(param.getHouseId());
+    }
 
     /**
      * For a given house and store, looks up whether a basket entry exists in the database, returning a basket_id and list of corresponding items in the basket if so, or creates a new basket if not.
@@ -98,7 +143,7 @@ public class QueryServicer {
      * @param storeId
      * @return A Map object with an Integer for the basket_id and a List of BasketItem objects for the basket items. (This list may be empty).
      */
-    public static Map<Integer, List<BasketItem>> returnBasketId(int houseId, int storeId){
+    public static ReturnedBasket returnBasketId(int houseId, int storeId){
         // look for basket entry in the basket table of the database corresponding to the values provided
         List<Basket> matchedBaskets =  new ArrayList<>(); // need to init for length check
         try{
@@ -123,9 +168,7 @@ public class QueryServicer {
                 SessionFactory sessionFactory = HibernateUtility.getSessionFactory();
                 basketItems = new BasketItemHandler(sessionFactory).getByBasketId(matchedBaskets.getFirst().getBasketId());
 
-                Map<Integer, List<BasketItem>> returnVal = new HashMap<>();
-                returnVal.put(matchedBaskets.getFirst().getBasketId(), basketItems);
-                return returnVal;
+                return new ReturnedBasket(matchedBaskets.getFirst().getBasketId(), basketItems);
             }
             catch (Exception e){
                 // error
@@ -143,17 +186,17 @@ public class QueryServicer {
 
                 Basket newlyCreatedBasket = basketHandler.getByAppInfo(houseId, storeId).getFirst();
 
-                Map<Integer, List<BasketItem>> returnVal = new HashMap<>();
-                returnVal.put(newlyCreatedBasket.getBasketId(), new ArrayList<>()); // returns empty list as there's no items in the basket, as the basket has just been made
-                return returnVal;
+                return new ReturnedBasket(newlyCreatedBasket.getBasketId(), new ArrayList<>());
             }
             catch (Exception e){
                 return null;
             }
         }
     }
-
-    /**
+    public static ReturnedBasket returnBasketId(ReturnBasketIdQueryParameter param){
+        return returnBasketId(param.getHouseId(), param.getStoreId());
+    }
+                                                                /**
      * Given necessary information, adds a quantity of an item from a supermarket to the relevant basket, so that it can be included in the order.
      * The function requires that the quantity supplied be strictly greater than zero.
      * The function will create a new record in the database in the case that a record already exists for the item, but was added by another housemate.
@@ -193,6 +236,9 @@ public class QueryServicer {
             // error
             return false;
         }
+    }
+    public static boolean addToBasket(AddToBasketQueryParameter param){
+        return addToBasket(param.getBasketId(), param.getStoreId(), param.getItemId(), param.getHousemateId(), param.getQuantity());
     }
 
     /**
@@ -239,6 +285,9 @@ public class QueryServicer {
             return false;
         }
     }
+    public static boolean removeFromBasket(RemoveFromBasketQueryParameter param){
+        return removeFromBasket(param.getBasketId(), param.getItemId(), param.getHousemateId(), param.getQuantity());
+    }
 
     /**
      * Simulates the order submission process with the supermarket API, by returning hard-coded approval and acknowledgement of the order submission.
@@ -251,4 +300,8 @@ public class QueryServicer {
 
         return true; // ie. order success
     }
+    public static boolean submitOrder(SubmitOrderQueryParameter param){
+        return submitOrder(param.getBasketId());
+    }
+
 }

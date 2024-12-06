@@ -1,5 +1,6 @@
 package ssh.handlers;
 
+import ssh.entities.Housemate;
 import ssh.entities.Item;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,6 +25,13 @@ public class ItemHandler {
     public List<Item> getAll() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("from Item", Item.class).list();
+        }
+    }
+
+    public List<Item> getByStoreId(int storeId){
+        try (Session session = sessionFactory.openSession()) {
+            String queryString = "from Item where Store.storeId = " + storeId;
+            return session.createQuery(queryString, Item.class).list();
         }
     }
 
