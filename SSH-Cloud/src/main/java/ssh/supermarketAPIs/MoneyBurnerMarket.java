@@ -23,25 +23,25 @@ public class MoneyBurnerMarket {
             StoreHandler storeHandler = new StoreHandler(sessionFactory);
 
             // read objects from JSON file, and populate into database
-            List<Basket> baskets = JsonUtilities.readJsonFile("src/main/resources/basket.json", Basket[].class);
+            List<Basket> baskets = JsonUtilities.readJsonString(MoneyBurnerMarketData.baskset, Basket[].class);
             baskets.forEach(basketHandler::create);
 
-            List<BasketItem> basketItems = JsonUtilities.readJsonFile("src/main/resources/basketItem.json", BasketItem[].class);
+            List<BasketItem> basketItems = JsonUtilities.readJsonString(MoneyBurnerMarketData.basketItem, BasketItem[].class);
             basketItems.forEach(basketItemHandler::create);
 
-            List<Category> categories = JsonUtilities.readJsonFile("src/main/resources/category.json", Category[].class);
+            List<Category> categories = JsonUtilities.readJsonString(MoneyBurnerMarketData.category, Category[].class);
             categories.forEach(categoryHandler::create);
 
-            List<House> houses = JsonUtilities.readJsonFile("src/main/resources/house.json", House[].class);
+            List<House> houses = JsonUtilities.readJsonString(MoneyBurnerMarketData.house, House[].class);
             houses.forEach(houseHandler::create);
 
-            List<Housemate> housemates = JsonUtilities.readJsonFile("src/main/resources/housemate.json", Housemate[].class);
+            List<Housemate> housemates = JsonUtilities.readJsonString(MoneyBurnerMarketData.housemate, Housemate[].class);
             housemates.forEach(housemateHandler::create);
 
-            List<Item> items = JsonUtilities.readJsonFile("src/main/resources/item.json", Item[].class);
+            List<Item> items = JsonUtilities.readJsonString(MoneyBurnerMarketData.item, Item[].class);
             items.forEach(itemHandler::create);
 
-            List<Store> stores = JsonUtilities.readJsonFile("src/main/resources/store.json", Store[].class);
+            List<Store> stores = JsonUtilities.readJsonString(MoneyBurnerMarketData.store, Store[].class);
             stores.forEach(storeHandler::create);
 
 
