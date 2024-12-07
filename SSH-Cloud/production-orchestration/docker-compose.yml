@@ -15,7 +15,9 @@ services:
 
   sshcloudserver:
     container_name: sshcloudserver
-    build: .
+    build:
+      context: ../
+      dockerfile: production-orchestration/Dockerfile
     depends_on:
       - mysql
     ports:
