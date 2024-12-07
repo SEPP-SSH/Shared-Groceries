@@ -12,8 +12,6 @@ services:
     ports:
       - "3306:3306"
     restart: unless-stopped
-    networks:
-      - app-network
 
   sshcloudserver:
     container_name: sshcloudserver
@@ -22,9 +20,3 @@ services:
       - mysql
     ports:
       - "8080:8080"
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
