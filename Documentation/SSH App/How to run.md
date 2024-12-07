@@ -40,7 +40,7 @@ Note that this command won't terminate, as the server is running in a Docker con
 15. Click an "Add new run configuration" button in the wizard.
 ![Screenshot of the run configuration wizard](../Attachments/how-to-run--new-config-dialogue.png)
 
-16. Select "Android App" from the drop-down menu.
+16. Select "Android App" from the drop-down menu. 
 ![Screenshot of the run configuration options drop-down menu](../Attachments/how-to-run--new-run-config-options.png)
 
 17. You'll see the default settings like so:
@@ -60,7 +60,10 @@ Note that this command won't terminate, as the server is running in a Docker con
 ---
 
 21. To close the running emulation, you can simply kill the emulation process in any way you wish. **However**, to close the SSH Cloud server _properly_, you need to follow these steps:
+
 22. Focus back into the terminal window from earlier, and kill the process - most easily with `ctl-c`
 ![Screenshot of the server having been killed in the terminal](../Attachments/how-to-run--killing-server.png)
-23. Once the processes have "gracefully stopped", run the following command: `docker-compose down && cd ../../Android`
-24. Once that has completed execution, you are _finally_ free to return going about your business!
+
+23.  Once the processes have "gracefully stopped", run the following command: `docker-compose down && cd ../../Android`
+
+24.  Once that has completed execution, you are _finally_ free to return going about your business!
