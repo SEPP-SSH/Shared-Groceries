@@ -1,67 +1,88 @@
 package uk.co.xeiverse.ssh;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import uk.co.xeiverse.ssh.adapters.BasketAdapter;
+import uk.co.xeiverse.ssh.adapters.GroceryItemsAdapter;
+import uk.co.xeiverse.ssh.helpers.ServerHelper;
+import uk.co.xeiverse.ssh.networking.entities.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.Item;
 
 import static org.junit.Assert.*;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+
+import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.xeiverse.ssh.helpers.ServerHelper;
-import uk.co.xeiverse.ssh.objects.GroceryItem;
-import uk.co.xeiverse.ssh.objects.GroceryStore;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+
 public class ExampleUnitTest {
 
-    // Checks categories are retrieved correctly
-    @Test
-    public void testGetCategories() {
-        ServerHelper serverHelper = new ServerHelper();
-        List<String> categories = serverHelper.getCategories();
-        assertNotNull(categories);
-        assertEquals(8, categories.size());
-        assertTrue(categories.contains("OFFERS"));
-        assertTrue(categories.contains("FROZEN"));
+    private BasketAdapter adapter;
+    private ServerHelper serverHelper;
+    private Context context;
+
+    @Before
+    public void setUp() {
+        context = new android.content.ContextWrapper(null);
+        serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
+        serverHelper.start();
+        adapter = new BasketAdapter(context, serverHelper, null, null);
     }
 
-    // Checks if random grocery items are created with valid properties
     @Test
-    public void testCreateRandomGroceryItems() {
-        ServerHelper serverHelper = new ServerHelper();
-        List<GroceryItem> items = serverHelper.createRandomGroceryItems(5);
-        assertEquals(5, items.size());
-        for (GroceryItem item : items) {
-            assertNotNull(item.getName());
-            assertNotNull(item.getImgUrl());
-            assertTrue(item.getBasePrice() >= 1 && item.getBasePrice() <= 10);
+    // Check the first item in the basket matches the adapter's first item
+    public void testGetItem() {
+        List<BasketItem> items = serverHelper.getBasketItemsList();
+        ArrayList<BasketItem> arrayListItems = new ArrayList<>(items);
+
+        if (!arrayListItems.isEmpty()) {
+            BasketItem expectedItem = arrayListItems.get(0);
+            assertEquals(expectedItem, adapter.getItem(0));
+        } else {
+            assertTrue("Basket is empty", arrayListItems.isEmpty());
         }
+
     }
 
-    // Checks if the correct number of stores is returned
     @Test
-    public void testGetStores() {
-        ServerHelper serverHelper = new ServerHelper();
-        List<GroceryStore> stores = serverHelper.getStores();
-        assertEquals(3, stores.size());
-        assertEquals("Tesco", stores.get(0).getName());
-        assertEquals("Sainsbury's", stores.get(1).getName());
-        assertEquals("Aldi", stores.get(2).getName());
+    // Check that the GroceryItemsAdapter correctly handles a single item
+    public void testGroceryItemAdapter() {
+        Context context = new ContextWrapper(null);
+        ServerHelper serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
+
+        Item testItem = new Item();
+        testItem.setItemId(1);
+        testItem.setItemName("Test Grocery");
+        testItem.setItemBasePrice(2.99);
+        testItem.setItemOfferPrice(2.49);
+        testItem.setItemInStock(true);
+        testItem.setItemImg("https://example.com/test-image.jpg");
+
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(testItem);
+
+        GroceryItemsAdapter adapter = new GroceryItemsAdapter(context, serverHelper, itemList);
+
+        assertEquals("Adapter should have one item", 1, adapter.getCount());
+
+        Item retrievedItem = adapter.getItem(0);
+        assertNotNull("Retrieved item should not be null", retrievedItem);
+        assertEquals("Item ID should match", 1, retrievedItem.getItemId());
+        assertEquals("Item name should match", "Test Grocery", retrievedItem.getItemName());
+        assertEquals("Item base price should match", 2.99, retrievedItem.getItemBasePrice(), 0.001);
+        assertEquals("Item offer price should match", 2.49, retrievedItem.getItemOfferPrice(), 0.001);
+        assertTrue("Item should be in stock", retrievedItem.isItemInStock());
+        assertEquals("Item image URL should match", "https://example.com/test-image.jpg", retrievedItem.getItemImg());
     }
 
-    // Checks if a GroceryItem is instantiated with correct values
-    @Test
-    public void testGroceryItemCreation() {
-        GroceryItem item = new GroceryItem(1, "Apple", "https://example.com/apple.jpg", 1.99, 1.79, 10, 1);
-        assertEquals(Integer.valueOf(1), item.getId());
-        assertEquals("Apple", item.getName());
-        assertEquals("https://example.com/apple.jpg", item.getImgUrl());
-        assertEquals(Double.valueOf(1.99), item.getBasePrice());
-        assertEquals(Double.valueOf(1.79), item.getOfferPrice());
-        assertEquals(Integer.valueOf(10), item.getInStock());
-        assertEquals(Integer.valueOf(1), item.getCategory());
-    }
+
 }
