@@ -1,13 +1,20 @@
-FROM maven:3.9.8-eclipse-temurin-21
-
-COPY src /app/src
-
-COPY pom.xml /app
+FROM maven:3.8.8-eclipse-temurin-21 AS build
 
 WORKDIR /app
-RUN sleep 25 # wait for server to start
+
+COPY pom.xml .
+COPY src ./src
+
 EXPOSE 8080
-EXPOSE 3306
-CMD mvn clean install -U
-#CMD mvn test
-#RUN mvn package
+
+RUN mvn clean compile assembly:single
+
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/*.jar app.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "app.jar"]
