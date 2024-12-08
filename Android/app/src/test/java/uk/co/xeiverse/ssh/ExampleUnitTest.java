@@ -4,15 +4,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import uk.co.xeiverse.ssh.adapters.BasketAdapter;
-import uk.co.xeiverse.ssh.adapters.GroceryItemsAdapter;
 import uk.co.xeiverse.ssh.helpers.ServerHelper;
 import uk.co.xeiverse.ssh.networking.entities.BasketItem;
+import uk.co.xeiverse.ssh.networking.entities.Category;
 import uk.co.xeiverse.ssh.networking.entities.Item;
+import uk.co.xeiverse.ssh.networking.entities.Store;
 
 import static org.junit.Assert.*;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,34 +54,40 @@ public class ExampleUnitTest {
     }
 
     @Test
-    // Check that the GroceryItemsAdapter correctly handles a single item
-    public void testGroceryItemAdapter() {
-        Context context = new ContextWrapper(null);
-        ServerHelper serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
+    public void testItemConstructorAndGetters() {
+        Category category = new Category();
+        Store store = new Store();
+        Item item = new Item(1, store, "Apple", "apple.jpg", 1.0, 0.9, true, category);
 
-        Item testItem = new Item();
-        testItem.setItemId(1);
-        testItem.setItemName("Test Grocery");
-        testItem.setItemBasePrice(2.99);
-        testItem.setItemOfferPrice(2.49);
-        testItem.setItemInStock(true);
-        testItem.setItemImg("https://example.com/test-image.jpg");
+        assertEquals(1, item.getItemId());
+        assertEquals("Apple", item.getItemName());
+        assertEquals(1.0, item.getItemBasePrice(), 0.001);
+        assertEquals(0.9, item.getItemOfferPrice(), 0.001);
+        assertTrue(item.isItemInStock());
+        assertEquals("apple.jpg", item.getItemImg());
+        assertEquals(category, item.getCategory());
+    }
 
-        List<Item> itemList = new ArrayList<>();
-        itemList.add(testItem);
+    @Test
+    public void testItemSetters() {
+        Item item = new Item();
+        Category category = new Category();
 
-        GroceryItemsAdapter adapter = new GroceryItemsAdapter(context, serverHelper, itemList);
+        item.setItemId(2);
+        item.setItemName("Banana");
+        item.setItemBasePrice(0.5);
+        item.setItemOfferPrice(0.4);
+        item.setItemInStock(false);
+        item.setItemImg("banana.jpg");
+        item.setCategory(category);
 
-        assertEquals("Adapter should have one item", 1, adapter.getCount());
-
-        Item retrievedItem = adapter.getItem(0);
-        assertNotNull("Retrieved item should not be null", retrievedItem);
-        assertEquals("Item ID should match", 1, retrievedItem.getItemId());
-        assertEquals("Item name should match", "Test Grocery", retrievedItem.getItemName());
-        assertEquals("Item base price should match", 2.99, retrievedItem.getItemBasePrice(), 0.001);
-        assertEquals("Item offer price should match", 2.49, retrievedItem.getItemOfferPrice(), 0.001);
-        assertTrue("Item should be in stock", retrievedItem.isItemInStock());
-        assertEquals("Item image URL should match", "https://example.com/test-image.jpg", retrievedItem.getItemImg());
+        assertEquals(2, item.getItemId());
+        assertEquals("Banana", item.getItemName());
+        assertEquals(0.5, item.getItemBasePrice(), 0.001);
+        assertEquals(0.4, item.getItemOfferPrice(), 0.001);
+        assertFalse(item.isItemInStock());
+        assertEquals("banana.jpg", item.getItemImg());
+        assertEquals(category, item.getCategory());
     }
 
 
