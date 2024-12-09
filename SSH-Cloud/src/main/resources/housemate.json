@@ -2,7 +2,7 @@
   {
     "housemate_forename": "Nathan",
     "housemate_surname": "Drake",
-    "housemate_img": "john.png",
+    "housemate_img": "nathan.png",
     "house" : {
       "house_id": 1
     }
@@ -10,7 +10,7 @@
   {
     "housemate_forename": "Clara",
     "housemate_surname": "Oswald",
-    "housemate_img": "jane.png",
+    "housemate_img": "clare.png",
     "house" : {
       "house_id": 1
     }
@@ -18,7 +18,7 @@
   {
     "housemate_forename": "Mike",
     "housemate_surname": "Ross",
-    "housemate_img": "emily.png",
+    "housemate_img": "mike.png",
     "house" : {
       "house_id": 1
     }
