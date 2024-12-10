@@ -2,11 +2,11 @@
 
 ## Orientation
 ### Group participants 
-George Henderson, Harvey Nicholson, Hasan Alshaban, Parla Tellioglu.
+George Henderson, Hasan Alshaban, Parla Tellioglu, Harvey Nicholson.
 
 ---
 
-### Project overview: 
+### Project overview
 This project prototypes a group grocery order feature for the Student Smart Homes (SSH) organisation, as outlined in [the selected Engineering Design Review (EDR)](/Documentation/Selected%20EDR.pdf). The prototype is formed of an Android application for the SSH App, and a web server that prototoypes the SSH Cloud product.
 
 ---
@@ -22,7 +22,7 @@ The individual reflections from each group member on every other group member ca
 ---
 
 ### Where to find documentation?
-Project documentation - both organisational and technical - can be found [here!](./Documentation)
+Project documentation - both organisational and technical - can be found [here](./Documentation)
 
 ---
 ---
