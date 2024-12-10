@@ -30,7 +30,7 @@ public class SettingsFragment extends Fragment {
         ImageView profileImageView = binding.profilePic;
 
         // Hardcode for now
-        userNameView.setText("George Clooney");
+        userNameView.setText("Clara Oswald");
         profileImageView.setImageResource(R.drawable.profile);
 
         return root;

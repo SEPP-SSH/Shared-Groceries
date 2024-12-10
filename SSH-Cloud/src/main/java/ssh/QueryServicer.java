@@ -222,9 +222,9 @@ public class QueryServicer {
 
             // does a record already exist with this itemId that matches the housemateId?
             for (BasketItem matchedItem : matchedItems){
-                if (matchedItem.getHousemate().getHousemateId() == housemateId){
+                if (matchedItem.getHousemate().getHousemateId() == housemateId && matchedItem.getItem().getItemId() == itemId){
                     // we've found a record that can be updated, so update it
-                    new BasketItemHandler(sessionFactory).increaseItemQuantity(basketId, quantity);
+                    new BasketItemHandler(sessionFactory).increaseItemQuantity(matchedItem.getBasketItemId(), quantity);
                     return true;
                 }
             }

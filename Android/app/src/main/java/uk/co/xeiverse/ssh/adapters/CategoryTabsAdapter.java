@@ -29,7 +29,7 @@ public class CategoryTabsAdapter extends FragmentStateAdapter {
         // Sort through the items by category
         ArrayList<Item> currentItems = new ArrayList<>();
         for (Item item : serverHelper.getItemsList()) {
-            if (item.getCategory() == serverHelper.getCategoriesList().get(position)) {
+            if (item.getCategory().getCategoryId() == serverHelper.getCategoriesList().get(position).getCategoryId()) {
                 currentItems.add(item);
             }
         }
