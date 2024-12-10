@@ -14,12 +14,13 @@ public class IntegrationTests {
     private static int storeId;
     private static int basketId;
     private static int itemId;
+
     @BeforeAll
     static void setUp() throws Exception {
-        for (int counter = 0; counter < 90; counter++){
+      /*  for (int counter = 0; counter < 90; counter++){
             System.out.println("Waiting for SSH Cloud server to spin up. " + (90 - counter) + " seconds remaining.");
             Thread.sleep(1000);
-        }
+        } */
 
         houseId = 1;
         housemateId = 1;
@@ -36,7 +37,7 @@ public class IntegrationTests {
 
         boolean storeFound = false;
         for (Store store : stores) {
-            if ("MoneyBurnerMarket".equals(store.getStoreName())) {
+            if (store.getStoreId() == storeId) {
                 storeFound = true;
                 break;
             }
@@ -54,14 +55,29 @@ public class IntegrationTests {
 
     @Test
     @Order(3)
-    void testReturnBasketId() {
-        ReturnedBasket returnedBasket = Client.returnBasketId(houseId, storeId);
-        assertNotNull(returnedBasket);
-        assertTrue(returnedBasket.getBasketItems().isEmpty());
+    void testReturnItems() {
+        List<Item> items = Client.returnitems(storeId);
+        assertNotNull(items);
+        assertFalse(items.isEmpty());
     }
 
     @Test
     @Order(4)
+    void testReturnHousemates() {
+        List<Housemate> housemates = Client.returnHousemates(houseId);
+        assertNotNull(housemates);
+        assertFalse(housemates.isEmpty());
+    }
+    @Test
+    @Order(5)
+    void testReturnBasketId() {
+        ReturnedBasket returnedBasket = Client.returnBasketId(houseId, storeId);
+        assertNotNull(returnedBasket);
+        assertEquals(basketId, returnedBasket.getBasketid());
+    }
+
+    @Test
+    @Order(6)
     void testAddToBasket() {
         boolean success = Client.addToBasket(basketId, storeId, itemId, housemateId, 5);
         assertTrue(success);
@@ -78,7 +94,7 @@ public class IntegrationTests {
     }
 
     @Test
-    @Order(5)
+    @Order(7)
     void testRemoveFromBasket() {
         boolean success = Client.removeFromBasket(basketId, itemId, housemateId, 3);
         assertTrue(success);
@@ -95,7 +111,7 @@ public class IntegrationTests {
     }
 
     @Test
-    @Order(6)
+    @Order(8)
     void testSubmitOrder() {
         boolean success = Client.submitOrder(basketId);
         assertTrue(success);
