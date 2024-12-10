@@ -17,8 +17,8 @@ public class IntegrationTests {
 
     @BeforeAll
     static void setUp() throws Exception {
-        for (int counter = 0; counter < 90; counter++){
-            System.out.println("Waiting for SSH Cloud server to spin up. " + (90 - counter) + " seconds remaining.");
+        for (int counter = 0; counter < 75; counter++){
+            System.out.println("Waiting for SSH Cloud server to spin up. " + (75 - counter) + " seconds remaining.");
             Thread.sleep(1000);
         }
 
