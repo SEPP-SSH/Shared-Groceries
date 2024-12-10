@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import uk.co.xeiverse.ssh.R;
 import uk.co.xeiverse.ssh.adapters.BasketAdapter;
@@ -26,6 +29,8 @@ public class BasketFragment extends Fragment {
 
     private TextView userTotalView;
     private TextView orderTotalView;
+
+    private CoordinatorLayout snackbarLayout;
 
     public BasketFragment(ShopFragment shopFragment, ServerHelper serverHelper) {
         this.shopFragment = shopFragment;
@@ -45,6 +50,9 @@ public class BasketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Setup snackbar layout
+        snackbarLayout = (CoordinatorLayout) view.findViewById(R.id.snackBarLayout);
+
         // Setup basket empty layout
         LinearLayout basketEmptyLayout = (LinearLayout) view.findViewById(R.id.emptyBasketView);
 
@@ -62,7 +70,11 @@ public class BasketFragment extends Fragment {
         checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                serverHelper.submitOrder();
+                // Check for confirmation from server
+                if (serverHelper.submitOrder()) {
+                    // Display success message
+                    displayCheckoutMsg();
+                }
             }
         });
 
@@ -117,5 +129,15 @@ public class BasketFragment extends Fragment {
         // Calculate user price
         double userPrice = calculateUserPrice();
         userTotalView.setText("£" + String.format("%.2f", userPrice));
+    }
+
+    private void displayCheckoutMsg() {
+        Snackbar snackbar
+                = Snackbar
+                .make(
+                        snackbarLayout,
+                        "Basket checked-out successfully!",
+                        Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 }

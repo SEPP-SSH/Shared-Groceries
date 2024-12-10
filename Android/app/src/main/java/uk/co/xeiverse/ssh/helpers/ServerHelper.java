@@ -136,8 +136,8 @@ public class ServerHelper {
         Client.removeFromBasket(basketId, item.getItemId(), housemateId, quantity);
     }
 
-    public void submitOrder() {
-        Boolean success = Client.submitOrder(basketId);
+    public Boolean submitOrder() {
+        return Client.submitOrder(basketId);
     }
 
     // GETTERS
