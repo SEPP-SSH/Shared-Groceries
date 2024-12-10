@@ -9,3 +9,17 @@ The SSH app has been split into frontend and backend development allowing develo
 ## `ServerHelper` Class
 
 The `ServerHelper` class will initially be developed so that the app can be tested without needing to connect to the SSH cloud. This means we will program in 'dummy' data initially to make sure the app works. This will then make integrating the network connectivity easier later.
+
+It will store the following attributes:
+- `housemateId` - the ID of the housemate logged into the app (hardcoded for now).
+- `houseId` - the ID of the house the current housemate is part of (this will also be hardcoded for now).
+- `storesList` - the list of stores available to shop at through the app. This will be the first thing fetched from the server.
+- `currentStoreId` - the ID of the store currently being browsed. This will be decided by the app - based on the list of stores returned by the server - it will then govern what data is fetched from the server for the next few attributes.
+- `categoriesList` - the list of different grocery categories available from a given store.
+- `itemsList` - list of all grocery items available from a given grocery store.
+- `basketId` - the ID of the basket for the current house, from the currently selected supermarket.
+- `basketItemsList` - the list of all the items currently in the basket.
+- `housemateList` - the list of all the housemates in current house.
+
+All of these attributes will be available for the app to fetch using getters and also set the values using setters. They will be populated by fetching the values from the server when the `ShopFragment` is launched.
+
