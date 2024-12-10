@@ -276,12 +276,12 @@ public class QueryServicer {
                         return true;
                     }
                 }
-                break; // stop after first alteration, as there should only be one record in database
             }
             return false; // only reaches here if no removal could take place (ie. cannot delete non-existent items, or other housemates' items)
         }
         catch (Exception e){
             // error
+            e.printStackTrace();
             return false;
         }
     }
