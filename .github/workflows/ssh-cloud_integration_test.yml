@@ -1,0 +1,19 @@
+name: SSH CI Workflow - Integration Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.1.0
+
+    - name: Run the docker-compose file
+      working-directory: ClientFramework
+      run: docker compose up --exit-code-from	clientframework
