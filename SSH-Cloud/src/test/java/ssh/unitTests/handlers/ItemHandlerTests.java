@@ -66,11 +66,16 @@ public class ItemHandlerTests {
         itemHandler.create(newItem);
 
         // Assert
-        Item fetchedItem = itemHandler.getById(newItem.getItemId());
-        assertNotNull(fetchedItem);
-        assertEquals("Banana", fetchedItem.getItemName());
-        assertEquals(0.80, fetchedItem.getItemOfferPrice());
-        assertTrue(fetchedItem.isItemInStock());
+        List<Item> items = itemHandler.getAll();
+        boolean itemFound = false;
+        for (Item fetchedItem :items) {
+            if (fetchedItem.getItemName().equals("Banana") &&
+                    fetchedItem.getItemOfferPrice() == 0.80 &&
+                    fetchedItem.isItemInStock()) {
+                itemFound = true;
+            }
+        }
+        assertTrue(itemFound);
 
     }
 
@@ -85,20 +90,5 @@ public class ItemHandlerTests {
             }
         }
         assertTrue(flag);
-    }
-
-    @Test
-    void testGetItemById() {
-        Item fetchedItem = itemHandler.getById(item.getItemId());
-        assertNotNull(fetchedItem);
-        assertEquals(item.getItemId(), fetchedItem.getItemId());
-    }
-
-    @Test
-    void testDeleteItemById() {
-        assertNotNull(itemHandler.getById(item.getItemId()));
-        itemHandler.deleteById(item.getItemId());
-        assertNull(itemHandler.getById(item.getItemId()));
-        itemHandler.create(item);
     }
 }

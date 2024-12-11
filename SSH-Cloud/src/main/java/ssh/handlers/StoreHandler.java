@@ -26,21 +26,4 @@ public class StoreHandler {
             return session.createQuery("from Store", Store.class).list();
         }
     }
-
-    public Store getById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.get(Store.class, id);
-        }
-    }
-
-    public void deleteById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            Store store = session.get(Store.class, id);
-            if (store != null) {
-                session.delete(store);
-            }
-            transaction.commit();
-        }
-    }
 }

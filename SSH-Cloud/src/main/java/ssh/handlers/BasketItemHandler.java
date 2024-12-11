@@ -80,15 +80,4 @@ public class BasketItemHandler {
             transaction.commit();
         }
     }
-
-    public void deleteById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            BasketItem basketItem = session.get(BasketItem.class, id);
-            if (basketItem != null) {
-                session.delete(basketItem);
-            }
-            transaction.commit();
-        }
-    }
 }
