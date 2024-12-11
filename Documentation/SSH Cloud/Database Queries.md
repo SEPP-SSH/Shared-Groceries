@@ -171,9 +171,9 @@ public static List<Category> returnCategories(int storeId){ ... }
 /**
  * @param houseId
  * @param storeId
- * @return A Map object with an Integer for the basket_id and a List of BasketItem objects for the basket items. (This list may be empty).
+ * @return A ReturnedBasket object with an Integer for the basket_id and a List of BasketItem objects for the basket items. (This list may be empty).
  */
-public static Map<Integer, List<BasketItem>> returnBasketId(int houseId, int storeId){ ... }
+public static ReturnedBasket returnBasketId(int houseId, int storeId){ ... }
 ```
 **Description**: For a given house and store, looks up whether a basket entry exists in the database, returning a basket_id and list of corresponding items in the basket if so, or creates a new basket if not.
 
@@ -181,7 +181,7 @@ public static Map<Integer, List<BasketItem>> returnBasketId(int houseId, int sto
 - `int houseId` - for identifying the house that the order belongs to.
 - `int storeId` - for identifying which supermarket the order is being placed with.
 
-**Return Value**: `Map<Integer, List<BasketItem>>` - provides both the `basketId` for the basket (either fetched or newly created) and any items that are in the basket. In the case that there are no items in the basket, this list will be an empty list. The returned `Map` object may be `null` in the event of a computation failure.
+**Return Value**: `ReturnedBasket` - an object that encapsulates both the returned `basketId` and the list of returned `BasketItem`'s, where this list may be empty if it's a new basket.
 
 
 ### `addToBasket`
