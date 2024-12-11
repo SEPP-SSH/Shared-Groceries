@@ -64,7 +64,7 @@ Working with Harvey on the SSH Cloud team for the Student Smart Homes project ha
 
 One of Harvey's standout strengths is his proactive approach. Not only did he take on a significant portion of the workload, but he also ensured that the team had the resources and guidance needed to progress effectively. For instance, his clear approach to organizing the database schema was crucial in ensuring seamless development. His attention to detail in code reviews and his ability to foresee potential issues saved the team considerable time and effort.
 
-One area where Harvey could grow is in delegation. While his dedication to completing tasks is admirable, sharing responsibilities more evenly among team members could foster a more balanced workload and encourage others to contribute more actively. This would also help the team members develop skills in areas such as project organization and troubleshooting
+One area where Harvey could grow is in delegation. While his dedication to completing tasks is admirable, sharing responsibilities more evenly among team members could foster a more balanced workload and encourage others to contribute more actively. This would also help the team members develop skills in areas such as project organization and troubleshooting.
 
 Looking ahead, I would suggest that Harvey continue leveraging his leadership skills while fostering a more collaborative environment by actively delegating tasks. This would not only enhance team productivity but also build a stronger, more cohesive team dynamic. Overall, Harvey's contributions were invaluable, and I look forward to collaborating with him on future projects.
 
