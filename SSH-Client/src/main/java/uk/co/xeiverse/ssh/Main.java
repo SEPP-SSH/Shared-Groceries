@@ -1,4 +1,4 @@
-package uk.co.xeiverse;
+package uk.co.xeiverse.ssh;
 
 public class Main {
     public static void main(String[] args) {

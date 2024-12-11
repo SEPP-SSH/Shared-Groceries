@@ -24,8 +24,6 @@ For SSH Cloud, we propose implementing a networked server in Java, that creates,
 
 The reason we chose Java and MySQL is due to the developers' familiarity with the technologies, and the excellent documentation for both platforms, which we hope will reduce the time taken to produce the prototype.
 
-Though we originally planned to use Gradle as the build system for the SSH Cloud prototype, we instead plan to use Maven. This is due to a bug when attempting to compile with a certain dependency when using Gradle preventing compilation - _an issue not experienced when using Maven_.
-
 We also propose using Javalin to implement networking between the SSH Cloud and SSH App products.
 
 #### SSH App
