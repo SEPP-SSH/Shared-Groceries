@@ -26,6 +26,14 @@ The reason we chose Java and MySQL is due to the developers' familiarity with th
 
 We also propose using Javalin to implement networking between the SSH Cloud and SSH App products.
 
+Instead of writing explicit SQL queries for the database, we will use Hibernate and the Javax persistence API to utilise Object/Relational Mapping (ORM) to store the data in the database. By doing this, we reduce the development time required to achieve the parsing of database-writable data to java objects, and vice versa.
+
+We propose using JUnit to implement unit testing on the individual components of the database actions, as well as utilising the testing platform to run integration tests that check the soundness of the client-server networking request handling, database actions, and the server-to-server network actions, in aggregate.
+
+We propose using the Jackson framework for parsing java objects from JSON files, and vice versa, making it easy to transmit parameters and return values over the network via Javalin, as well as for loading up the initial state of the database server from a cold-boot.
+
+We also propose using Lombok for processing annotations in Java classes that represent database entities.
+
 #### SSH App
 We are proposing to use the Android Studio IDE to create the SSH App using Java as the language, as well as XML for the layouts.
 
