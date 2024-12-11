@@ -1,13 +1,16 @@
 package uk.co.xeiverse.ssh.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,12 +68,19 @@ public class BasketAdapter extends ArrayAdapter<BasketItem> {
         TextView userTextView = currentItemView.findViewById(R.id.userView);
         TextView stockView = currentItemView.findViewById(R.id.stockView);
 
+        LinearLayout quantityLayout = currentItemView.findViewById(R.id.quantityView);
         TextView quantityView = currentItemView.findViewById(R.id.itemQuantityView);
         ImageView increaseQuantityBtn = currentItemView.findViewById(R.id.increaseQuantityBtn);
         ImageView decreaseQuantityBtn = currentItemView.findViewById(R.id.reduceQuantityBtn);
 
         // Set the text of the text views
         titleView.setText(currentBasketItem.getItem().getItemName());
+
+        // Check if this item was added by current user
+        if (currentBasketItem.getHousemate().getHousemateId() != serverHelper.getHousemateId()) {
+            // If not then grey out the layout
+            quantityLayout.getBackground().setColorFilter(Color.parseColor("#707070"), PorterDuff.Mode.SRC_ATOP);
+        }
 
         // Set price text
         if (currentBasketItem.getItem().getItemOfferPrice() == currentBasketItem.getItem().getItemBasePrice()) {

@@ -9,5 +9,3 @@ RUN sleep 25 # wait for server to start
 EXPOSE 8080
 EXPOSE 3306
 CMD mvn clean install -U
-#CMD mvn test
-#RUN mvn package
