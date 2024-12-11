@@ -36,20 +36,4 @@ public class ItemHandler {
         }
     }
 
-    public Item getById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.get(Item.class, id);
-        }
-    }
-
-    public void deleteById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            Item item = session.get(Item.class, id);
-            if (item != null) {
-                session.delete(item);
-            }
-            transaction.commit();
-        }
-    }
 }

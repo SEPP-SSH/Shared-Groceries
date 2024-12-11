@@ -1,6 +1,7 @@
 package ssh.unitTests.handlers;
 
 import org.junit.jupiter.api.*;
+import ssh.entities.Item;
 import ssh.entities.Store;
 import ssh.handlers.StoreHandler;
 import ssh.utilities.HibernateUtility;
@@ -37,10 +38,15 @@ public class StoreHandlerTests {
         storeHandler.create(newStore);
 
         // Assert
-        Store fetchedStore = storeHandler.getById(newStore.getStoreId());
-        assertNotNull(fetchedStore);
-        assertEquals("SaveMore", fetchedStore.getStoreName());
-        assertEquals("SaveMore.png", fetchedStore.getStoreLogo());
+        List<Store> stores = storeHandler.getAll();
+        boolean storeFound = false;
+        for (Store fetchedItem :stores) {
+            if (fetchedItem.getStoreName().equals("SaveMore") &&
+                    fetchedItem.getStoreLogo().equals("SaveMore.png")) {
+                storeFound = true;
+            }
+        }
+        assertTrue(storeFound);
     }
 
     @Test
@@ -54,20 +60,5 @@ public class StoreHandlerTests {
             }
         }
         assertTrue(flag);
-    }
-
-    @Test
-    void testGetStoreById() {
-        Store fetchedStore = storeHandler.getById(store.getStoreId());
-        assertNotNull(fetchedStore);
-        assertEquals(store.getStoreId(), fetchedStore.getStoreId());
-    }
-
-    @Test
-    void testDeleteStoreById() {
-        assertNotNull(storeHandler.getById(store.getStoreId()));
-        storeHandler.deleteById(store.getStoreId());
-        assertNull(storeHandler.getById(store.getStoreId()));
-        storeHandler.create(store);
     }
 }

@@ -146,18 +146,18 @@ public class BasketItemHandlerTests {
         assertEquals(basketItem.getBasketItemId(), fetchedBasketItem.getBasketItemId());
     }
 
-//    @Test
-//    void testGetBasketItemByBasketId() {
-//        List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
-//        boolean flag = false;
-//        for (BasketItem returnedBasketItem : basketItems){
-//            if (basket.getBasketId() == returnedBasketItem.getBasketItemId()){
-//                flag = true;
-//                break;
-//            }
-//        }
-//        assertTrue(flag);
-//    }
+    @Test
+    void testGetBasketItemByBasketId() {
+        List<BasketItem> basketItems = basketItemHandler.getByBasketId(basket.getBasketId());
+        boolean flag = false;
+        for (BasketItem returnedBasketItem : basketItems){
+            if (basket.getBasketId() == returnedBasketItem.getBasket().getBasketId()){
+                flag = true;
+                break;
+            }
+        }
+        assertTrue(flag);
+    }
 
     @Test
     void testIncreaseItemQuantity() {
@@ -180,4 +180,5 @@ public class BasketItemHandlerTests {
         assertNull(basketItemHandler.getById(basketItem.getBasketItemId()));
         basketItemHandler.create(basketItem);
     }
+
 }

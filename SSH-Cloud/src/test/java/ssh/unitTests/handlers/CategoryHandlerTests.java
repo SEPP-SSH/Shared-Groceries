@@ -49,10 +49,17 @@ public class CategoryHandlerTests {
         categoryHandler.create(category);
 
         // Assert
-        Category fetchedCategory = categoryHandler.getById(category.getCategoryId());
-        assertNotNull(fetchedCategory);
-        assertEquals("Vegetables", fetchedCategory.getCategoryName());
-        assertEquals(store.getStoreId(), fetchedCategory.getStore().getStoreId());
+        List<Category> categories = categoryHandler.getAll();
+        boolean categoryFound = false;
+        for (Category fetchedCategory : categories) {
+            if (fetchedCategory.getCategoryName().equals("Vegetables") &&
+                    fetchedCategory.getStore().getStoreId() == store.getStoreId()) {
+                categoryFound = true;
+                break;
+            }
+        }
+
+        assertTrue(categoryFound);
     }
 
     @Test
@@ -66,13 +73,6 @@ public class CategoryHandlerTests {
             }
         }
         assertTrue(flag);
-    }
-
-    @Test
-    void testGetCategoryById() {
-        Category fetchedCategory = categoryHandler.getById(category.getCategoryId());
-        assertNotNull(fetchedCategory);
-        assertEquals(category.getCategoryId(), fetchedCategory.getCategoryId());
     }
 
     @Test
@@ -91,11 +91,4 @@ public class CategoryHandlerTests {
         assertTrue(flag);
     }
 
-    @Test
-    void testDeleteCategoryById() {
-        assertNotNull(categoryHandler.getById(category.getCategoryId()));
-        categoryHandler.deleteById(category.getCategoryId());
-        assertNull(categoryHandler.getById(category.getCategoryId()));
-        categoryHandler.create(category);
-    }
 }

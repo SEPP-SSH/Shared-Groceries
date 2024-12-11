@@ -35,20 +35,4 @@ public class CategoryHandler {
         }
     }
 
-    public Category getById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.get(Category.class, id);
-        }
-    }
-
-    public void deleteById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            Category category = session.get(Category.class, id);
-            if (category != null) {
-                session.delete(category);
-            }
-            transaction.commit();
-        }
-    }
 }

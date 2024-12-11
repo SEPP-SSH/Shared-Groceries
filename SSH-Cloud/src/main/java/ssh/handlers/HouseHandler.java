@@ -33,14 +33,4 @@ public class HouseHandler {
         }
     }
 
-    public void deleteById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            House house = session.get(House.class, id);
-            if (house != null) {
-                session.delete(house);
-            }
-            transaction.commit();
-        }
-    }
 }

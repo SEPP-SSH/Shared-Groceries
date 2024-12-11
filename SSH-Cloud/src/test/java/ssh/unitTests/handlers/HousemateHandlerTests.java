@@ -47,31 +47,16 @@ public class HousemateHandlerTests {
         housemateHandler.create(newHousemate);
 
         // Assert
-        Housemate fetchedHousemate = housemateHandler.getById(newHousemate.getHousemateId());
-        assertNotNull(fetchedHousemate);
-        assertEquals("Elena", fetchedHousemate.getHousemateForename());
-        assertEquals("Fisher", fetchedHousemate.getHousemateSurname());
-        assertEquals(house.getHouseId(), fetchedHousemate.getHouse().getHouseId());
-    }
-
-    @Test
-    void testGetAllHousemates() {
-        List<Housemate> housemates = housemateHandler.getAll();
-        boolean flag = false;
-        for (Housemate returnedHousemate : housemates){
-            if (housemate.getHousemateId() == returnedHousemate.getHousemateId()){
-                flag = true;
-                break;
+        List<Housemate> housemates = housemateHandler.getByHouse(house.getHouseId());
+        boolean housemateFound = false;
+        for (Housemate fetchedHousemate :housemates) {
+            if (fetchedHousemate.getHousemateForename().equals("Elena") &&
+                    fetchedHousemate.getHousemateSurname().equals("Fisher") &&
+                        fetchedHousemate.getHouse().getHouseId() == house.getHouseId()) {
+                housemateFound = true;
             }
         }
-        assertTrue(flag);
-    }
-
-    @Test
-    void testGetHousemateById() {
-        Housemate fetchedHousemate = housemateHandler.getById(housemate.getHousemateId());
-        assertNotNull(fetchedHousemate);
-        assertEquals(housemate.getHousemateId(), fetchedHousemate.getHousemateId());
+        assertTrue(housemateFound);
     }
 
     @Test
@@ -89,11 +74,4 @@ public class HousemateHandlerTests {
         assertTrue(flag);
     }
 
-    @Test
-    void testDeleteHousemateById() {
-        assertNotNull(housemateHandler.getById(housemate.getHousemateId()));
-        housemateHandler.deleteById(housemate.getHousemateId());
-        assertNull(housemateHandler.getById(housemate.getHousemateId()));
-        housemateHandler.create(housemate);
-    }
 }

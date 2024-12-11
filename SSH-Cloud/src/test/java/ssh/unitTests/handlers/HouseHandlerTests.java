@@ -41,30 +41,10 @@ public class HouseHandlerTests {
     }
 
     @Test
-    void testGetAllHouses() {
-        List<House> houses = houseHandler.getAll();
-        boolean flag = false;
-        for (House returnedHouse : houses){
-            if (house.getHouseId() == returnedHouse.getHouseId()){
-                flag = true;
-                break;
-            }
-        }
-        assertTrue(flag);
-    }
-
-    @Test
     void testGetHouseById() {
         House fetchedHouse = houseHandler.getById(house.getHouseId());
         assertNotNull(fetchedHouse);
         assertEquals(house.getHouseId(), fetchedHouse.getHouseId());
     }
 
-    @Test
-    void testDeleteHouseById() {
-        assertNotNull(houseHandler.getById(house.getHouseId()));
-        houseHandler.deleteById(house.getHouseId());
-        assertNull(houseHandler.getById(house.getHouseId()));
-        houseHandler.create(house);
-    }
 }

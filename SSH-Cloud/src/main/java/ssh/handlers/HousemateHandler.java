@@ -29,12 +29,6 @@ public class HousemateHandler {
         }
     }
 
-    public Housemate getById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            return session.get(Housemate.class, id);
-        }
-    }
-
     public List<Housemate> getByHouse(int houseId) {
         System.out.println("in get by house");
         try (Session session = sessionFactory.openSession()) {
@@ -44,14 +38,4 @@ public class HousemateHandler {
         }
     }
 
-    public void deleteById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            Housemate housemate = session.get(Housemate.class, id);
-            if (housemate != null) {
-                session.delete(housemate);
-            }
-            transaction.commit();
-        }
-    }
 }
