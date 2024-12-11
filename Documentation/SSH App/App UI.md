@@ -25,3 +25,6 @@ The following UI mock-up was created based on the features and description from 
 - The Home Fragment will also not be populated, as this just shows how the new shopping functionaliy would fit-in with the exising smart home functionality.
 - The Settings Fragment (ehich can be seen above) will also remain largely unpopulated for the same reason, only displaying the user currently logged-in (which will be hardcoded for this prototype) for clarity about which user added which item to the basket.
 - The sign-out button in the settings fragment will also not be functional for this prototype.
+
+## Dependencies
+We are using the Glide library for loading images from URLs into imageviews as it is fast and not resource heavy. It also caches images meaning that images don't have to be fetched multiple times.
