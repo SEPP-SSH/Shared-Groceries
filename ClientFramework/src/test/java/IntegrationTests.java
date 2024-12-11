@@ -17,10 +17,10 @@ public class IntegrationTests {
 
     @BeforeAll
     static void setUp() throws Exception {
-        for (int counter = 0; counter < 75; counter++){
-            System.out.println("Waiting for SSH Cloud server to spin up. " + (75 - counter) + " seconds remaining.");
-            Thread.sleep(1000);
-        }
+//        for (int counter = 0; counter < 75; counter++){
+//            System.out.println("Waiting for SSH Cloud server to spin up. " + (75 - counter) + " seconds remaining.");
+//            Thread.sleep(1000);
+//        }
 
         houseId = 1;
         housemateId = 1;
@@ -38,6 +38,8 @@ public class IntegrationTests {
         boolean storeFound = false;
         for (Store store : stores) {
             if (store.getStoreId() == storeId) {
+                assertEquals("Tesco", store.getStoreName());
+                assertEquals("https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/Tesco_Logo.svg/2560px-Tesco_Logo.svg.png", store.getStoreLogo());
                 storeFound = true;
                 break;
             }
@@ -51,6 +53,16 @@ public class IntegrationTests {
         List<Category> categories = Client.returnCategories(storeId);
         assertNotNull(categories);
         assertFalse(categories.isEmpty());
+
+        boolean categoryFound = false;
+        for (Category category : categories) {
+            if (category.getCategoryName().equals("Fruit")) {
+                categoryFound = true;
+                assertEquals(storeId, category.getStore().getStoreId());
+                break;
+            }
+        }
+        assertTrue(categoryFound);
     }
 
     @Test
@@ -59,6 +71,21 @@ public class IntegrationTests {
         List<Item> items = Client.returnitems(storeId);
         assertNotNull(items);
         assertFalse(items.isEmpty());
+
+        boolean itemFound = false;
+        for (Item item : items) {
+            if (item.getItemName().equals("Apples")) {
+                itemFound = true;
+                assertEquals(3.00, item.getItemBasePrice());
+                assertEquals(2.50, item.getItemOfferPrice());
+                assertEquals("https://nearlynakedveg.co.uk/cdn/shop/products/Depositphotos_246784090_S_720x.jpg?v=1681394329",item.getItemImg());
+                assertEquals(1, item.getStore().getStoreId());
+                assertEquals(1, item.getCategory().getCategoryId());
+                assertTrue(item.isItemInStock());
+                break;
+            }
+        }
+        assertTrue(itemFound);
     }
 
     @Test
@@ -67,6 +94,17 @@ public class IntegrationTests {
         List<Housemate> housemates = Client.returnHousemates(houseId);
         assertNotNull(housemates);
         assertFalse(housemates.isEmpty());
+
+        boolean housemateFound = false;
+        for (Housemate housemate : housemates) {
+            if (housemate.getHousemateForename().equals("Nathan") && housemate.getHousemateSurname().equals("Drake")) {
+                housemateFound = true;
+                assertEquals("nathan.png", housemate.getHousemateImg());
+                assertEquals(houseId, housemate.getHouse().getHouseId());
+                break;
+            }
+        }
+        assertTrue(housemateFound);
     }
     @Test
     @Order(5)
