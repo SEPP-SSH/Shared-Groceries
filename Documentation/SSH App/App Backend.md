@@ -23,3 +23,4 @@ It will store the following attributes:
 
 All of these attributes will be available for the app to fetch using getters and also set the values using setters. They will be populated by fetching the values from the server when the `ShopFragment` is launched.
 
+In the end we decided to re-use the classes developed by the SSH Cloud developers to pass data around the app. This means that the objects received from the server can be used straight away rather than having to convert them to our own objects.
