@@ -22,14 +22,17 @@ public class Main {
     public static void main(String[] args) {
         // populate database
         try{
-            Thread.sleep(25000); // required to wait for mysql server to spin up
+            // wait for mysql server to spin up
+            for (int counter = 0; counter < 25; counter++){
+                System.out.println("Waiting for SSH Cloud's MySQL server to spin up. " + (25 - counter) + " seconds remaining.");
+                Thread.sleep(1000);
+            }
+
             MoneyBurnerMarket.populateSshDatabase();
             System.out.println("Populated initial database information successfully");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
         // create and start the server
@@ -39,56 +42,56 @@ public class Main {
         ObjectMapper objectMapper = new ObjectMapper();
 
         // define the requests that the server can receive
-        app.post("/returnStores", ctx ->{
+        app.post("/returnStores", ctx -> {
             ReturnStoresQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnStoresQueryParameter.class);
 
             List<Store> returnObject = QueryServicer.returnStores(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/returnCategories", ctx ->{
+        app.post("/returnCategories", ctx -> {
             ReturnCategoriesQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnCategoriesQueryParameter.class);
 
             List<Category> returnObject = QueryServicer.returnCategories(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/returnItems", ctx ->{
+        app.post("/returnItems", ctx -> {
             ReturnItemsQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnItemsQueryParameter.class);
 
             List<Item> returnObject = QueryServicer.returnItems(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/returnHousemates", ctx ->{
+        app.post("/returnHousemates", ctx -> {
             ReturnHousematesQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnHousematesQueryParameter.class);
 
             List<Housemate> returnObject = QueryServicer.returnHousemates(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/returnBasket", ctx ->{
+        app.post("/returnBasket", ctx -> {
             ReturnBasketIdQueryParameter parameter = objectMapper.readValue(ctx.body(), ReturnBasketIdQueryParameter.class);
 
             ReturnedBasket returnObject = QueryServicer.returnBasketId(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/addToBasket", ctx ->{
+        app.post("/addToBasket", ctx -> {
             AddToBasketQueryParameter parameter = objectMapper.readValue(ctx.body(), AddToBasketQueryParameter.class);
 
             boolean returnObject = QueryServicer.addToBasket(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/removeFromBasket", ctx ->{
+        app.post("/removeFromBasket", ctx -> {
             RemoveFromBasketQueryParameter parameter = objectMapper.readValue(ctx.body(), RemoveFromBasketQueryParameter.class);
 
             boolean returnObject = QueryServicer.removeFromBasket(parameter);
 
             ctx.json(returnObject);
         });
-        app.post("/submitOrder", ctx ->{
+        app.post("/submitOrder", ctx -> {
             SubmitOrderQueryParameter parameter = objectMapper.readValue(ctx.body(), SubmitOrderQueryParameter.class);
 
             boolean returnObject = QueryServicer.submitOrder(parameter);

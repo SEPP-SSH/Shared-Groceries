@@ -62,7 +62,7 @@ public class MoneyBurnerMarketData {
             "  {\n" +
             "    \"housemate_forename\": \"Nathan\",\n" +
             "    \"housemate_surname\": \"Drake\",\n" +
-            "    \"housemate_img\": \"john.png\",\n" +
+            "    \"housemate_img\": \"nathan.png\",\n" +
             "    \"house\" : {\n" +
             "      \"house_id\": 1\n" +
             "    }\n" +
@@ -70,7 +70,7 @@ public class MoneyBurnerMarketData {
             "  {\n" +
             "    \"housemate_forename\": \"Clara\",\n" +
             "    \"housemate_surname\": \"Oswald\",\n" +
-            "    \"housemate_img\": \"jane.png\",\n" +
+            "    \"housemate_img\": \"clara.png\",\n" +
             "    \"house\" : {\n" +
             "      \"house_id\": 1\n" +
             "    }\n" +
@@ -78,7 +78,7 @@ public class MoneyBurnerMarketData {
             "  {\n" +
             "    \"housemate_forename\": \"Mike\",\n" +
             "    \"housemate_surname\": \"Ross\",\n" +
-            "    \"housemate_img\": \"emily.png\",\n" +
+            "    \"housemate_img\": \"mike.png\",\n" +
             "    \"house\" : {\n" +
             "      \"house_id\": 1\n" +
             "    }\n" +
