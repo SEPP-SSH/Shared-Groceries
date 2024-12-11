@@ -12,4 +12,4 @@ The prototype implements the database schema and necessary logic for SSH Cloud c
 During the next milestone, we will develop the app so that all of the functionality works without the connection to the server, hardcoding 'dummy' data into the `ServerHelper` class and testing data flow through the app. This will then make adding the network integration in Milestone 4 much easier.
 
 ## Report at end of Milestone 3
-TO-DO!
+SSH App and SSH Cloud networking routines correctly implement the EDR’s specification for data synchronisation whenever changes are made in the app. As for synchronising when changes are made in the other direction (I.e. from cloud to app), the networking framework allows for the relevant listeners and handlers to be added easily, where the supporting foundations for this are already in place. (The reason this direction of dataflow hasn’t been implemented is due to the choice to simulate the supermarket APIs for the purposes of this prototype).
