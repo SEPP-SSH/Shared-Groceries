@@ -21,8 +21,13 @@ import static ssh.utilities.JsonUtilities.readJsonString;
 public class Main {
     public static void main(String[] args) {
         // populate database
-        try {
-            Thread.sleep(25000); // required to wait for mysql server to spin up
+        try{
+            // wait for mysql server to spin up
+            for (int counter = 0; counter < 25; counter++){
+                System.out.println("Waiting for SSH Cloud's MySQL server to spin up. " + (25 - counter) + " seconds remaining.");
+                Thread.sleep(1000);
+            }
+
             MoneyBurnerMarket.populateSshDatabase();
             System.out.println("Populated initial database information successfully");
         } catch (Exception e) {

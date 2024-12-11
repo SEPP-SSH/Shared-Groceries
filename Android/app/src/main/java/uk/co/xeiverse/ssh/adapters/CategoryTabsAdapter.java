@@ -26,6 +26,10 @@ public class CategoryTabsAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
+        // If position 0 - then offers tab
+        // TODO: Populate offers tab
+        // ID of offers tab = -1
+
         // Sort through the items by category
         ArrayList<Item> currentItems = new ArrayList<>();
         for (Item item : serverHelper.getItemsList()) {
