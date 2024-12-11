@@ -21,6 +21,12 @@ public class HouseHandler {
         }
     }
 
+    public List<House> getAll() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from House", House.class).list();
+        }
+    }
+
     public House getById(int id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(House.class, id);

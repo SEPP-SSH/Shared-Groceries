@@ -23,6 +23,12 @@ public class HousemateHandler {
         }
     }
 
+    public List<Housemate> getAll() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from Housemate", Housemate.class).list();
+        }
+    }
+
     public List<Housemate> getByHouse(int houseId) {
         System.out.println("in get by house");
         try (Session session = sessionFactory.openSession()) {
