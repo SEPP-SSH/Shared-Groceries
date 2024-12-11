@@ -105,26 +105,11 @@ void testGetAllCategories(){ ... }
 ```
 **Description**: Confirms that all Category records can be retrieved from the database. The test ensures that the preloaded Category is included in the retrieved list, validating the functionality of CategoryHandler.getAll.
 
-
-#### `testGetCategoryById`
-```java
-void testGetCategoryById(){ ... }
-```
-**Description**: Tests retrieval of a specific Category by its unique ID. The test validates that the fetched Category ID matches the expected value.
-
-
 #### `testGetCategoryByStoreId`
 ```java
 void testGetCategoryByStoreId(){ ... }
 ```
 **Description**: Ensures that categories can be retrieved based on their associated store's ID. The test fetches categories for the predefined store and validates that the returned Category matches the expected name and store reference.
-
-#### `testDeleteCategoryById`
-```java
-void testDeleteCategoryById(){ ... }
-```
-**Description**: Validates that a Category can be deleted from the database using its unique ID. The test deletes the Category, verifies its removal, and recreates it to restore the testing environment.
-
 
 ### HouseHandler Tests  
 #### `testCreateHouse`
@@ -133,27 +118,17 @@ void testCreateHouse(){ ... }
 ```
 **Description**: Validates the creation of a new House record in the database. A new house with a specific address is created, and the test verifies that the saved house matches the expected address.
 
-
 #### `testGetAllHouses`
 ```java
 void testGetAllHouses(){ ... }
 ```
 **Description**: Confirms the retrieval of all House records from the database. The test ensures that the preloaded House is included in the list, validating the HouseHandler.getAll method.
 
-
 #### `testGetHouseById`
 ```java
 void testGetHouseById(){ ... }
 ```
 **Description**: Tests retrieval of a specific House by its unique ID. The test validates that the fetched House ID matches the expected value.
-
-
-#### `testDeleteHouseById`
-```java
-void testDeleteHouseById(){ ... }
-```
-**Description**: Verifies that a House can be successfully deleted using its ID. The test removes the House, ensures it is no longer retrievable, and then recreates it to maintain the test environment.
-
 
 ### HousemateHandler Tests  
 #### `testCreateHousemate`
@@ -162,27 +137,11 @@ void testCreateHousemate(){ ... }
 ```
 **Description**: Validates the creation of a new Housemate in the database. A new housemate is created and linked to an existing House. The test confirms that the saved housemate matches the provided details, including their name, image, and associated house.
 
-
-#### `testGetAllHousemates`
+#### `testGetHousematesByHouse`
 ```java
-void testGetAllHousemates(){ ... }
+void testGetHousematesByHouse(){ ... }
 ```
-**Description**: Ensures that all Housemate records can be retrieved from the database. The test checks that the preloaded housemate is included in the result list, verifying the functionality of HousemateHandler.getAll.
-
-
-#### `testGetHousemateById`
-```java
-void testGetHousemateById(){ ... }
-```
-**Description**: Tests retrieval of a specific Housemate by its unique ID. The test validates that the fetched Housemate ID matches the expected value.
-
-
-#### `testDeleteHousemateById`
-```java
-void testDeleteHousemateById(){ ... }
-```
-**Description**: Verifies that a Housemate can be successfully deleted using its ID. The test removes the housemate, ensures it is no longer retrievable, and then recreates it to maintain the test environment.
-
+**Description**: Verifies that, for a housemate previously added to a house, the house does indeed contain that housemate.
 
 ### ItemHandler Tests  
 #### `testCreateItem`
@@ -197,19 +156,11 @@ void testGetAllItems(){ ... }
 ```
 **Description**: Ensures that all Item records can be retrieved from the database. The test confirms that the preloaded item is included in the result list, validating the functionality of ItemHandler.getAll.
 
-#### `testGetItemById`
+#### `testGetItemByStoreId`
 ```java
-void testGetItemById(){ ... }
+void testGetItemByStoreId(){ ... }
 ```
-**Description**: Tests retrieval of a specific item by its unique ID. The test validates that the fetched item ID matches the expected value.
-
-
-#### `testDeleteItemById`
-```java
-void testDeleteItemById(){ ... }
-```
-**Description**: Validates that an Item can be successfully deleted by its ID. The test removes the item, verifies that it is no longer retrievable, and then recreates it to maintain the test environment.
-
+**Description**: Verifies that items are associated with the correct stores after being persisted to the database.
 
 ### StoreHandler Tests  
 #### `testCreateStore`
@@ -223,21 +174,6 @@ void testCreateStore(){ ... }
 void testGetAllStores(){ ... }
 ```
 **Description**: Confirms that all Store records can be retrieved from the database. The test ensures that the preloaded store is included in the result list, validating the functionality of StoreHandler.getAll.
-
-
-#### `testGetStoreById`
-```java
-void testGetStoreById(){ ... }
-```
-**Description**: Tests retrieval of a specific store by its unique ID. The test validates that the fetched store ID matches the expected value.
-
-
-#### `testDeleteStoreById`
-```java
-void testDeleteStoreById(){ ... }
-```
-**Description**: Validates that a Store can be successfully deleted by its ID. The test removes the store, verifies that it is no longer retrievable, and then recreates it to restore the test environment.
-
 
 ## QueryServicer Tests
 #### `testReturnStores`
