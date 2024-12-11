@@ -173,4 +173,12 @@ public class BasketItemHandlerTests {
         assertEquals(2, updatedBasketItem.getItemQuantity());
     }
 
+    @Test
+    void testDeleteBasketItemById() {
+        assertNotNull(basketItemHandler.getById(basketItem.getBasketItemId()));
+        basketItemHandler.deleteById(basketItem.getBasketItemId());
+        assertNull(basketItemHandler.getById(basketItem.getBasketItemId()));
+        basketItemHandler.create(basketItem);
+    }
+
 }
