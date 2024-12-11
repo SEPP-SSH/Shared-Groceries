@@ -5,7 +5,7 @@ In the following document, we show examples of some of the functionalities of th
 ## When you load up the app
 | "My Home" tab | "Shopping" tab | "Settings" tab |
 | --------------- | ------------ | -------------- |
-| ![The initial screen of the SSH App]() | ![The Shopping tab of the SSH App]() | ![The Settings tab of the SSH App]() |
+| ![The initial screen of the SSH App](./Attachments/prototype-in-action-1.png) | ![The Shopping tab of the SSH App](./Attachments/prototype-in-action-2.png) | ![The Settings tab of the SSH App](./Attachments/prototype-in-action-3.png) |
 
 The "Shopping" tab is where you will find the prototyped group grocery shopping order feature.
 
@@ -15,13 +15,13 @@ When you've tapped into the Shopping tab, you'll see...
 The partner supermaket selection "drop-down" menu:
 | A supermarket is selected | Choices appear! |
 | ------------------------- | --------------- |
-| ![The supermarket selection menu with a store selected]() | ![The supermarket selection menu with the options visible]() |
+| ![The supermarket selection menu with a store selected](./Attachments/prototype-in-action-4.png) | ![The supermarket selection menu with the options visible](./Attachments/prototype-in-action-5.png) |
 
 The categories tab bar:
 
 | Example Category 1 | Example Category 2 | 
 | ------------------ | ------------------ |
-| ![An example of one category]() | ![An example of a second category]() |
+| ![An example of one category](./Attachments/prototype-in-action-6.png) | ![An example of a second category](./Attachments/prototype-in-action-7.png) |
 
 With these screenshots, you can also see that each category is populated with a list of items, where each item has:
   - an image, to visually describe to the user what item they're being shown for consideration.
@@ -38,18 +38,18 @@ When clicking the "Add to basket" button, the app sends a request to SSH Cloud t
 
 Of course, the app also adds a visual confirmation for the user that the item has been added:
 
-![An example of what happens when Add To Basket is clicked in the SSH App]()
+![An example of what happens when Add To Basket is clicked in the SSH App](./Attachments/prototype-in-action-8.png)
 
 i.e. The "Add to basket" button has been replaced with a quantity and a switch that allows you to add more or request less (or none at all) of the given item:
 
 | Added one | Added three more | Removed all four |
 | --------- | ---------------- | ---------------- |
-| 
+| ![Screenshot of adding one Bananas](./Attachments/prototype-in-action-9.png) | ![Screenshot of adding three more Bananas](./Attachments/prototype-in-action-10.png) | ![Screenshot of removing all four Bananas](./Attachments/prototype-in-action-11.png) |
 
 ## What's going on in the basket???
 When you click through to the basket, you'll see the following basket view:
 
-![An example of the basket view in the SSH App]()
+![An example of the basket view in the SSH App](./Attachments/prototype-in-action-12.png)
 
 This view implements the "items" tab described in the [selected Engineering Design Review (EDR)](/Documentation/Selected%20EDR.pdf), and is a list of items - much similar to the browsing and selection view we looked at previously, but has extra information.
 
@@ -70,7 +70,7 @@ Once the user has reviewed the full order total, as well as _their_ total - whic
 
 | Ready to checkout | Checkout clicked |
 | ----------------- | ---------------- |
-| ![The SSH App basket view before Checkout is clicked]() | ![The SSH App basket view after Checkout is clicked]() |
+| ![The SSH App basket view before Checkout is clicked](./Attachments/prototype-in-action-13.png) | ![The SSH App basket view after Checkout is clicked](./Attachments/prototype-in-action-14.png) |
 
 ---
 ---
