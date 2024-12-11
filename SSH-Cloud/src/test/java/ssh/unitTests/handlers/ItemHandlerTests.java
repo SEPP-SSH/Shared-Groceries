@@ -91,4 +91,20 @@ public class ItemHandlerTests {
         }
         assertTrue(flag);
     }
+
+    @Test
+    void testGetItemByStoreId() {
+        List<Item> items = itemHandler.getByStoreId(store.getStoreId());
+        assertEquals(1, items.size());
+        boolean flag = false;
+        for (Item returnedItem : items){
+            if (returnedItem.getItemName().equals("Apple")) {
+                if (store.getStoreId() == returnedItem.getStore().getStoreId()){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        assertTrue(flag);
+    }
 }
