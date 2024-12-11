@@ -267,7 +267,7 @@ Based on the previous sections, the following queries and commands have been ide
 | `void createByInfo(int basketId, int storeId, int itemId, int housemateId, int itemQuantity)` | Required for servicing a client request to add an item to the group basket. | Yes |
 | `List<BasketItem> getAll()`| Required for testing purposes, to see that items are added to and removed from group baskets correctly. | Yes |
 | `BasketItem getById(int id)` | Required for testing purposes, to see that items are removed from group baskets correctly. | Yes |
-| `List<BasketItem> getByBasketId(int basketId)` | Required for fetching all items in a group basket when requested to by client instances. | No |
+| `List<BasketItem> getByBasketId(int basketId)` | Required for fetching all items in a group basket when requested to by client instances. | Yes |
 | `void increaseItemQuantity(int basketItemId, int quantityToAdd)` | Required to add new items or increase the quantity of items already in group baskets. | Yes |
 | `void decreaseItemQuantity(int basketItemId, int quantityToRemove)` | Required to remove items or decrease the quantity of items already in group baskets. | Yes |
 | `void deleteById(int id)` | Required to delete record in (removeFromBasket method, QueryServicer class), and to clean database in (cleanDatabase method, QueryServicerTests class). | Yes |
@@ -277,7 +277,7 @@ Based on the previous sections, the following queries and commands have been ide
 | -------------------------------- | ----------- | ------------ |
 | `void create(Category category)` | Required for the initial population of database tables, when loading the test information from JSON files/strings. | Yes |
 | `List<Category> getAll()` | Required for testing purposes, to verify that categories are correctly added as a part of database actions. | Yes |
-| `List<Category> getByStoreId(int storeId)` | Required for fetching all categories of itmes made available by partner supermarkets when a client instance is spun-up. | No |
+| `List<Category> getByStoreId(int storeId)` | Required for fetching all categories of itmes made available by partner supermarkets when a client instance is spun-up. | Yes |
 
 ### Pertaining to `House` entity:
 | Query/Command Function Prototype | Explanation | Has a Unit Test? |
@@ -296,7 +296,7 @@ Based on the previous sections, the following queries and commands have been ide
 | -------------------------------- | ----------- | ------------ |
 | `void create(Item item)` | Required for the initial population of database tables, when loading the test information from JSON files/strings. | Yes |
 | `List<Item> getAll()` | Required for testing purposes, to verify that items are correctly added by other database actions. | Yes |
-| `List<Item> getByStoreId(int storeId)` | Required for getting the list of all items to display for browsing/searching once a supermarket has been selected in a client instance. | No |
+| `List<Item> getByStoreId(int storeId)` | Required for getting the list of all items to display for browsing/searching once a supermarket has been selected in a client instance. | Yes |
 
 ### Pertaining to `Store` entity:
 | Query/Command Function Prototype | Explanation | Has a Unit Test? |
