@@ -21,7 +21,7 @@ import uk.co.xeiverse.ssh.networking.entities.Store;
 public class ServerHelper {
 
     // Hardcoded for prototype
-    public static final Integer TEMP_HOUSEMATE_ID = 1;
+    public static final Integer TEMP_HOUSEMATE_ID = 2; // 2 is Clara, 1 is Nathan Drake
     public static final Integer TEMP_HOUSE_ID = 1;
 
     private Integer housemateId;
@@ -71,7 +71,10 @@ public class ServerHelper {
         // Server returns categories and items for that store,
         // the basket ID for that store and list of items in basket.
 
-        categoriesList = Client.returnCategories(storeId);
+        categoriesList = new ArrayList<>();
+        categoriesList.add(new Category(-1, null, "Offers")); // Add offers tab
+        categoriesList.addAll(Client.returnCategories(storeId)); // Add the categories from the server
+
         itemsList = Client.returnitems(storeId);
 
         // Get basket information
@@ -136,8 +139,8 @@ public class ServerHelper {
         Client.removeFromBasket(basketId, item.getItemId(), housemateId, quantity);
     }
 
-    public void submitOrder() {
-        Boolean success = Client.submitOrder(basketId);
+    public Boolean submitOrder() {
+        return Client.submitOrder(basketId);
     }
 
     // GETTERS

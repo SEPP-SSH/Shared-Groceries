@@ -222,9 +222,9 @@ public class QueryServicer {
 
             // does a record already exist with this itemId that matches the housemateId?
             for (BasketItem matchedItem : matchedItems){
-                if (matchedItem.getHousemate().getHousemateId() == housemateId){
+                if (matchedItem.getHousemate().getHousemateId() == housemateId && matchedItem.getItem().getItemId() == itemId){
                     // we've found a record that can be updated, so update it
-                    new BasketItemHandler(sessionFactory).increaseItemQuantity(basketId, quantity);
+                    new BasketItemHandler(sessionFactory).increaseItemQuantity(matchedItem.getBasketItemId(), quantity);
                     return true;
                 }
             }
@@ -276,12 +276,12 @@ public class QueryServicer {
                         return true;
                     }
                 }
-                break; // stop after first alteration, as there should only be one record in database
             }
             return false; // only reaches here if no removal could take place (ie. cannot delete non-existent items, or other housemates' items)
         }
         catch (Exception e){
             // error
+            e.printStackTrace();
             return false;
         }
     }

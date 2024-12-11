@@ -2,25 +2,39 @@ package ssh;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
+import org.apache.hc.client5.http.fluent.Request;
+import org.apache.hc.core5.http.ContentType;
+import org.eclipse.jetty.server.ServerConnector;
 import ssh.entities.*;
 import ssh.handlers.*;
 import ssh.handlers.CategoryHandler;
 import ssh.queryParameterWrappers.*;
 import ssh.supermarketAPIs.MoneyBurnerMarket;
 import ssh.utilities.DatabaseExporter;
+import ssh.utilities.JsonUtilities;
 
 import java.util.List;
 import java.util.Map;
+
+import static ssh.utilities.JsonUtilities.readJsonString;
 
 public class Main {
     public static void main(String[] args) {
         // populate database
         try{
+            // wait for mysql server to spin up
+            for (int counter = 0; counter < 25; counter++){
+                System.out.println("Waiting for SSH Cloud's MySQL server to spin up. " + (25 - counter) + " seconds remaining.");
+                Thread.sleep(1000);
+            }
+
             MoneyBurnerMarket.populateSshDatabase();
+            System.out.println("Populated initial database information successfully");
         }
         catch (Exception e){
             e.printStackTrace();
         }
+
 
 
         // create and start the server
