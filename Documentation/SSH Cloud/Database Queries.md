@@ -308,12 +308,14 @@ Based on the previous sections, the following queries and commands have been ide
 | Query/Command Function Prototype | Explanation | Has a Unit Test? |
 | -------------------------------- | ----------- | ------------ |
 | `void create(House house)` | Required for the initial population of database tables, when loading the test information from JSON files/strings. | Yes |
+| `List<House> getAll()` | Required for testing purposes. | Yes |
 | `House getById(int id)` | Required for fetching the address that an order corresponds to as a part of a group order. | Yes |
 
 ### Pertaining to `Housemate` entity:
 | Query/Command Function Prototype | Explanation | Has a Unit Test? |
 | -------------------------------- | ----------- | ------------ |
 | `void create(Housemate housemate)` | Required for the initial population of database tables, when loading the test information from JSON files/strings. | Yes |
+| `List<Housemate> getAll()` | Required for the initial handshake between SSH Cloud and client instances so that the client instance can show the necessary information about which housemate added which items when reviewing the group basket. | Yes |
 | `List<Housemate> getByHouse(int houseId)` | Required for getting a list of all housemates when a client instance is spun up. The list of housemates in the corresponding house is required to show which users added which items to the group basket. | Yes |
 
 ### Pertaining to `Item` entity:

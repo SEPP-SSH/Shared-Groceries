@@ -34,6 +34,8 @@ We propose using the Jackson framework for parsing java objects from JSON files,
 
 We also propose using Lombok for processing annotations in Java classes that represent database entities.
 
+Further, we propose containerising the various systems of the SSH Cloud facet using Docker containers, and orchestrating them using docker-compose, so that the code is portable, results are reproducible, and we can easily integrate a continuous integration workflow using GitHub Actions.
+
 #### SSH App
 We are proposing to use the Android Studio IDE to create the SSH App using Java as the language, as well as XML for the layouts.
 
