@@ -123,7 +123,7 @@ public class IntegrationTests {
         List<BasketItem> basketItems = Client.returnBasketId(houseId, storeId).getBasketItems();
         boolean itemFound = false;
         for (BasketItem basketItem : basketItems) {
-            if (basketItem.getItem().getItemId() == itemId && basketItem.getItemQuantity() == 5) {
+            if (basketItem.getItem().getItemId() == itemId && basketItem.getItemQuantity() == 10) {
                 itemFound = true;
                 break;
             }
@@ -140,7 +140,7 @@ public class IntegrationTests {
         List<BasketItem> basketItems = Client.returnBasketId(houseId, storeId).getBasketItems();
         boolean quantityUpdated = false;
         for (BasketItem basketItem : basketItems) {
-            if (basketItem.getItem().getItemId() == itemId && basketItem.getItemQuantity() == 2) {
+            if (basketItem.getItem().getItemId() == itemId && basketItem.getItemQuantity() == 7) {
                 quantityUpdated = true;
                 break;
             }
