@@ -26,7 +26,6 @@ services:
   clientframework:
     container_name: clientframework
     build: .
-    network_mode: host
     depends_on:
       - mysql
       - sshcloudserver
