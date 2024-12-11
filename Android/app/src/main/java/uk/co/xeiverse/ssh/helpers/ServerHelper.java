@@ -21,7 +21,7 @@ import uk.co.xeiverse.ssh.networking.entities.Store;
 public class ServerHelper {
 
     // Hardcoded for prototype
-    public static final Integer TEMP_HOUSEMATE_ID = 1;
+    public static final Integer TEMP_HOUSEMATE_ID = 2; // 2 is Clara, 1 is Nathan Drake
     public static final Integer TEMP_HOUSE_ID = 1;
 
     private Integer housemateId;
