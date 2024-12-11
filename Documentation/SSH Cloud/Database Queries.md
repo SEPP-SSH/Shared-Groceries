@@ -63,6 +63,16 @@ func returnCategories(store_id){
 ```
 
 ```
+func returnHousemates(house_id){
+    lookup all housemates in teh database with the house_id supplied
+
+    parse them into a list of java objects
+
+    return the list of objects to the app
+}
+```
+
+```
 func returnBasketId(house_id, store_id){
     look for basket entry in the basket table of the database corresponding to the values provided
 
@@ -166,6 +176,21 @@ public static List<Category> returnCategories(int storeId){ ... }
 - `int storeId` - for identifying the supermarket for which the categories should be drawn from.
 
 **Return Value**: `List<Category>` - provides the list of `Category` objects that contains all necessary supermarket data for the client process. May be `null` in the event of a computation failure.
+
+### `returnHousemates`
+```java
+/**
+ * @param houseId
+ * @return List of Housemate objects (this may be empty) in the case of success, or null in the case of computation failure
+ */
+public static ReturnedBasket returnBasketId(int houseId, int storeId){ ... }
+```
+**Description**: For a given house lookup and return all housemates belonging to that house (which may be none).
+
+**Parameters**:
+- `int houseId` - for identifying the house that the housemates belong to.
+
+**Return Value**: `List<Housemate>` - a list of `Housemate` objects, which may be empty if none are found. In the event of a computation failure, this may be `null`, instead of an empty list.
 
 ### `returnBasketId`
 ```java
