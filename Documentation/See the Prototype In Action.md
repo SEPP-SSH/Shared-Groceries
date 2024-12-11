@@ -4,7 +4,7 @@ In the following document, we show examples of some of the functionalities of th
 
 ## When you load up the app
 | "My Home" tab | "Shopping" tab | "Settings" tab |
-| --------------- | ------------ | -------------- |
+|:---------------:|:------------:|:--------------:|
 | ![The initial screen of the SSH App](./Attachments/prototype-in-action-1.png) | ![The Shopping tab of the SSH App](./Attachments/prototype-in-action-2.png) | ![The Settings tab of the SSH App](./Attachments/prototype-in-action-3.png) |
 
 The "Shopping" tab is where you will find the prototyped group grocery shopping order feature.
@@ -14,13 +14,13 @@ When you've tapped into the Shopping tab, you'll see...
 
 The partner supermaket selection "drop-down" menu:
 | A supermarket is selected | Choices appear! |
-| ------------------------- | --------------- |
+|:-------------------------:|:---------------:|
 | ![The supermarket selection menu with a store selected](./Attachments/prototype-in-action-4.png) | ![The supermarket selection menu with the options visible](./Attachments/prototype-in-action-5.png) |
 
 The categories tab bar:
 
 | Example Category 1 | Example Category 2 | 
-| ------------------ | ------------------ |
+|:------------------:|:------------------:|
 | ![An example of one category](./Attachments/prototype-in-action-6.png) | ![An example of a second category](./Attachments/prototype-in-action-7.png) |
 
 With these screenshots, you can also see that each category is populated with a list of items, where each item has:
@@ -43,7 +43,7 @@ Of course, the app also adds a visual confirmation for the user that the item ha
 i.e. The "Add to basket" button has been replaced with a quantity and a switch that allows you to add more or request less (or none at all) of the given item:
 
 | Added one | Added three more | Removed all four |
-| --------- | ---------------- | ---------------- |
+|:---------:|:----------------:|:----------------:|
 | ![Screenshot of adding one Bananas](./Attachments/prototype-in-action-9.png) | ![Screenshot of adding three more Bananas](./Attachments/prototype-in-action-10.png) | ![Screenshot of removing all four Bananas](./Attachments/prototype-in-action-11.png) |
 
 ## What's going on in the basket???
@@ -69,7 +69,7 @@ Thus, in summary, the user can only modify the quantities of items that _they_ a
 Once the user has reviewed the full order total, as well as _their_ total - which is indicated with labels at the bottom of the basket view, the user can click the "Checkout" button to initiate the checkout process _- simulated for the purposes of this prototype._
 
 | Ready to checkout | Checkout clicked |
-| ----------------- | ---------------- |
+|:-----------------:|:----------------:|
 | ![The SSH App basket view before Checkout is clicked](./Attachments/prototype-in-action-13.png) | ![The SSH App basket view after Checkout is clicked](./Attachments/prototype-in-action-14.png) |
 
 ---
