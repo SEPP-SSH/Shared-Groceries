@@ -113,6 +113,15 @@ void testGetBasketItemById(){ ... }
 ```
 **Description**: Tests the retrieval of a specific BasketItem by its unique ID. The test verifies that the fetched BasketItem ID matches the expected value.
 
+#### `testGetBasketItemByBasketId`
+```java
+/**
+ * @Test
+ */
+void testGetBasketItemByBasketId(){ ... }
+```
+**Description**: Ensures that basket items can be retrieved based on their associated basket's ID. The test fetches basket items for the predefined basket and validates that the returned basket item matches the expected basket reference.
+
 
 #### `testIncreaseItemQuantity`
 ```java
@@ -315,6 +324,15 @@ void testGetItemById(){ ... }
 void testDeleteItemById(){ ... }
 ```
 **Description**: Validates that an Item can be successfully deleted by its ID. The test removes the item, verifies that it is no longer retrievable, and then recreates it to maintain the test environment.
+
+#### `testGetItemByStoreId`
+```java
+/**
+ * @Test
+ */
+void testGetItemByStoreId(){ ... }
+```
+**Description**: Ensures that items can be retrieved based on their associated store's ID. The test fetches items for the predefined store and validates that the returned items matches the expected name and store reference.
 
 
 ### StoreHandler Tests  
