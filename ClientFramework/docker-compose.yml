@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: sshCloud
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+
+  sshcloudserver:
+    container_name: sshcloudserver
+    build:
+      context: ../SSH-Cloud
+      dockerfile: ../SSH-Cloud/production-orchestration/Dockerfile
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+
+  clientframework:
+    container_name: clientframework
+    build: .
+    depends_on:
+      - mysql
+      - sshcloudserver

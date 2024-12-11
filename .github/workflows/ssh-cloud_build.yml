@@ -1,4 +1,4 @@
-name: SSH CI Workflow
+name: SSH CI Workflow - Unit Test & Build Artifact
 
 on:
   push:
