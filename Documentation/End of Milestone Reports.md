@@ -10,3 +10,6 @@ For the SSH App, the prototype implements the two main views required for the gr
 The prototype implements the database schema and necessary logic for SSH Cloud correctly, as specified in the EDR.
 
 During the next milestone, we will develop the app so that all of the functionality works without the connection to the server, hardcoding 'dummy' data into the `ServerHelper` class and testing data flow through the app. This will then make adding the network integration in Milestone 4 much easier.
+
+## Report at end of Milestone 3
+TO-DO!
