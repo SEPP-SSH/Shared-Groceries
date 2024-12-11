@@ -20,3 +20,5 @@ With regards to the SSH App, for milestone 4, we will be adding the networking `
 The prototype has not implemented the payments processing system or the basket approval mechanism. Though these are well-specified in the EDR, the team agreed to place them out of scope at the start of the development of the prototype. 
 Similarly, strong encryption for networking and database requests has been omitted from the prototype.
 We should add extra clarification to our documentation for the rationale behind these decisions, and the exact nature of which features we didn’t prototype.
+
+Within the SSH App we decided to use the same Java classes as developed by the SSH Cloud team to represent the database entities within the app. This required a large amount of refactoring has been completed successfully and the prototype is now functional.
