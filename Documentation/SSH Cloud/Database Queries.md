@@ -171,9 +171,9 @@ public static List<Category> returnCategories(int storeId){ ... }
 /**
  * @param houseId
  * @param storeId
- * @return A Map object with an Integer for the basket_id and a List of BasketItem objects for the basket items. (This list may be empty).
+ * @return A ReturnedBasket object with an Integer for the basket_id and a List of BasketItem objects for the basket items. (This list may be empty).
  */
-public static Map<Integer, List<BasketItem>> returnBasketId(int houseId, int storeId){ ... }
+public static ReturnedBasket returnBasketId(int houseId, int storeId){ ... }
 ```
 **Description**: For a given house and store, looks up whether a basket entry exists in the database, returning a basket_id and list of corresponding items in the basket if so, or creates a new basket if not.
 
@@ -181,7 +181,7 @@ public static Map<Integer, List<BasketItem>> returnBasketId(int houseId, int sto
 - `int houseId` - for identifying the house that the order belongs to.
 - `int storeId` - for identifying which supermarket the order is being placed with.
 
-**Return Value**: `Map<Integer, List<BasketItem>>` - provides both the `basketId` for the basket (either fetched or newly created) and any items that are in the basket. In the case that there are no items in the basket, this list will be an empty list. The returned `Map` object may be `null` in the event of a computation failure.
+**Return Value**: `ReturnedBasket` - an object that encapsulates both the returned `basketId` and the list of returned `BasketItem`'s, where this list may be empty if it's a new basket.
 
 
 ### `addToBasket`
@@ -270,7 +270,6 @@ Based on the previous sections, the following queries and commands have been ide
 | `List<BasketItem> getByBasketId(int basketId)` | Required for fetching all items in a group basket when requested to by client instances. | Yes |
 | `void increaseItemQuantity(int basketItemId, int quantityToAdd)` | Required to add new items or increase the quantity of items already in group baskets. | Yes |
 | `void decreaseItemQuantity(int basketItemId, int quantityToRemove)` | Required to remove items or decrease the quantity of items already in group baskets. | Yes |
-| `void deleteById(int id)` | Required to delete record in (removeFromBasket method, QueryServicer class), and to clean database in (cleanDatabase method, QueryServicerTests class). | Yes |
 
 ### Pertaining to `Category` entity:
 | Query/Command Function Prototype | Explanation | Has a Unit Test? |
