@@ -9,6 +9,11 @@ import uk.co.xeiverse.ssh.networking.entities.BasketItem;
 import uk.co.xeiverse.ssh.networking.entities.Category;
 import uk.co.xeiverse.ssh.networking.entities.Item;
 import uk.co.xeiverse.ssh.networking.entities.Store;
+import uk.co.xeiverse.ssh.ui.shop.BasketFragment;
+import uk.co.xeiverse.ssh.ui.shop.BrowseFragment;
+import uk.co.xeiverse.ssh.ui.shop.CategoryFragment;
+import uk.co.xeiverse.ssh.ui.shop.ShopFragment;
+
 
 import static org.junit.Assert.*;
 
@@ -39,6 +44,33 @@ public class ExampleUnitTest {
     }
 
     @Test
+    // Check that a BasketFragment can be created successfully
+    public void testBasketFragmentCreation() {
+        ShopFragment shopFragment = new ShopFragment();
+        ServerHelper serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
+        BasketFragment basketFragment = new BasketFragment(shopFragment, serverHelper);
+        assertNotNull(basketFragment);
+    }
+
+    @Test
+    // Check that a BrowserFragment can be created successfully
+    public void testBrowseFragmentCreation() {
+        ServerHelper serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
+        BrowseFragment browseFragment = new BrowseFragment(serverHelper);
+        assertNotNull(browseFragment);
+    }
+
+    @Test
+    // Check that a CategoryFragment can be created successfully
+    public void testCategoryFragmentCreation() {
+        ServerHelper serverHelper = new ServerHelper(ServerHelper.TEMP_HOUSEMATE_ID, ServerHelper.TEMP_HOUSE_ID);
+        ArrayList<Item> items = new ArrayList<>();
+        CategoryFragment categoryFragment = new CategoryFragment(serverHelper, items);
+        assertNotNull(categoryFragment);
+    }
+
+
+    @Test
     // Check the first item in the basket matches the adapter's first item
     public void testGetItem() {
         List<BasketItem> items = serverHelper.getBasketItemsList();
@@ -54,6 +86,7 @@ public class ExampleUnitTest {
     }
 
     @Test
+    // Check the Item constructor and getter methods
     public void testItemConstructorAndGetters() {
         Category category = new Category();
         Store store = new Store();
@@ -69,6 +102,7 @@ public class ExampleUnitTest {
     }
 
     @Test
+    // Check that the Item setter methods work correctly
     public void testItemSetters() {
         Item item = new Item();
         Category category = new Category();
@@ -89,6 +123,5 @@ public class ExampleUnitTest {
         assertEquals("banana.jpg", item.getItemImg());
         assertEquals(category, item.getCategory());
     }
-
 
 }
