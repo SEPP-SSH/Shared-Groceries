@@ -133,6 +133,7 @@ func submitOrder(basket_id){
 ---
 ## Formalised Function Prototypes
 The following section provides the formalised Java function prototypes for the previously outlined functions:
+> Note that it is these very functions that are used to service networking requests to/from the SSH Cloud server.
 
 ### `returnStores`
 ```java
