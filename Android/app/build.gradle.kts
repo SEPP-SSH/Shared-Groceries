@@ -11,7 +11,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,4 +46,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.glide)
+
+    implementation(libs.httpcore5)
+    implementation(libs.httpclient5.fluent)
+    implementation(libs.jackson.core)
+    implementation(libs.jackson.databind)
+    implementation(libs.javax.persistence.api)
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
 }
+
+android { packaging { resources.excludes.add("META-INF/*") } }

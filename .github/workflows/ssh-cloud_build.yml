@@ -1,0 +1,29 @@
+name: SSH CI Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.1.0
+
+    - name: Run the docker-compose file
+      working-directory: SSH-Cloud
+      run: docker compose up --exit-code-from	sshcloudserver
+
+    - name: Copy the .jar file from the docker container image
+      run: docker cp sshcloudserver:/app/target/ssh-cloud-1.0-SNAPSHOT.jar .
+
+    - name: Upload the Build Artifact
+      if: success()
+      uses: actions/upload-artifact@v3.1.3
+      with:
+          name: ssh-cloud-1.0-SNAPSHOT.jar
+          path: ./ssh-cloud-1.0-SNAPSHOT.jar
