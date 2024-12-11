@@ -5,8 +5,8 @@ To see the group grocery shopping feature prototype in action:
 > Note that these pre-requisites only cover _running_ the project. To view some of the source files in Android Studio without the linting system becoming frustrated, you'll need to install the Lombok plugin for Android Studio.
 
 1. Clone the repository onto your machine.
-2. Load the project located at `./Android` (i.e. located in the root of the repository) in Android Studio.
-3. Open the "Terminal" tab in Android studio (or, less conveniently, any terminal at the `Android` directory - wherever that may reside on your system).
+2. Load the project located at `./SSH-Client` (i.e. located in the root of the repository) in Android Studio.
+3. Open the "Terminal" tab in Android studio (or, less conveniently, any terminal at the `SSH-Client` directory - wherever that may reside on your system).
 ![Screenshot of terminal button](../Attachments/how-to-run--terminal.png)
 4. If on a UNIX-based machine, run the following command: `cd ../SSH-Cloud/production-orchestration && docker-compose build --no-cache` _(it will take a little while)._ If you're _not_ on a UNIX-based machine, you'll need to run the two commands _separately_ - i.e. `cd ../SSH-Cloud/production-orchestration` and then `docker-compose build --no-cache`.
 5. Wait until the command has finished _(like so...)_
@@ -46,7 +46,7 @@ Note that the process started by this command won't terminate, as the server is 
 20. To close the running emulation, you can simply kill the emulation process in any way you wish. **However**, to close the SSH Cloud server _properly_, you need to follow these steps:
 21. Focus back into the terminal window from earlier, and kill the process - most easily with `ctl-c`
 ![Screenshot of the server having been killed in the terminal](../Attachments/how-to-run--killing-server.png)
-22.  Once the processes have "gracefully stopped", If on a UNIX-based machine, run the following command: `docker-compose down && cd ../../Android`. If you're _not_ on a UNIX-based machine, you'll need to run the two commands _separately_ - i.e. `docker-compose down` and then `cd ../../Android`.
+22.  Once the processes have "gracefully stopped", If on a UNIX-based machine, run the following command: `docker-compose down && cd ../../SSH-Client`. If you're _not_ on a UNIX-based machine, you'll need to run the two commands _separately_ - i.e. `docker-compose down` and then `cd ../../SSH-Client`.
 23.  Once that has completed execution, you are _finally_ free to return going about your business!
 ---
 ---
