@@ -15,9 +15,6 @@
 ### BasketHandler Tests   
 #### `testCreateBasket`
 ```java
-/**
- * @Test
- */
 void testCreateBasket(){ ... }
 ```
 **Description**: Verifies that a new basket can be created in the database. A new Basket is created with a predefined House and Store. The test ensures that the basket is saved correctly and that its associations with the House and Store match the expected values.
@@ -25,9 +22,6 @@ void testCreateBasket(){ ... }
 
 #### `testGetAllBaskets`
 ```java
-/**
- * @Test
- */
 void testGetAllBaskets(){ ... }
 ```
 **Description**: Confirms that all baskets can be retrieved from the database. The test fetches all baskets and ensures that the previously created basket is included in the result. This validates that BasketHandler.getAll works correctly.
@@ -35,9 +29,6 @@ void testGetAllBaskets(){ ... }
 
 #### `testGetBasketById`
 ```java
-/**
- * @Test
- */
 void testGetBasketById(){ ... }
 ```
 **Description**: Tests retrieval of a specific basket using its unique ID. The test validates that the returned basket matches the expected values.
@@ -45,9 +36,6 @@ void testGetBasketById(){ ... }
 
 #### `testGetBasketByAppInfo`
 ```java
-/**
- * @Test
- */
 void testGetBasketByAppInfo(){ ... }
 ```
 **Description**: Ensures baskets can be retrieved based on application-specific information such as houseId and storeId. The test fetches baskets associated with the given House and Store and validates that only the expected basket is returned with correct details.
@@ -55,9 +43,6 @@ void testGetBasketByAppInfo(){ ... }
 
 #### `testDeleteBasketById`
 ```java
-/**
- * @Test
- */
 void testDeleteBasketById(){ ... }
 ```
 **Description**: Validates that a basket can be successfully deleted by its ID. The test first deletes the existing basket and then verifies that it is no longer retrievable. Finally, it recreates the basket to restore the test environment for subsequent tests.
@@ -65,9 +50,6 @@ void testDeleteBasketById(){ ... }
 
 #### `testCreateBasketByAppInfo`
 ```java
-/**
- * @Test
- */
 void testCreateBasketByAppInfo(){ ... }
 ```
 **Description**: Confirms that a basket can be created using houseId and storeId. The test deletes the existing basket and then creates a new one using BasketHandler.createByAppInfo. It validates the correctness of the newly created basket's associations with the House and Store.
@@ -76,9 +58,6 @@ void testCreateBasketByAppInfo(){ ... }
 ### BasketItemHandler Tests  
 #### `testCreateBasketItem`
 ```java
-/**
- * @Test
- */
 void testCreateBasketItem(){ ... }
 ```
 **Description**: Validates that a new BasketItem can be created in the database. The test creates a BasketItem with predefined references to Basket, Store, Item, and Housemate. It verifies that the BasketItem is saved successfully and its attributes, such as quantity and associations, match the expected values.
@@ -86,9 +65,6 @@ void testCreateBasketItem(){ ... }
 
 #### `testCreateBasketItemByInfo`
 ```java
-/**
- * @Test
- */
 void testCreateBasketItemByInfo(){ ... }
 ```
 **Description**: Ensures that a BasketItem can be created using specific identifiers (basketId, storeId, itemId, housemateId) and an item quantity. The method constructs a BasketItem using these values and saves it to the database. The test verifies that the saved BasketItem has the correct attributes and associations, such as the proper basket, store, item, housemate, and quantity.
@@ -96,9 +72,6 @@ void testCreateBasketItemByInfo(){ ... }
 
 #### `testGetAllBasketItems`
 ```java
-/**
- * @Test
- */
 void testGetAllBasketItems(){ ... }
 ```
 **Description**: Confirms that all BasketItem records can be retrieved from the database. The test ensures that the preloaded BasketItem is included in the results, validating the functionality of BasketItemHandler.getAll.
@@ -106,9 +79,6 @@ void testGetAllBasketItems(){ ... }
 
 #### `testGetBasketItemById`
 ```java
-/**
- * @Test
- */
 void testGetBasketItemById(){ ... }
 ```
 **Description**: Tests the retrieval of a specific BasketItem by its unique ID. The test verifies that the fetched BasketItem ID matches the expected value.
@@ -116,9 +86,6 @@ void testGetBasketItemById(){ ... }
 
 #### `testIncreaseItemQuantity`
 ```java
-/**
- * @Test
- */
 void testIncreaseItemQuantity(){ ... }
 ```
 **Description**: Verifies that the quantity of an existing BasketItem can be increased. The test updates the item quantity and validates that the new quantity is correctly saved in the database
@@ -126,9 +93,6 @@ void testIncreaseItemQuantity(){ ... }
 
 #### `testDecreaseItemQuantity`
 ```java
-/**
- * @Test
- */
 void testDecreaseItemQuantity(){ ... }
 ```
 **Description**: Confirms that the quantity of an existing BasketItem can be decreased. The test updates the item quantity and validates that the updated value matches expectations.
@@ -136,9 +100,6 @@ void testDecreaseItemQuantity(){ ... }
 
 #### `testDeleteBasketItemById`
 ```java
-/**
- * @Test
- */
 void testDeleteBasketItemById(){ ... }
 ```
 **Description**: Validates that a BasketItem can be deleted from the database using its unique ID. The test deletes the BasketItem, confirms its removal, and recreates it to restore the testing environment.
@@ -147,9 +108,6 @@ void testDeleteBasketItemById(){ ... }
 ### CategoryHandler Tests  
 #### `testCreateCategory`
 ```java
-/**
- * @Test
- */
 void testCreateCategory(){ ... }
 ```
 **Description**: Verifies the ability to create a new Category in the database. The test creates a category with a predefined store association and ensures that the saved Category has the correct name and store reference
@@ -157,9 +115,6 @@ void testCreateCategory(){ ... }
 
 #### `testGetAllCategories`
 ```java
-/**
- * @Test
- */
 void testGetAllCategories(){ ... }
 ```
 **Description**: Confirms that all Category records can be retrieved from the database. The test ensures that the preloaded Category is included in the retrieved list, validating the functionality of CategoryHandler.getAll.
@@ -167,9 +122,6 @@ void testGetAllCategories(){ ... }
 
 #### `testGetCategoryById`
 ```java
-/**
- * @Test
- */
 void testGetCategoryById(){ ... }
 ```
 **Description**: Tests retrieval of a specific Category by its unique ID. The test validates that the fetched Category ID matches the expected value.
@@ -177,18 +129,12 @@ void testGetCategoryById(){ ... }
 
 #### `testGetCategoryByStoreId`
 ```java
-/**
- * @Test
- */
 void testGetCategoryByStoreId(){ ... }
 ```
 **Description**: Ensures that categories can be retrieved based on their associated store's ID. The test fetches categories for the predefined store and validates that the returned Category matches the expected name and store reference.
 
 #### `testDeleteCategoryById`
 ```java
-/**
- * @Test
- */
 void testDeleteCategoryById(){ ... }
 ```
 **Description**: Validates that a Category can be deleted from the database using its unique ID. The test deletes the Category, verifies its removal, and recreates it to restore the testing environment.
@@ -197,9 +143,6 @@ void testDeleteCategoryById(){ ... }
 ### HouseHandler Tests  
 #### `testCreateHouse`
 ```java
-/**
- * @Test
- */
 void testCreateHouse(){ ... }
 ```
 **Description**: Validates the creation of a new House record in the database. A new house with a specific address is created, and the test verifies that the saved house matches the expected address.
@@ -207,9 +150,6 @@ void testCreateHouse(){ ... }
 
 #### `testGetAllHouses`
 ```java
-/**
- * @Test
- */
 void testGetAllHouses(){ ... }
 ```
 **Description**: Confirms the retrieval of all House records from the database. The test ensures that the preloaded House is included in the list, validating the HouseHandler.getAll method.
@@ -217,9 +157,6 @@ void testGetAllHouses(){ ... }
 
 #### `testGetHouseById`
 ```java
-/**
- * @Test
- */
 void testGetHouseById(){ ... }
 ```
 **Description**: Tests retrieval of a specific House by its unique ID. The test validates that the fetched House ID matches the expected value.
@@ -227,9 +164,6 @@ void testGetHouseById(){ ... }
 
 #### `testDeleteHouseById`
 ```java
-/**
- * @Test
- */
 void testDeleteHouseById(){ ... }
 ```
 **Description**: Verifies that a House can be successfully deleted using its ID. The test removes the House, ensures it is no longer retrievable, and then recreates it to maintain the test environment.
@@ -238,9 +172,6 @@ void testDeleteHouseById(){ ... }
 ### HousemateHandler Tests  
 #### `testCreateHousemate`
 ```java
-/**
- * @Test
- */
 void testCreateHousemate(){ ... }
 ```
 **Description**: Validates the creation of a new Housemate in the database. A new housemate is created and linked to an existing House. The test confirms that the saved housemate matches the provided details, including their name, image, and associated house.
@@ -248,9 +179,6 @@ void testCreateHousemate(){ ... }
 
 #### `testGetAllHousemates`
 ```java
-/**
- * @Test
- */
 void testGetAllHousemates(){ ... }
 ```
 **Description**: Ensures that all Housemate records can be retrieved from the database. The test checks that the preloaded housemate is included in the result list, verifying the functionality of HousemateHandler.getAll.
@@ -258,9 +186,6 @@ void testGetAllHousemates(){ ... }
 
 #### `testGetHousemateById`
 ```java
-/**
- * @Test
- */
 void testGetHousemateById(){ ... }
 ```
 **Description**: Tests retrieval of a specific Housemate by its unique ID. The test validates that the fetched Housemate ID matches the expected value.
@@ -268,9 +193,6 @@ void testGetHousemateById(){ ... }
 
 #### `testDeleteHousemateById`
 ```java
-/**
- * @Test
- */
 void testDeleteHousemateById(){ ... }
 ```
 **Description**: Verifies that a Housemate can be successfully deleted using its ID. The test removes the housemate, ensures it is no longer retrievable, and then recreates it to maintain the test environment.
@@ -279,9 +201,6 @@ void testDeleteHousemateById(){ ... }
 ### ItemHandler Tests  
 #### `testCreateItem`
 ```java
-/**
- * @Test
- */
 void testCreateItem(){ ... }
 ```
 **Description**: Verifies the creation of a new Item in the database. A new item is associated with a predefined Store and Category. The test checks that the item is saved with correct details, including its name, offer price, and stock status.
@@ -289,9 +208,6 @@ void testCreateItem(){ ... }
 
 #### `testGetAllItems`
 ```java
-/**
- * @Test
- */
 void testGetAllItems(){ ... }
 ```
 **Description**: Ensures that all Item records can be retrieved from the database. The test confirms that the preloaded item is included in the result list, validating the functionality of ItemHandler.getAll.
@@ -299,9 +215,6 @@ void testGetAllItems(){ ... }
 
 #### `testGetItemById`
 ```java
-/**
- * @Test
- */
 void testGetItemById(){ ... }
 ```
 **Description**: Tests retrieval of a specific item by its unique ID. The test validates that the fetched item ID matches the expected value.
@@ -309,9 +222,6 @@ void testGetItemById(){ ... }
 
 #### `testDeleteItemById`
 ```java
-/**
- * @Test
- */
 void testDeleteItemById(){ ... }
 ```
 **Description**: Validates that an Item can be successfully deleted by its ID. The test removes the item, verifies that it is no longer retrievable, and then recreates it to maintain the test environment.
@@ -320,9 +230,6 @@ void testDeleteItemById(){ ... }
 ### StoreHandler Tests  
 #### `testCreateStore`
 ```java
-/**
- * @Test
- */
 void testCreateStore(){ ... }
 ```
 **Description**: Verifies the creation of a new Store in the database. A new store is created with a specific name and logo, and the test ensures that the store is saved correctly with matching details.
@@ -330,9 +237,6 @@ void testCreateStore(){ ... }
 
 #### `testGetAllStores`
 ```java
-/**
- * @Test
- */
 void testGetAllStores(){ ... }
 ```
 **Description**: Confirms that all Store records can be retrieved from the database. The test ensures that the preloaded store is included in the result list, validating the functionality of StoreHandler.getAll.
@@ -340,9 +244,6 @@ void testGetAllStores(){ ... }
 
 #### `testGetStoreById`
 ```java
-/**
- * @Test
- */
 void testGetStoreById(){ ... }
 ```
 **Description**: Tests retrieval of a specific store by its unique ID. The test validates that the fetched store ID matches the expected value.
@@ -350,9 +251,6 @@ void testGetStoreById(){ ... }
 
 #### `testDeleteStoreById`
 ```java
-/**
- * @Test
- */
 void testDeleteStoreById(){ ... }
 ```
 **Description**: Validates that a Store can be successfully deleted by its ID. The test removes the store, verifies that it is no longer retrievable, and then recreates it to restore the test environment.
@@ -361,9 +259,6 @@ void testDeleteStoreById(){ ... }
 ## QueryServicer Tests
 #### `testReturnStores`
 ```java
-/**
- * @Test
- */
 void testReturnStores(){ ... }
 ```
 **Description**: Verifies that QueryServicer.returnStores correctly retrieves the list of stores accessible to a housemate. The test ensures that the returned store name matches the expected value when queried with a valid house and housemate ID.
@@ -371,9 +266,6 @@ void testReturnStores(){ ... }
 
 #### `testReturnCategories`
 ```java
-/**
- * @Test
- */
 void testReturnCategories(){ ... }
 ```
 **Description**: Ensures that QueryServicer.returnCategories retrieves all categories for a given store. The test validates that the categories list is not null and contains at least one entry, ensuring proper database integration and query execution.
@@ -381,9 +273,6 @@ void testReturnCategories(){ ... }
 
 #### `testReturnBasketId`
 ```java
-/**
- * @Test
- */
 void testReturnBasketId(){ ... }
 ```
 **Description**: Confirms that QueryServicer.returnBasketId retrieves the correct basket ID for a given house and store. The test validates that the returned basket matches the prepopulated basket's ID and that its item list is initially empty.
@@ -391,9 +280,6 @@ void testReturnBasketId(){ ... }
 
 #### `testAddToBasket`
 ```java
-/**
- * @Test
- */
 void testAddToBasket(){ ... }
 ```
 **Description**: Tests the functionality of QueryServicer.addToBasket by adding an item to a basket. The test verifies that the item is successfully added with the correct quantity and checks if the basket items list includes the added item.
@@ -401,9 +287,6 @@ void testAddToBasket(){ ... }
 
 #### `testRemoveFromBasket`
 ```java
-/**
- * @Test
- */
 void testRemoveFromBasket(){ ... }
 ```
 **Description**: Validates the behavior of QueryServicer.removeFromBasket when reducing the quantity of an item in the basket. The test first adds an item to the basket, then removes part of its quantity, and confirms the updated quantity in the basket.
@@ -411,9 +294,6 @@ void testRemoveFromBasket(){ ... }
 
 #### `testSubmitOrder`
 ```java
-/**
- * @Test
- */
 void testSubmitOrder(){ ... }
 ```
 **Description**: Simulates an order submission using QueryServicer.submitOrder. The test ensures the method returns true, indicating successful submission of the order.
