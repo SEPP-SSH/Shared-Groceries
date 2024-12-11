@@ -270,6 +270,7 @@ Based on the previous sections, the following queries and commands have been ide
 | `List<BasketItem> getByBasketId(int basketId)` | Required for fetching all items in a group basket when requested to by client instances. | No |
 | `void increaseItemQuantity(int basketItemId, int quantityToAdd)` | Required to add new items or increase the quantity of items already in group baskets. | Yes |
 | `void decreaseItemQuantity(int basketItemId, int quantityToRemove)` | Required to remove items or decrease the quantity of items already in group baskets. | Yes |
+| `void deleteById(int id)` | Required to delete record in (removeFromBasket method, QueryServicer class), and to clean database in (cleanDatabase method, QueryServicerTests class). | Yes |
 
 ### Pertaining to `Category` entity:
 | Query/Command Function Prototype | Explanation | Has a Unit Test? |
