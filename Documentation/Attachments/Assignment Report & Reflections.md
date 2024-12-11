@@ -20,13 +20,25 @@ to do!
 
 ## Parla Tellioglu's Reflections
 #### Parla's reflections on George
-to do!
+George brought significant value to the project through consistent engagement and skillful contributions to the frontend of the SSH App, as well as ensuring functionality and effective communication with the SSH Cloud. His technical expertise was critical to achieving the project’s objectives and his friendly and collaborative attitude created a positive and supportive team dynamic. George actively participated in team discussions, demonstrating a strong understanding of the project’s requirements and offering thoughtful solutions to challenges. His willingness to assist others and share knowledge during meetings showcased his dedication to teamwork and his reliability. George’s ability to focus on complex tasks and deliver high quality work on time was a significant strength throughout the project.
+
+While George made significant contributions that greatly benefited the entire group, clearer communication about the approach and the tasks would have allowed others to contribute more effectively. By sharing more details about the work being done and involving team members in the process, it could have been ensured that everyone had the opportunity to participate meaningfully and add value to the project. Greater collaboration during planning and implementation phases would empower others to take on responsibilities and contribute more actively to the team’s success.
+
+His technical skills, along with his willingness to support others, make him a vital team member whose increased involvement into group processes will lead to even greater success in future projects.
 
 #### Parla's reflections on Harvey
-to do!
+Harvey demonstrated exceptional leadership throughout the project, showing enthusiasm and commitment that motivated the entire team. His detailed planning and clear milestones provided structure and efficiency to the workflow. By managing the GitHub repository effectively and simplifying the EDR with attention to detail, he ensured that the project goals remained realistic and achievable. His ability to revise code and provide constructive feedback was invaluable. Harvey’s approach reflected a deep understanding of the project’s requirements, and his proactive mindset ensured the team stayed on schedule.
+
+One area for improvement is the communication around role distributions. While Harvey took on a significant portion of the workload, a more balanced and transparent allocation of responsibilities could have ensured greater equity within the team. Encouraging broader involvement in task management would not only enhance the workload but also give other team members opportunities to develop leadership and technical skills. Additionally, fostering more open discussions about tasks and priorities would enhance overall collaboration. 
+
+Harvey’s leadership set a strong foundation for success, and his strategic thinking and organizational abilities will continue to drive productive teamwork in the future.
 
 #### Parla's reflections on Hasan
-to do!
+Hasan showed remarkable technical skill and discipline throughout the project, particularly in his work on the database. His structured and methodical approach ensured that critical components of the project were completed efficiently and to a high standard. Hasan’s deep technical knowledge was evident in his ability to address complex tasks with confidence.
+
+Hasan’s impact on future projects could be strengthened through greater engagement in group discussions and more active communication. While his individual contributions were highly effective, greater engagement in collaborative activities would allow the team to benefit more from his ideas and insights. Increased visibility in team meetings and planning sessions would ensure that Hasan’s expertise is fully utilized in shaping the direction of the project.
+
+Hasan’s technical expertise and disciplined approach make him a valuable asset to any team, and a more active presence in group dynamics will only amplify his contributions in future collaborations.
 
 ---
 
