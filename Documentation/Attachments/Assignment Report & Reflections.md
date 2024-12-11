@@ -1,9 +1,13 @@
 # Assignment Report
 ---
 ## What we accomplished
-to do!
+We selected Harvey’s EDR to prototype, and subsequently implemented – for Student Smart Homes (SSH) – a group grocery shopping feature in the SSH App, a supporting request handling server in SSH Cloud, which itself draws on a MySQL database server.
+
+The prototype allows a user that’s a part of a shared house to contribute to group grocery orders with partner supermarkets. The user can choose which supermarket to place an order with, and can have orders with more than one supermarket at a given time. The user can browse for items to add to an order, change the quantity they’ve added in the basket, and outright remove them. The user cannot remove items added by other housemates, and pays only for the items that they added themselves. This prototype only simulates one user adding items at a given time, making the feature clearer to understand. Submitting a group order, payment splitting and payments processing have been omitted from the prototype, and are instead simulated by order submission always being accepted, with no additional processing. The EDR has also been altered to not implement item search functionality, nor the feature for the SSH Console table, and to omit the order deadline condition. 
 
 ## How we accomplished it
+to do!
+
 ---
 # Reflections
 ## George Henderson's Reflections
