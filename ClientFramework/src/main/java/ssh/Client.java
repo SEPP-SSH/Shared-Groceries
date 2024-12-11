@@ -29,7 +29,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/returnStores")
+            String responseJson = Request.post("http://localhost:8080/returnStores")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -54,7 +54,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/returnCategories")
+            String responseJson = Request.post("http://localhost:8080/returnCategories")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -79,7 +79,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/returnItems")
+            String responseJson = Request.post("http://localhost:8080/returnItems")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -104,7 +104,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/returnHousemates")
+            String responseJson = Request.post("http://localhost:8080/returnHousemates")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -129,7 +129,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/returnBasket")
+            String responseJson = Request.post("http://localhost:8080/returnBasket")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -154,7 +154,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/addToBasket")
+            String responseJson = Request.post("http://localhost:8080/addToBasket")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -179,7 +179,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/removeFromBasket")
+            String responseJson = Request.post("http://localhost:8080/removeFromBasket")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
@@ -204,7 +204,7 @@ public class Client {
         try{
             String queryParamJson = objectMapper.writeValueAsString(queryParam);
 
-            String responseJson = Request.post("http://sshcloudserver:8080/submitOrder")
+            String responseJson = Request.post("http://localhost:8080/submitOrder")
                     .bodyString(queryParamJson, ContentType.APPLICATION_JSON)
                     .execute()
                     .returnContent()
