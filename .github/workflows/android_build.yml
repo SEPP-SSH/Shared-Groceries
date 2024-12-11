@@ -19,11 +19,11 @@ jobs:
           java-version: '17'
 
       - name: Build with Gradle
-        working-directory: ./Android
+        working-directory: ./SSH-Client
         run : ./gradlew build
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.3
         with:
           name: dsTemplate.apk
-          path: Android/app/build/outputs/apk/debug/app-debug.apk
+          path: SSH-Client/app/build/outputs/apk/debug/app-debug.apk
