@@ -12,13 +12,31 @@ to do!
 # Reflections
 ## George Henderson's Reflections
 #### George's reflections on Parla
-to do!
+I enjoyed collaborating with Parla on this project. While she might have been quieter during initial project discussions, she definitely showed some willingness to contribute. Her contributions, such as writing unit tests for the SSH App, were valuable to the project. For future projects she could work improving her knowledge and understanding of GitHub and the git version control system as this is a highly important skill to have.
+
+To further enhance her impact, I think Parla would benefit from sharing her ideas more often and contributing to the team’s decision-making process, for example, during group discussions, as everyone has a unique perspective and by combining these it can really improve the end result.
+
+Additionally, I believe it would be beneficial for Parla to actively seek out specific tasks that align with her interests and skills. By taking ownership of particular components of the project, she can not only enhance her own learning experience and deepen her understanding of the project but also contribute meaningfully to the team's overall success. Furthermore, it would also likely make the project more enjoyable and engaging for her as she would be working on something that interests her.
+
+Overall, I believe that with a bit more proactive engagement, Parla has the potential to be an even more valuable asset to future group projects. By taking the initiative to share her ideas, seek out specific tasks, and actively participate in discussions, she can significantly enhance her contributions and the overall quality of the team's work.
 
 #### George's reflections on Havey
-to do!
+Harvey demonstrated strong leadership skills and was instrumental in keeping the project on track. His clear communication and effective use of version control made project management significantly easier through the use of GitHub issues and informative commit descriptions.
+
+To become an even more effective team member in the future, perhaps he could delegate tasks more effectively to other team members. By sharing the workload more evenly, utilising other team members with less work, he could have fostered a more collaborative environment. Having a more balanced distribution of work could allow others to further develop their skills and take on greater responsibility.
+
+Harvey demonstrated a keen attention to detail, often referring back to the original EDR to ensure accuracy and consistency. His logical thinking and problem-solving skills were invaluable in identifying and resolving issues, particularly when working with Docker. Despite encountering challenges, Harvey persevered and successfully implemented the Docker environments, showcasing both his determination and technical ability.
+
+Overall, it was a pleasure to work with Harvey and his technical skills and dedication to the project were commendable. He consistently provided helpful feedback and demonstrated a deep understanding of GitHub and the git version control system. His contributions significantly impacted the project's success.
 
 #### George's reflections Hasan
-to do!
+Hasan was a valuable member of the team, contributing to the database component of the SSH Cloud. He also helped with testing the SSH Cloud and documenting the development of the added features.
+
+To further improve his effectiveness as part of a team in the future, Hasan could improve his communication and collaboration skills. While his technical skills are strong, he could sometimes have been more open about his ideas and how he was approaching tasks. For example, he could have been more proactive in seeking feedback on his work, offering assistance to other team members if they struggle to run his code, and sharing his ideas in group discussions.
+
+Additionally, Hasan could benefit from deepening his knowledge and understanding of GitHub and the git version control system. A stronger grasp of these tools would enable him to work more efficiently and collaboratively with the team. This involves ensuring to stick to branch naming conventions and reviewing/commenting on other’s work whether that’s through pull requests or in GitHub issues.
+
+Overall, I enjoyed working with Hasan on this team project and his contributions were valuable but by addressing these areas, he can become an even more effective team member and contribute significantly to future projects.
 
 ---
 
