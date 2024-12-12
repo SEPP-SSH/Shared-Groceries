@@ -78,13 +78,30 @@ Hasan’s technical expertise and disciplined approach make him a valuable asset
 
 ## Harvey Nicholson's Reflections
 #### Harvey's reflections on George
-to do!
+Throughout the project, you’ve shown excellent engagement, working both independently and collaboratively, adeptly switching style based on which was more appropriate in the moment. You’ve also demonstrated that you’re able to communicate effectively and frequently with teammates about what aspects of the system you’re working on, what challenges you’re facing, and what help you may need. Furthermore, you successfully collaborated with the team on setting a clear standard for what each aspect of the system was expected to receive and output in terms of data. These skills were key to enabling the success of the development of the prototype.
+
+With respect to version control, you demonstrated sound use of the systems we agreed on for the prototype development, and in future, you could further refine your skills by making smaller, more frequent commits to your working branch, so that the effect of your changes is even clearer to your colleagues when reviewing your code.
+
+When it comes to risk management, you critically evaluated the proposal in the Engineering Design Review (EDR), which led to the excellent evaluation of which aspects of the system needed developing to prove that the project is viable, and you could further expand on this by conducting more frequent assessments of whether your “development direction” aligns with the proposal in hand, so as to ensure that the feature/project doesn’t experience scope creep or drift.
+Glancing at debugging, the pace at which you identified and rectified bugs within your code was excellent.
 
 #### Harvey's reflections on Parla
-to do!
+Your engagement throughout this project has been somewhat lacking, and going forward you could take some initiative to indicate to your teammates which aspects of the system you believe you could add something to. This would both reduce the workload of your teammates and develop your own skills of collaborative project work.
+
+Going forward, you could also make attempts to communicate with your colleagues, so that they are aware of what, if anything, you are currently working on, so that they can better identify how the project’s course will flow, track targets and milestones, and reach the project goals more quickly and effectively. Furthermore, you could also engage with your teammates’ pull requests, where reviewing and commenting on your colleagues’ work will help the team’s output be of a higher quality.
+
+More generally, responding to your teammates’ attempts to communicate with you would be a great starting point moving forward.
+Your use of software engineering techniques such as version control could be refined by following your organisation’s branch naming conventions, and adding descriptions to your commits and pull requests. Furthermore, with respect to testing, a more well-thought-out approach to writing tests would be a great improvement to your output. This would allow your work to convey itself more clearly in how it helps achieve the project goals.
+In the future, you could take initiative in identifying what software engineering skills you bring to the team, and how best you can apply them to the project you’re working on.
 
 #### Harvey's reflections on Hasan
-to do!
+Throughout the project, you’ve shown excellent skills of communication, working with your teammates to ensure that your work is moving in the same direction as the rest of the team. You’ve also shown good engagement, achieving the development of your work units in a timely manner, and you could further build on this by taking more initiative, and actively discussing with the team how you can help to achieve the project goals. 
+
+With respect to your use of version control, you demonstrated excellent use of the tools we agreed upon for the project, making frequent and useful commits. To build further on this, your branch organisation could be improved by making sure that your branch names conform to organisation conventions, and by ensuring that your pull requests are well named and described, so that reviewers can gain some idea of what you worked on in that branch before digging into the detail of the line-by-line changes. 
+
+With respect to pull requests, actively reviewing your teammates’ work will help them work more effectively, moving the team closer to the goal in a more efficient manner, and will also help you build further on your skills of critical analysis of code. 
+
+Whilst your development skills are more than sound, in the future you could build more resilience in debugging your code, furthering your problem-solving skills, whilst avoiding the need for your teammates to defocus on their work, wherever possible and sensible.
 
 ---
 
