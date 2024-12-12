@@ -3,7 +3,7 @@
 ## Choosing an EDR to prototype
 > *This section formally documents the following GitHub issue: https://github.com/SEPP-SSH/Shared-Groceries/issues/35*
 
-We selected Harvey's Engineering Design Review (EDR) to prototype *(See the .pdf in this directory - i.e. [Selected EDR](/Selected%20EDR.pdf))*.
+We selected Harvey's Engineering Design Review (EDR) to prototype *(See the .pdf in this directory - i.e. [Selected EDR](./Selected%20EDR.pdf))*.
 
 After reviewing the EDR, we decided to make the following simplifications, alterations and omissions for the prototype:
 -  Populating only two categories of items in the item selection view. This would include _not_ populating the "Offers" section. The reason behind this is that implementing support for a limited selection of items overcomes the largest challenge in the implementation, and adding further layers of features on top of this doesn't add much in the way of reducing the risk of approving the project for full development.
