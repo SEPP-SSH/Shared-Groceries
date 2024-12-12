@@ -12,7 +12,7 @@ The GitHub hosted version of the repository can be found [here](https://github.c
 ---
 
 ## Where to find the **assignment report**?
-The <200 word summary of the project accomplishments, <800 word summary of how we made those accomplishments, and team member reflections can be found [here (.md)](./Assignment%20Report%20&%20Reflections.md) or [here (.pdf)]().
+The <200 word summary of the project accomplishments, <800 word summary of how we made those accomplishments, and team member reflections can be found [here](./Assignment%20Report%20&%20Reflections.md).
 
 ---
 
