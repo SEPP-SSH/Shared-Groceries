@@ -32,6 +32,7 @@ Additionally, I believe it would be beneficial for Parla to actively seek out sp
 
 Overall, I believe that with a bit more proactive engagement, Parla has the potential to be an even more valuable asset to future group projects. By taking the initiative to share her ideas, seek out specific tasks, and actively participate in discussions, she can significantly enhance her contributions and the overall quality of the team's work.
 
+#### George's reflections on Harvey
 Harvey demonstrated strong leadership skills and was instrumental in keeping the project on track. His clear communication and effective use of version control made project management significantly easier through the use of GitHub issues and informative commit descriptions.
 
 To become an even more effective team member in the future, perhaps he could delegate tasks more effectively to other team members. By sharing the workload more evenly, utilising other team members with less work, he could have fostered a more collaborative environment. Having a more balanced distribution of work could allow others to further develop their skills and take on greater responsibility.
