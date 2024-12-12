@@ -12,29 +12,29 @@ On top of this, we utilised GitHub to centralise our Git repository, to add GitH
 
 | View of the GitHub Actions dashboard for the CI workflows for the project |
 |:-------------------------------------------------------------------------:|
-| ![View of the GitHub Actions dashboard for the CI workflows for the project]() |
+| ![View of the GitHub Actions dashboard for the CI workflows for the project](/Documentation/Attachments/GitHub%20Actions.jpeg) |
 
 | View of a successful build for the SSH App CI workflow, with the build artifact shown |
 |:-------------------------------------------------------------------------:|
-| ![View of a successful build for the SSH App CI workflow, with the build artifact shown]() |
+| ![View of a successful build for the SSH App CI workflow, with the build artifact shown](/Documentation/Attachments/Successful%20Action.png) |
 
 | View of the reviews and checks required for a pull request |
 |:-------------------------------------------------------------------------:|
-| ![View of the reviews and checks required for a pull request]() |
+| ![View of the reviews and checks required for a pull request](/Documentation/Attachments/Pull%20request%20example.png) |
 
 | View of the ruleset for the `main` branch protection rule |
 |:-------------------------------------------------------------------------:|
-| ![View of the ruleset for the main branch protection rule]() |
+| ![View of the ruleset for the main branch protection rule](/Documentation/Attachments/Rulesets.png) |
  
 We also used GitHub’s project management tools to organise the prototype’s development, where GitHub issues – organised into milestones – were used to track the tasks that needed to be completed to achieve the prototype, ensuring we implemented all necessary components and fixed all identified bugs. These issues were further organised into a Kanban to help with visualising the status of the prototype. Comments on issues were crucial for quick and effective collaboration on how best to implement the trickier aspects of the system.
 
 | View of the GitHub Issues tab for Milestone 2 |
 |:-------------------------------------------------------------------------:|
-| ![View of the issues tab for Milestone 2]() |
+| ![View of the issues tab for Milestone 2](/Documentation/Attachments/Issues%20Tracking%20-%20Milestone%202.png) |
 
 | Kanban board view of the project GitHub Issues |
 |:-------------------------------------------------------------------------:|
-| ![Kanban board view of the project GitHub Issues]() |
+| ![Kanban board view of the project GitHub Issues](/Documentation/Attachments/Kanban.png) |
 
 Turning to the technical management of the project, we used both Gradle and Maven build systems, in the SSH App and SSH Cloud respectively, to automatically resolve dependencies, manage their versions, build the applications, and run tests. This enabled us to focus on the higher-level product logic, rather than focussing on the minutia of Java compilation. Furthermore, the use of build systems allowed for easy collaboration on the projects, with minimal setup needed for each developer to resolve dependencies in projects.
 
