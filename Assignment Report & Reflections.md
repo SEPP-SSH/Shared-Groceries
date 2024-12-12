@@ -8,9 +8,33 @@ The prototype allows a user that’s a part of a shared house to contribute to g
 ## How we accomplished it
 Most fundamental to how we achieved the implementation of our prototype was using a version control system. By using Git to track and manage commits, and organising them into branches, allowed us to divide ourselves into two teams – one to work on the SSH App facet of the prototype, and another to work on the SSH Cloud facet, which helped us demonstrate the viability of the group grocery order feature quicker. Further, we documented key expectations for external behaviours and communication standards between each aspect of the system – a method which rendered the process of integrating the two systems smooth and successful.
 
-On top of this, we utilised GitHub to centralise our Git repository, to add GitHub Actions to implement continuous integration (CI) workflows for both the SSH App and SSH Cloud, and then branch protection rules on our main branch. By centralising our Git repository, we were able to utilise pull requests to manage branch merging in a collaborative manner, using reviews and comments to coordinate which branches should be merged and when. Using GitHub Actions allowed for the automated build, testing and build artifact extraction for both the SSH App and SSH Cloud systems, and further enabled us to require these Actions to pass for a branch to be merged into main, as per the branch protection rule. Our branch protection rule for the main branch also required at least one reviewer before merging, ensuring that new code is of sufficient quality before destructively altering the main branch. 
+On top of this, we utilised GitHub to centralise our Git repository, to add GitHub Actions to implement continuous integration (CI) workflows for both the SSH App and SSH Cloud, and then branch protection rules on our main branch. By centralising our Git repository, we were able to utilise pull requests to manage branch merging in a collaborative manner, using reviews and comments to coordinate which branches should be merged and when. Using GitHub Actions allowed for the automated build, testing and build artifact extraction for both the SSH App and SSH Cloud systems, and further enabled us to require these Actions to pass for a branch to be merged into main, as per the branch protection rule. Our branch protection rule for the main branch also required at least one reviewer before merging, ensuring that new code is of sufficient quality before destructively altering the main branch.
+
+| View of the GitHub Actions dashboard for the CI workflows for the project |
+|:-------------------------------------------------------------------------:|
+| ![View of the GitHub Actions dashboard for the CI workflows for the project]() |
+
+| View of a successful build for the SSH App CI workflow, with the build artifact shown |
+|:-------------------------------------------------------------------------:|
+| ![View of a successful build for the SSH App CI workflow, with the build artifact shown]() |
+
+| View of the reviews and checks required for a pull request |
+|:-------------------------------------------------------------------------:|
+| ![View of the reviews and checks required for a pull request]() |
+
+| View of the ruleset for the `main` branch protection rule |
+|:-------------------------------------------------------------------------:|
+| ![View of the ruleset for the main branch protection rule]() |
  
 We also used GitHub’s project management tools to organise the prototype’s development, where GitHub issues – organised into milestones – were used to track the tasks that needed to be completed to achieve the prototype, ensuring we implemented all necessary components and fixed all identified bugs. These issues were further organised into a Kanban to help with visualising the status of the prototype. Comments on issues were crucial for quick and effective collaboration on how best to implement the trickier aspects of the system.
+
+| View of the GitHub Issues tab for Milestone 2 |
+|:-------------------------------------------------------------------------:|
+| ![View of the issues tab for Milestone 2]() |
+
+| Kanban board view of the project GitHub Issues |
+|:-------------------------------------------------------------------------:|
+| ![Kanban board view of the project GitHub Issues]() |
 
 Turning to the technical management of the project, we used both Gradle and Maven build systems, in the SSH App and SSH Cloud respectively, to automatically resolve dependencies, manage their versions, build the applications, and run tests. This enabled us to focus on the higher-level product logic, rather than focussing on the minutia of Java compilation. Furthermore, the use of build systems allowed for easy collaboration on the projects, with minimal setup needed for each developer to resolve dependencies in projects.
 
