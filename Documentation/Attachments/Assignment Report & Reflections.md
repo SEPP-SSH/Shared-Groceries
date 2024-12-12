@@ -40,9 +40,9 @@ Harvey’s leadership set a strong foundation for success, and his strategic thi
 #### Parla's reflections on Hasan
 Hasan showed remarkable technical skill and discipline throughout the project, particularly in his work on the database. His structured and methodical approach ensured that critical components of the project were completed efficiently and to a high standard. Hasan’s deep technical knowledge was evident in his ability to address complex tasks with confidence.
 
-Hasan’s impact on future projects could be strengthened through greater engagement in group discussions and more active communication. While his individual contributions were highly effective, greater engagement in collaborative activities would allow the team to benefit more from his ideas and insights. Increased visibility in team meetings and planning sessions would ensure that Hasan’s expertise is fully utilized in shaping the direction of the project.
+Hasan’s impact on future projects could be strengthened through greater engagement in group discussions and more active communication. By leveraging his deep technical expertise and disciplined approach more vocally in group discussions, Hasan has the potential to elevate the entire team's performance to new levels. His insights and ideas, when shared more frequently, could spark different solutions and drive the project's direction in new ways.
 
-Hasan’s technical expertise and disciplined approach make him a valuable asset to any team, and a more active presence in group dynamics will only amplify his contributions in future collaborations.
+Hasan’s technical expertise and disciplined approach make him a valuable asset to any team. By taking a more proactive stance in voicing his ideas, he will inspire and empower his teammates, fostering a more dynamic and collaborative environment.
 
 ---
 
